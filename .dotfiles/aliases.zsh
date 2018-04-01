@@ -1,0 +1,122 @@
+# Utility
+alias reload='source ~/.zshrc'
+
+# default params
+alias less='less -R'
+
+# Common -- Some are from Damian Conway
+#alias a='ls -A' # -A all except literal . ..
+alias c='clear'
+alias cdd='cd -'  # goto last dir cd'ed from
+function cdc() { 
+    cd $1; ls 
+}
+alias md='mkdir -p'
+
+function take() { 
+    mkdir -p "$1"
+    cd "$1" 
+}
+
+alias e='exit'
+alias k9="killall -9"
+function killnamed () { 
+    ps ax | grep $1 | cut -d ' ' -f 2 | xargs kill 
+}
+function zipr() {
+  zip -r $1.zip $1
+}
+
+# vim
+alias vi='vim'
+
+alias rm='rm -i'
+# alias cp='cp -i'
+alias mv='mv -i'
+
+alias h='history'
+alias j='jobs -l'
+alias which='type -a'
+alias ..='cd ..'
+alias cl='clear; l'
+alias cls='clear; ls'
+alias h='history'
+
+# Pretty-print of some PATH variables:
+alias path='echo -e ${PATH//:/\\n}'
+alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
+
+alias du='du -kh'    # Makes a more readable output.
+alias df='df -kTh'
+
+#-------------------------------------------------------------
+# The 'ls' family (this assumes you use a recent GNU ls).
+#-------------------------------------------------------------
+# Add colors for filetype and  human-readable sizes by default on 'ls':
+
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+#alias ls='ls -a -h --color'
+alias ll='ls -a -l --color'
+alias lx='ls -lXB'         #  Sort by extension.
+alias lk='ls -lSr'         #  Sort by size, biggest last.
+alias lt='ls -ltr'         #  Sort by date, most recent last.
+alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
+alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
+alias lh="ls -alh"
+alias ll='ls -alhG'  # -l long listing, human readable, no group info
+alias la="ls -A -l -h -G"
+alias lt='ls -lt' # sort with recently modified first
+alias l.='ls -d .[^.]*'
+alias l='ls -lhGt'  # -l long listing, most recent first
+                    # -G color
+# The ubiquitous 'll': directories first, with alphanumeric sorting:
+alias lm='ll |more'        #  Pipe through 'more'
+alias lr='ll -R'           #  Recursive ls.
+alias laa='ls -la | grep "^d" && ls -la | grep -v "^d"'
+
+# encontrar um ficheiro no filesystem deste dir para baixo
+function ff()
+{
+  find . -type f -iname '*'"$*"'*' -ls ;
+}
+
+# encontrar um ficheiro no filesystem em todo o filesystem
+function ffr()
+{
+  find / -type f -iname '*'"$*"'*' -ls ;
+}
+
+# encontrar ficheiros que contenham o texto, desta pasta para baixo
+function fif()
+{
+  find . -type f -exec grep -l "${1}" "{}" \;
+}
+
+# encontar ficheiros que contenham o texto do param, desde a root do filesystem
+function fifa()
+{
+  find / -type f -exec grep -l "${1}" "{}" \;
+}
+
+# encontrar ficheiros que contenham o texto, desta pasta para baixo COM DESCRICAO DO TEXTO NO LOCAL
+function fifd()
+{
+  find . -type f -exec grep -i "${1}" "{}" \; -print
+}
+
+# encontar ficheiros que contenham o texto do param, desde a root do filesystem COM DESCRICAO DO TEXTO NO LOCAL
+function fifad()
+{
+  find / -type f -exec grep -i "${1}" "{}" \; -print
+}
+
+# du, mas usável (ordenado por tamanho e human-readable
+function duf() {
+  du -s $* | sort -n | cut -f 2- | while read a; do du -sh $a; done
+}
+
+# cheer me up (needs cowsay and fortune packages)
+alias fdx='fortune | cowsay'
+
