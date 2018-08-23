@@ -1,12 +1,7 @@
-# PATH STUFF
-
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
-# Add Visual Studio Code (code)
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH"
 
 # Erlang manual entry
 export MANPATH="$MANPATH:/usr/local/opt/erlang/lib/erlang/man"
 
-# some tools are installed to sbin
-export PATH="/usr/local/sbin:$PATH"
+# PATH STUFF
+export PATH=":/usr/local/sbin:/usr/local/opt/python/libexec/bin:$PATH:$HOME/go/bin:$HOME/.rvm/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
