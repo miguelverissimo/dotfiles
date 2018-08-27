@@ -9,7 +9,7 @@ export ZSH=/Users/miguel/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"
-#ZSH_THEME="bullet-train"
+# ZSH_THEME="bullet-train"
 #  BULLETTRAIN_PROMPT_ORDER=(
 #    time
 #    status
@@ -20,7 +20,8 @@ export ZSH=/Users/miguel/.oh-my-zsh
 #    hg
 #    cmd_exec_time
 #  )
-ZSH_THEME="cobalt2"
+# ZSH_THEME="cobalt2"
+ZSH_THEME="spaceship"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -64,7 +65,7 @@ ZSH_CUSTOM=$HOME/.dotfiles
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man colorize github jira virtualenv pip python brew osx zsh-syntax-highlighting golang)
+plugins=(git colored-man colorize github python brew osx zsh-syntax-highlighting golang)
 
 source $ZSH/oh-my-zsh.sh
 

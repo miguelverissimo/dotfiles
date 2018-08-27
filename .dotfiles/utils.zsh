@@ -5,8 +5,8 @@ function edit-aliases() {
 
 function sync-aliases() {
     for file in ./*.zsh; do
-        cp ${file##*/} $ZSH_CUSTOM/${file##*/}
-        print "Copying ${file##*/} to $ZSH_CUSTOM/${file##*/}"
+        cp ${file##*/} $ZSH/custom/${file##*/}
+        print "Copying ${file##*/} to $ZSH/custom/${file##*/}"
     done
 }
 
@@ -20,3 +20,6 @@ function sync-aliases() {
 #         fi
 #     done
 # } 
+
+# git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt"
+# ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/themes/spaceship.zsh-theme"
