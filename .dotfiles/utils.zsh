@@ -21,5 +21,6 @@ function sync-aliases() {
 #     done
 # } 
 
+# CURRENTLY USING SPACESHIP PROMPT WITH OHMYZSH
 # git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt"
-# ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/themes/spaceship.zsh-theme"
+# ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/themes/spaceship.zsh-theme"
