@@ -106,3 +106,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval $(thefuck --alias)
