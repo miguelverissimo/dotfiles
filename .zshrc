@@ -108,3 +108,5 @@ if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval $(thefuck --alias)
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

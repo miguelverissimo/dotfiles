@@ -8,20 +8,20 @@ alias less='less -R'
 #alias a='ls -A' # -A all except literal . ..
 alias c='clear'
 alias cdd='cd -'  # goto last dir cd'ed from
-function cdc() { 
-    cd $1; ls 
+function cdc() {
+    cd $1; ls
 }
 alias md='mkdir -p'
 
-function take() { 
+function take() {
     mkdir -p "$1"
-    cd "$1" 
+    cd "$1"
 }
 
 alias e='exit'
 alias k9="killall -9"
-function killnamed () { 
-    ps ax | grep $1 | cut -d ' ' -f 2 | xargs kill 
+function killnamed () {
+    ps ax | grep $1 | cut -d ' ' -f 2 | xargs kill
 }
 function zipr() {
   zip -r $1.zip $1
@@ -120,3 +120,7 @@ function duf() {
 # cheer me up (needs cowsay and fortune packages)
 alias fdx='fortune | cowsay'
 
+# use nvim because hipster
+alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
