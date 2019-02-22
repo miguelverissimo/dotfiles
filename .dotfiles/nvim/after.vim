@@ -1,0 +1,1 @@
+/Users/miguel/workspace/bosh-workstation/nvim/after.vim
