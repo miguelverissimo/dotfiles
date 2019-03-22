@@ -11,3 +11,5 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 export PATH="$PATH:$HOME/.dotfiles/bin"
+
+export HAXE_STD_PATH="/usr/local/lib/haxe/std"
