@@ -12,5 +12,6 @@ export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 export PATH="$PATH:$HOME/.dotfiles/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
+export PATH="$PATH:$HOME/workspace/sdk/flutter/bin"
 
 export HAXE_STD_PATH="/usr/local/lib/haxe/std"
