@@ -124,3 +124,8 @@ alias fdx='fortune | cowsay'
 alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+
+# launch android and ios emulators without the IDE bloat
+alias android-avd="emulator -avd \$(emulator -list-avds | head -n 1)"
+alias ios-emulator="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/"
+
