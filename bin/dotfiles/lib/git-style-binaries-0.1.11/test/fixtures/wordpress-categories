@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
+require 'git-style-binary/command'
+
+GitStyleBinary.command do
+  short_desc 'do something with categories'
+  banner <<~EOS
+    SYNOPSIS
+          #{command.full_name} #{all_options_string}
+
+    Does something with categories
+
+  EOS
+  run do |_command|
+    puts 'does something with categories'
+    puts @categories.join(' ')
+  end
+end
