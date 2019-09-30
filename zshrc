@@ -12,7 +12,7 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="dd.mm.yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$HOME/dotfiles/zsh
+ZSH_CUSTOM=$HOME/.dotfiles/zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -38,5 +38,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
+# source all the zsh files
+
 # z!!!
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file

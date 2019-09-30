@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake'
+require 'English'
 require 'fileutils'
 require File.join(File.dirname(__FILE__), 'bin', 'dotfiles', 'vundle')
 
@@ -11,9 +12,11 @@ task :install do
   puts '======================================================'
   puts
 
-  install_homebrew_and_all_packages if RUBY_PLATFORM.downcase.include?('darwin')
+  install_homebrew_and_all_packages if RUBY_PLATFORM.downcase.include?('darwin') && want_to_install?('brew & brewfile')
 
-  install_oh_my_zsh
+  # install_oh_my_zsh if want_to_install?('oh my zsh')
+  # install_files(Dir.glob('{zshrc}')) if want_to_install?('zshrc')
+  install_prezto if want_to_install?('prezto')
 
   install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
   install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
@@ -26,11 +29,11 @@ task :install do
     Rake::Task['install_vundle'].execute
   end
 
-  install_fonts
+  install_fonts if want_to_install?('fonts')
 
-  install_term_theme if RUBY_PLATFORM.downcase.include?('darwin')
+  install_iterm_theme if RUBY_PLATFORM.downcase.include?('darwin') if want_to_install?('iterm theme')
 
-  run_bundle_config
+  run_bundle_config if want_to_install?('configure bundler')
 
   success_msg('installed')
 end
@@ -65,11 +68,10 @@ task :install_vundle do
   puts
 
   vundle_path = File.join('vim', 'bundle', 'vundle')
-  unless File.exist?(vundle_path)
-    run %(
-      cd $HOME/.dotfiles
-      git clone https://github.com/gmarik/vundle.git #{vundle_path}
-    )
+  if File.exist?(vundle_path)
+    run %( cd $HOME/.dotfiles/#{vundle_path} && git pull )
+  else
+    run %( cd $HOME/.dotfiles && git clone https://github.com/gmarik/vundle.git #{vundle_path} )
   end
 
   Vundle.update_vundle
@@ -103,6 +105,46 @@ def run_bundle_config
   puts
 end
 
+def install_prezto
+  puts
+  puts "Installing Prezto (ZSH Enhancements)..."
+  puts '======================================================'
+
+  if File.exists?(File.join(ENV['HOME'], '.zprezto'))
+    puts "Prezto already installed. Skipping installation"
+  else
+    run %{ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" }
+
+    # The prezto runcoms are only going to be installed if zprezto has never been installed
+    install_files_absolute(Dir.glob(File.join(ENV['HOME'], '.zprezto/runcoms/z*')), :symlink)
+  end
+
+  puts
+  puts "Overriding prezto ~/.zpreztorc to enable additional modules..."
+  run %{ ln -nfs "$HOME/.dotfiles/zsh/prezto-override/zpreztorc" "${ZDOTDIR:-$HOME}/.zpreztorc" }
+
+  puts
+  puts "Creating directories for your customizations"
+  run %{ mkdir -p $HOME/.zsh.before }
+  run %{ mkdir -p $HOME/.zsh.after }
+  run %{ mkdir -p $HOME/.zsh.prompts }
+
+  if "#{ENV['SHELL']}".include? 'zsh' then
+    puts "Zsh is already configured as your shell of choice. Restart your session to load the new settings"
+  else
+    puts "Setting zsh as your default shell"
+    if File.exists?("/usr/local/bin/zsh")
+      if File.readlines("/private/etc/shells").grep("/usr/local/bin/zsh").empty?
+        puts "Adding zsh to standard shell list"
+        run %{ echo "/usr/local/bin/zsh" | sudo tee -a /private/etc/shells }
+      end
+      run %{ chsh -s /usr/local/bin/zsh }
+    else
+      run %{ chsh -s /bin/zsh }
+    end
+  end
+end
+
 def install_homebrew_and_all_packages
   install_homebrew_if_not_already_installed
   update_homebrew
@@ -111,9 +153,9 @@ end
 
 def install_homebrew_if_not_already_installed
   run %(which brew)
-  return if $CHILD_STATUS&.success?
+  return if $?&.success?
 
-  if $CHILD_STATUS.nil?
+  if $?.nil?
     puts 'Hummmm... Seems like `which brew` failed.'
     return
   end
@@ -147,7 +189,7 @@ def install_fonts
   puts
 end
 
-def install_term_theme
+def install_iterm_theme
   install_themes_in_iterm
   pick_iterm_theme if ensure_plist_exists
 end
@@ -201,7 +243,7 @@ def iterm_profile_list
   profiles = []
   loop do
     profiles << `/usr/libexec/PlistBuddy -c "Print :'New Bookmarks':#{profiles.size}:Name" ~/Library/Preferences/com.googlecode.iterm2.plist 2>/dev/null`
-    break unless $CHILD_STATUS&.exitstatus&.zero?
+    break unless $?&.exitstatus&.zero?
   end
   profiles.pop
   profiles
@@ -213,26 +255,60 @@ def ask(message, values)
     values.each_with_index { |val, idx| puts " #{idx + 1}. #{val}" }
     selection = STDIN.gets.chomp
     if (begin
-          Float(selection).nil?
-        rescue StandardError
-          true
-        end) || selection.to_i < 0 || selection.to_i > values.size + 1
-      puts "ERROR: Invalid selection.\n\n"
-    else
-      break
-    end
+        Float(selection).nil?
+    rescue StandardError
+      true
+    end) || selection.to_i < 0 || selection.to_i > values.size + 1
+    puts "ERROR: Invalid selection.\n\n"
+  else
+    break
   end
-  selection = selection.to_i - 1
-  values[selection]
+end
+selection = selection.to_i - 1
+values[selection]
 end
 
 def want_to_install?(section)
-  if ENV['ASK'] == 'true'
-    puts "Would you like to install configuration files for: #{section}? [y]es, [n]o"
-    STDIN.gets.chomp == 'y'
-  else
-    true
+  return true if ENV['ASK'] == 'false'
+
+  puts '   ***************************************************************************************'
+  puts '************************************** QUESTION *********************************************'
+  puts "* Would you like to install configuration files for: #{section}? [y]es, [n]o"
+  STDIN.gets.chomp == 'y'
+end
+
+def install_files_absolute(files, method = :symlink)
+  files.each do |f|
+    file = f.split('/').last
+    source = f
+    target = "#{ENV['HOME']}/.#{file}"
+
+    puts "======================#{file}=============================="
+    puts "Source: #{source}"
+    puts "Target: #{target}"
+
+    if File.exist?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
+      puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
+      run %( mv "$HOME/.#{file}" "$HOME/.#{file}.backup" )
+    end
+
+    if method == :symlink
+      run %( ln -nfs "#{source}" "#{target}" )
+    else
+      run %( cp -f "#{source}" "#{target}" )
+    end
+
+    source_config_code = 'for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file'
+    if file == 'zshrc'
+      File.open(target, 'a+') do |zshrc|
+        if zshrc.readlines.grep(/#{Regexp.escape(source_config_code)}/).empty?
+          zshrc.puts(source_config_code)
+        end
+      end
+    end
+    puts
   end
+
 end
 
 def install_files(files, method = :symlink)
@@ -274,7 +350,7 @@ end
 
 def list_vim_submodules
   result = %x(git submodule -q foreach 'echo $name"||"\`git remote -v | awk "END{print \\\\\$2}"\`')
-           .select { |line| line =~ /^vim.bundle/ }.map { |line| line.split('||') }
+    .select { |line| line =~ /^vim.bundle/ }.map { |line| line.split('||') }
   Hash[*result.flatten]
 end
 
