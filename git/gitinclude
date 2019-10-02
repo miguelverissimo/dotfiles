@@ -1,0 +1,44 @@
+[alias]
+  st = status
+  di = diff
+  co = checkout
+  ci = commit -v
+  cira = commit -v --reset-author --amend
+  br = branch
+  llog = "log --date=local"
+  flog = "log --pretty=fuller --decorate"
+  lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+  lol = "log --graph --decorate --oneline"
+  lola = "log --graph --decorate --oneline --all"
+  blog = "log origin/master... --left-right"
+  ds = "diff --staged"
+  fixup = "commit --fixup"
+  squash = "commit --squash"
+  unstage = "reset HEAD"
+  rum = "rebase master@{u}"
+  drb = rebase -i --exec 'git commit --amend --reset-author'
+  pom = push origin master
+  poh = push origin HEAD
+  prom = pull --rebase origin master
+[core]
+  editor = nvim
+  excludesfile = ~/workspace/src/github.com/cloudfoundry/bosh-workstation/global-gitignore
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
+[push]
+  default = simple
+[submodule]
+  fetchJobs = 6
+[diff]
+  compactionHeuristic = true
+[commit]
+  template = ~/.gitmessage
+[merge]
+  tool = fugitive
+[mergetool "vimdiff"]
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "fugitive"]
+  cmd = nvim -f -c Gdiff $MERGED
+[rerere]
+  enabled = true
+

@@ -271,9 +271,8 @@ end
 def want_to_install?(section)
   return true if ENV['ASK'] == 'false'
 
-  puts '   ***************************************************************************************'
   puts '************************************** QUESTION *********************************************'
-  puts "* Would you like to install configuration files for: #{section}? [y]es, [n]o"
+  puts "* Would you like to install configuration files for: #{section}? yes, [n]o"
   STDIN.gets.chomp == 'y'
 end
 
