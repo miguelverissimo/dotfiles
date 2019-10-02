@@ -126,3 +126,6 @@
   path = .gitconfig.user
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
+[user]
+	name = Miguel Verissimo
+	email = m.verissimo@gmail.com

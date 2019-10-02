@@ -3,7 +3,155 @@
 require 'rake'
 require 'English'
 require 'fileutils'
+require 'tty'
 require File.join(File.dirname(__FILE__), 'bin', 'dotfiles', 'vundle')
+
+desc 'install homebrew packages'
+task :install_homebrew_packages do
+  yellow_text 'Step: Install Homebrew packages'
+  return if confirm? && !get_response('Install all homebrew packages?')
+  puts
+end
+
+desc 'install prezto'
+task :install_prezto do
+  yellow_text 'Step: Install prezto'
+  return if confirm? && !get_response('Install prezto?')
+  puts
+
+end
+
+desc 'link git configurations'
+task :link_git_configs do
+  yellow_text 'Step: Install git configurations'
+  return if confirm? && !get_response('Install git configurations?')
+  begin
+    install_files(Dir.glob('git/*'))
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link irb and pry configurations'
+task :link_irb_pry_configs do
+  yellow_text 'Step: Install irb and pry configurations'
+  return if confirm? && !get_response('Install irb and pry configurations?')
+  begin
+    install_files(Dir.glob('irb/*'))
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link rubygems configurations'
+task :link_rubygems_configs do
+  yellow_text 'Step: Install rubygems configurations'
+  return if confirm? && !get_response('Install rubygems configurations?')
+  begin
+    install_files(Dir.glob('ruby/*'))
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link ctags configurations'
+task :link_ctags_configs do
+  yellow_text 'Step: Install ctags configurations'
+  return if confirm? && !get_response('Install ctags configurations?')
+  begin
+    install_files(Dir.glob('ctags/*'))
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link tmux configurations'
+task :link_tmux_configs do
+  yellow_text 'Step: Install tmux configurations'
+  return if confirm? && !get_response('Install tmux configurations?')
+  begin
+    install_files(Dir.glob('tmux/*'))
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link global linter configurations'
+task :link_linter_configs do
+  yellow_text 'Step: Install linter configurations'
+  return if confirm? && !get_response('Install linter configurations?')
+  begin
+    install_files(Dir.glob('linters/*'))
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link vim configurations and packages'
+task :link_vim_and_vundle do
+  yellow_text 'Step: Install vim configurations and packages via vundle'
+  return if confirm? && !get_response('Install vin configurations and packages?')
+  begin
+    
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'install fonts'
+task :install_fonts do
+  yellow_text 'Step: Install fonts'
+  return if confirm? && !get_response('Install fonts?')
+  begin
+    install_fonts
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'install and choose iTerm2 themes'
+task :install_iterm_theme do
+  yellow_text 'Step: Install and choose iTerm2 themes'
+  return if confirm? && !get_response('Install and choose iTerm2 themes?')
+  begin
+    install_iterm_theme
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link bundler configs (no docs)'
+task :link_bundler_config do
+  yellow_text 'Step: Install bundler configurations'
+  return if confirm? && !get_response('Install bundler configurations?')
+  begin
+    run_bundle_config
+  rescue
+    red_text('Failed!')
+  end
+end
+
+desc 'link all dotfiles (configurations)'
+task :link_all_dotfiles do
+  Rake::Task['link_git_configs'].execute
+  Rake::Task['link_irb_pry_configs'].execute
+  Rake::Task['link_rubygems_configs'].execute
+  Rake::Task['link_ctags_configs'].execute
+  Rake::Task['link_tmux_configs'].execute
+  Rake::Task['link_linter_configs'].execute
+  Rake::Task['link_bundler_config'].execute
+end
+
+desc 'full installation (initial setup)'
+task :full_installation do
+  Rake::Task['install_homebrew_packages'].execute
+  Rake::Task['install_prezto'].execute
+  Rake::Task['link_all_dotfiles'].execute
+  Rake::Task['install_fonts'].execute
+  Rake::Task['install_iterm_theme'].execute
+  Rake::Task['link_vim_and_vundle'].execute
+  success_msg
+end
 
 desc 'Hook our dotfiles into system-standard positions.'
 task :install do
@@ -18,24 +166,24 @@ task :install do
   # install_files(Dir.glob('{zshrc}')) if want_to_install?('zshrc')
   install_prezto if want_to_install?('prezto')
 
-  install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
-  install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
-  install_files(Dir.glob('ruby/*')) if want_to_install?('rubygems config (faster/no docs)')
-  install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
-  install_files(Dir.glob('tmux/*')) if want_to_install?('tmux config')
-  install_files(Dir.glob('javascript/*')) if want_to_install?('eslintrc')
+  # install_files(Dir.glob('git/*')) if want_to_install?('git configs (color, aliases)')
+  # install_files(Dir.glob('irb/*')) if want_to_install?('irb/pry configs (more colorful)')
+  # install_files(Dir.glob('ruby/*')) if want_to_install?('rubygems config (faster/no docs)')
+  # install_files(Dir.glob('ctags/*')) if want_to_install?('ctags config (better js/ruby support)')
+  # install_files(Dir.glob('tmux/*')) if want_to_install?('tmux config')
+  # install_files(Dir.glob('javascript/*')) if want_to_install?('eslintrc')
   if want_to_install?('vim configuration (highly recommended)')
     install_files(Dir.glob('{vim,vimrc}'))
     Rake::Task['install_vundle'].execute
   end
 
-  install_fonts if want_to_install?('fonts')
+  # install_fonts if want_to_install?('fonts')
 
-  install_iterm_theme if RUBY_PLATFORM.downcase.include?('darwin') if want_to_install?('iterm theme')
+  # install_iterm_theme if RUBY_PLATFORM.downcase.include?('darwin') if want_to_install?('iterm theme')
 
-  run_bundle_config if want_to_install?('configure bundler')
+  # run_bundle_config if want_to_install?('configure bundler')
 
-  success_msg('installed')
+  # success_msg('installed')
 end
 
 desc 'Updates the installation'
@@ -55,7 +203,7 @@ task :vundle_migration do
   puts '======================================================'
 
   Dir.glob(File.join('vim', 'bundle', '**')) do |sub_path|
-    run %(git config -f #{File.join('.git', 'config')} --remove-section submodule.#{sub_path})
+    run_shell_command %(git config -f #{File.join('.git', 'config')} --remove-section submodule.#{sub_path})
     FileUtils.rm_rf(File.join('.git', 'modules', sub_path))
   end
   FileUtils.mv(File.join('vim', 'bundle'), File.join('vim', 'bundle.old'))
@@ -69,9 +217,9 @@ task :install_vundle do
 
   vundle_path = File.join('vim', 'bundle', 'vundle')
   if File.exist?(vundle_path)
-    run %( cd $HOME/.dotfiles/#{vundle_path} && git pull )
+    run_shell_command %( cd $HOME/.dotfiles/#{vundle_path} && git pull )
   else
-    run %( cd $HOME/.dotfiles && git clone https://github.com/gmarik/vundle.git #{vundle_path} )
+    run_shell_command %( cd $HOME/.dotfiles && git clone https://github.com/gmarik/vundle.git #{vundle_path} )
   end
 
   Vundle.update_vundle
@@ -81,10 +229,19 @@ task default: 'install'
 
 private
 
-def run(cmd)
-  puts "[Running] #{cmd}"
-  `#{cmd}` unless ENV['DEBUG']
+def get_response(query)
+  prompt = TTY::Prompt.new
+  prompt.yes?(query)
 end
+
+def confirm?
+  ENV['ASK'] == 'true'
+end
+
+# def run(cmd)
+#   puts "[Running] #{cmd}"
+#   `#{cmd}` unless ENV['DEBUG']
+# end
 
 def number_of_cores
   cores = if RUBY_PLATFORM.downcase.include?('darwin')
@@ -100,8 +257,8 @@ def run_bundle_config
   return unless system('which bundle')
 
   bundler_jobs = number_of_cores - 1
-  puts 'Configuring Bundlers for parallel gem installation'
-  run %( bundle config --global jobs #{bundler_jobs} )
+  bright_blue_text 'Configuring Bundlers for parallel gem installation'
+  run_shell_command %( bundle config --global jobs #{bundler_jobs} )
   puts
 end
 
@@ -111,9 +268,9 @@ def install_prezto
   puts '======================================================'
 
   if File.exists?(File.join(ENV['HOME'], '.zprezto'))
-    puts "Prezto already installed. Skipping installation"
+    yellow_text "Prezto already installed. Skipping installation"
   else
-    run %{ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" }
+    run_shell_command %{ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" }
 
     # The prezto runcoms are only going to be installed if zprezto has never been installed
     install_files_absolute(Dir.glob(File.join(ENV['HOME'], '.zprezto/runcoms/z*')), :symlink)
@@ -121,13 +278,13 @@ def install_prezto
 
   puts
   puts "Overriding prezto ~/.zpreztorc to enable additional modules..."
-  run %{ ln -nfs "$HOME/.dotfiles/zsh/prezto-override/zpreztorc" "${ZDOTDIR:-$HOME}/.zpreztorc" }
+  run_shell_command %{ ln -nfs "$HOME/.dotfiles/zsh/prezto-override/zpreztorc" "${ZDOTDIR:-$HOME}/.zpreztorc" }
 
   puts
   puts "Creating directories for your customizations"
-  run %{ mkdir -p $HOME/.zsh.before }
-  run %{ mkdir -p $HOME/.zsh.after }
-  run %{ mkdir -p $HOME/.zsh.prompts }
+  run_shell_command %{ mkdir -p $HOME/.zsh.before }
+  run_shell_command %{ mkdir -p $HOME/.zsh.after }
+  run_shell_command %{ mkdir -p $HOME/.zsh.prompts }
 
   if "#{ENV['SHELL']}".include? 'zsh' then
     puts "Zsh is already configured as your shell of choice. Restart your session to load the new settings"
@@ -136,11 +293,11 @@ def install_prezto
     if File.exists?("/usr/local/bin/zsh")
       if File.readlines("/private/etc/shells").grep("/usr/local/bin/zsh").empty?
         puts "Adding zsh to standard shell list"
-        run %{ echo "/usr/local/bin/zsh" | sudo tee -a /private/etc/shells }
+        run_shell_command %{ echo "/usr/local/bin/zsh" | sudo tee -a /private/etc/shells }
       end
-      run %{ chsh -s /usr/local/bin/zsh }
+      run_shell_command %{ chsh -s /usr/local/bin/zsh }
     else
-      run %{ chsh -s /bin/zsh }
+      run_shell_command %{ chsh -s /bin/zsh }
     end
   end
 end
@@ -166,26 +323,26 @@ end
 
 def update_homebrew
   puts 'Updating Homebrew.'
-  run %( brew update )
-  run %( brew tap Homebrew/bundle )
-  run %{ ln -sf $(pwd)/brew/Brewfile ${HOME}/.Brewfile }
+  run_shell_command %( brew update )
+  run_shell_command %( brew tap Homebrew/bundle )
+  run_shell_command %{ ln -sf $(pwd)/brew/Brewfile ${HOME}/.Brewfile }
 end
 
 def install_homebrew_packages
   puts 'Installing Homebrew packages...There may be some ignorable warnings.'
-  run %( brew bundle --global )
+  run_shell_command %( brew bundle --global )
   puts 'Cleaning up after brew.'
-  run %( brew cleanup )
+  run_shell_command %( brew cleanup )
 end
 
 def install_oh_my_zsh
-  run %{ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" }
+  run_shell_command %{ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" }
 end
 
 def install_fonts
   puts 'Installing patched fonts for Powerline/Lightline.'
-  run %( cp -f $HOME/.dotfiles/fonts/* $HOME/Library/Fonts ) if RUBY_PLATFORM.downcase.include?('darwin')
-  run %( mkdir -p ~/.fonts && cp ~/.dotfiles/fonts/* ~/.fonts && fc-cache -vf ~/.fonts ) if RUBY_PLATFORM.downcase.include?('linux')
+  run_shell_command %( cp -f $HOME/.dotfiles/fonts/* $HOME/Library/Fonts ) if RUBY_PLATFORM.downcase.include?('darwin')
+  run_shell_command %( mkdir -p ~/.fonts && cp ~/.dotfiles/fonts/* ~/.fonts && fc-cache -vf ~/.fonts ) if RUBY_PLATFORM.downcase.include?('linux')
   puts
 end
 
@@ -196,12 +353,12 @@ end
 
 def install_themes_in_iterm
   puts 'Installing iTerm2 themes.'
-  run %( /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Bright Lights' dict" ~/Library/Preferences/com.googlecode.iterm2.plist )
-  run %( /usr/libexec/PlistBuddy -c "Merge 'iTerm2/Bright Lights.itermcolors' :'Custom Color Presets':'Bright Lights'" ~/Library/Preferences/com.googlecode.iterm2.plist )
-  run %( /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Snow Dark' dict" ~/Library/Preferences/com.googlecode.iterm2.plist )
-  run %( /usr/libexec/PlistBuddy -c "Merge 'iTerm2/Snow Dark.itermcolors' :'Custom Color Presets':'Snow Dark'" ~/Library/Preferences/com.googlecode.iterm2.plist )
-  run %( /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Ayu' dict" ~/Library/Preferences/com.googlecode.iterm2.plist )
-  run %( /usr/libexec/PlistBuddy -c "Merge 'iTerm2/ayu.itermcolors' :'Custom Color Presets':'Ayu'" ~/Library/Preferences/com.googlecode.iterm2.plist )
+  run_shell_command %( /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Bright Lights' dict" ~/Library/Preferences/com.googlecode.iterm2.plist )
+  run_shell_command %( /usr/libexec/PlistBuddy -c "Merge 'iTerm2/Bright Lights.itermcolors' :'Custom Color Presets':'Bright Lights'" ~/Library/Preferences/com.googlecode.iterm2.plist )
+  run_shell_command %( /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Snow Dark' dict" ~/Library/Preferences/com.googlecode.iterm2.plist )
+  run_shell_command %( /usr/libexec/PlistBuddy -c "Merge 'iTerm2/Snow Dark.itermcolors' :'Custom Color Presets':'Snow Dark'" ~/Library/Preferences/com.googlecode.iterm2.plist )
+  run_shell_command %( /usr/libexec/PlistBuddy -c "Add :'Custom Color Presets':'Ayu' dict" ~/Library/Preferences/com.googlecode.iterm2.plist )
+  run_shell_command %( /usr/libexec/PlistBuddy -c "Merge 'iTerm2/ayu.itermcolors' :'Custom Color Presets':'Ayu'" ~/Library/Preferences/com.googlecode.iterm2.plist )
 end
 
 def ensure_plist_exists
@@ -268,13 +425,12 @@ selection = selection.to_i - 1
 values[selection]
 end
 
-def want_to_install?(section)
-  return true if ENV['ASK'] == 'false'
-
-  puts '************************************** QUESTION *********************************************'
-  puts "* Would you like to install configuration files for: #{section}? yes, [n]o"
-  STDIN.gets.chomp == 'y'
-end
+# def want_to_install?(section)
+#   return true if ENV['ASK'] == 'false'
+#
+#   puts '************************************** QUESTION *********************************************'
+#   HighLine.agree("* Would you like to install configuration files for: #{section}? yes, [n]o")
+# end
 
 def install_files_absolute(files, method = :symlink)
   files.each do |f|
@@ -288,13 +444,13 @@ def install_files_absolute(files, method = :symlink)
 
     if File.exist?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
       puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
-      run %( mv "$HOME/.#{file}" "$HOME/.#{file}.backup" )
+      run_shell_command %( mv "$HOME/.#{file}" "$HOME/.#{file}.backup" )
     end
 
     if method == :symlink
-      run %( ln -nfs "#{source}" "#{target}" )
+      run_shell_command %( ln -nfs "#{source}" "#{target}" )
     else
-      run %( cp -f "#{source}" "#{target}" )
+      run_shell_command %( cp -f "#{source}" "#{target}" )
     end
 
     source_config_code = 'for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file'
@@ -316,19 +472,19 @@ def install_files(files, method = :symlink)
     source = "#{ENV['PWD']}/#{f}"
     target = "#{ENV['HOME']}/.#{file}"
 
-    puts "======================#{file}=============================="
+    bright_blue_text "====================  #{file}  ============================"
     puts "Source: #{source}"
-    puts "Target: #{target}"
+    magenta_text "Target: #{target}"
 
     if File.exist?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
-      puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
-      run %( mv "$HOME/.#{file}" "$HOME/.#{file}.backup" )
+      bold_blue_text "[Overwriting] #{target}...leaving original at #{target}.backup..."
+      run_shell_command %( mv "$HOME/.#{file}" "$HOME/.#{file}.backup" )
     end
 
     if method == :symlink
-      run %( ln -nfs "#{source}" "#{target}" )
+      run_shell_command %( ln -nfs "#{source}" "#{target}" )
     else
-      run %( cp -f "#{source}" "#{target}" )
+      run_shell_command %( cp -f "#{source}" "#{target}" )
     end
 
     source_config_code = 'for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file'
@@ -363,6 +519,34 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
   run %( defaults read com.googlecode.iterm2 )
 end
 
-def success_msg(action)
-  puts "#{action}. Please restart your terminal and vim."
+def run_shell_command(params)
+  cmd = TTY::Command.new
+  cmd.run(params)
+end
+
+def success_msg
+  pastel = Pastel.new
+  font = TTY::Font.new(:starwars)
+  puts pastel.bright_green(font.write('SUCCESS'))
+  puts "Please restart your terminal and vim."
+end
+
+def yellow_text(msg)
+  puts Pastel.new.yellow(msg)
+end
+
+def red_text(msg)
+  puts Pastel.new.red(msg)
+end
+
+def magenta_text(msg)
+  puts Pastel.new.magenta(msg)
+end
+
+def bold_blue_text(msg)
+  puts Pastel.new.bright_blue.bold(msg)
+end
+
+def bright_blue_text(msg)
+  puts Pastel.new.bright_blue(msg)
 end
