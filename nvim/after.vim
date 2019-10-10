@@ -44,8 +44,8 @@ let g:UltiSnipsJumpBackwardTrigger="<M-[>"
 
 """ Set the colorscheme
 set background=dark
+
 " colorscheme snow
-" let g:lightline = { 'colorscheme': 'snow_dark' }
 " colorscheme pink-moon
 " colorscheme carbonized-dark
 " colorscheme lucius
@@ -55,11 +55,14 @@ set background=dark
 " colorscheme stellarized
 " colorscheme dracula
 " colorscheme onehalfdark
-" let g:lightline.colorscheme='onehalfdark'
 " colorscheme tender
-" let g:lightline.colorscheme='tender'
 " colorscheme zenburn
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme base16-material
+
+" let g:lightline.colorscheme='onehalfdark'
+" let g:lightline.colorscheme='tender'
+let g:lightline.colorscheme='snow_dark'
 
 """ TWO SPACES
 set expandtab

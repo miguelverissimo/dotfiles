@@ -17,6 +17,7 @@ desc 'install prezto'
 task :install_prezto do
   yellow_text 'Step: Install prezto'
   return if confirm? && !get_response('Install prezto?')
+
   install_prezto
 end
 
@@ -24,9 +25,10 @@ desc 'link git configurations'
 task :link_git_configs do
   yellow_text 'Step: Install git configurations'
   return if confirm? && !get_response('Install git configurations?')
+
   begin
     install_files(Dir.glob('git/*'))
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -35,9 +37,10 @@ desc 'link irb and pry configurations'
 task :link_irb_pry_configs do
   yellow_text 'Step: Install irb and pry configurations'
   return if confirm? && !get_response('Install irb and pry configurations?')
+
   begin
     install_files(Dir.glob('irb/*'))
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -46,9 +49,10 @@ desc 'link rubygems configurations'
 task :link_rubygems_configs do
   yellow_text 'Step: Install rubygems configurations'
   return if confirm? && !get_response('Install rubygems configurations?')
+
   begin
     install_files(Dir.glob('ruby/*'))
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -57,9 +61,10 @@ desc 'link ctags configurations'
 task :link_ctags_configs do
   yellow_text 'Step: Install ctags configurations'
   return if confirm? && !get_response('Install ctags configurations?')
+  
   begin
     install_files(Dir.glob('ctags/*'))
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -68,9 +73,10 @@ desc 'link tmux configurations'
 task :link_tmux_configs do
   yellow_text 'Step: Install tmux configurations'
   return if confirm? && !get_response('Install tmux configurations?')
+
   begin
     install_files(Dir.glob('tmux/*'))
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -78,10 +84,11 @@ end
 desc 'link global linter configurations'
 task :link_linter_configs do
   yellow_text 'Step: Install linter configurations'
+  
   return if confirm? && !get_response('Install linter configurations?')
   begin
     install_files(Dir.glob('linters/*'))
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -90,10 +97,11 @@ desc 'link vim configurations and packages'
 task :link_vim_and_vundle do
   yellow_text 'Step: Install vim configurations and packages via vundle'
   return if confirm? && !get_response('Install vin configurations and packages?')
+  
   begin
     install_files(Dir.glob('{vim,vimrc}'))
     Rake::Task['install_vundle'].execute
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -102,9 +110,10 @@ desc 'install fonts'
 task :install_fonts do
   yellow_text 'Step: Install fonts'
   return if confirm? && !get_response('Install fonts?')
+  
   begin
     install_fonts
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -113,9 +122,10 @@ desc 'install and choose iTerm2 themes'
 task :install_iterm_theme do
   yellow_text 'Step: Install and choose iTerm2 themes'
   return if confirm? && !get_response('Install and choose iTerm2 themes?')
+  
   begin
     install_iterm_themes
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -124,9 +134,10 @@ desc 'link bundler configs (no docs)'
 task :link_bundler_config do
   yellow_text 'Step: Install bundler configurations'
   return if confirm? && !get_response('Install bundler configurations?')
+  
   begin
     run_bundle_config
-  rescue => e
+  rescue StandardError => e
     red_text("Failed! : #{e}")
   end
 end
@@ -202,7 +213,7 @@ def migrate_to_vundle
 end
 
 def number_of_cores
-  command = RUBY_PLATFORM.downcase.include?('darwin')? %( sysctl -n hw.ncpu ) : %( nproc )
+  command = RUBY_PLATFORM.downcase.include?('darwin') ? %( sysctl -n hw.ncpu ) : %( nproc )
   cores = run_command command
   cores.to_i
 end
@@ -218,9 +229,9 @@ end
 
 def install_prezto
   if File.exists?(File.join(ENV['HOME'], '.zprezto'))
-    yellow_text "Prezto already installed. Skipping installation"
+    yellow_text 'Prezto already installed. Skipping installation'
   else
-    run_shell_command %{ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" }
+    run_shell_command %( git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" )
 
     # The prezto runcoms are only going to be installed if zprezto has never been installed
     install_files(Dir.glob(File.join(ENV['HOME'], '.zprezto/runcoms/z*')), :symlink, false)
@@ -407,7 +418,7 @@ def success_msg
   pastel = Pastel.new
   font = TTY::Font.new(:starwars)
   puts pastel.bright_green(font.write('SUCCESS'))
-  puts "Please restart your terminal and vim."
+  puts 'Please restart your terminal and vim.'
 end
 
 def yellow_text(msg)
@@ -437,7 +448,7 @@ end
 #     selection = STDIN.gets.chomp
 #     if (begin
 #           Float(selection).nil?
-#         rescue => e StandardError
+#         rescue StandardError => e StandardError
 #           true
 #         end) || selection.to_i < 0 || selection.to_i > values.size + 1
 #       puts "ERROR: Invalid selection.\n\n"
