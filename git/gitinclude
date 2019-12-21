@@ -20,9 +20,12 @@
   pom = push origin master
   poh = push origin HEAD
   prom = pull --rebase origin master
+  uncommit = "reset --soft HEAD^"
+  unstage = "reset HEAD^"
+  untrack = "rm -r --cached"
 [core]
   editor = nvim
-  excludesfile = ~/workspace/src/github.com/cloudfoundry/bosh-workstation/global-gitignore
+  excludesfile = ~/.gitignore
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
 [push]

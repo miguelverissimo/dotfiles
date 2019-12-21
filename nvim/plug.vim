@@ -46,3 +46,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 """ GraphQL Syntax Highlighting
 Plug 'jparise/vim-graphql'
+
+""" Elixir
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'

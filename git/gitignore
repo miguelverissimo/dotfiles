@@ -39,3 +39,13 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Elixir
+.elixir_ls/
+
+# Node
+node_modules/
+
+# IDEs
+.vscode/
+.idea/

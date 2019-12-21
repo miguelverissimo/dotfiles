@@ -50,7 +50,7 @@ set background=dark
 " colorscheme carbonized-dark
 " colorscheme lucius
 " colorscheme mysticaltutor
-" colorscheme blayu
+colorscheme blayu
 " colorscheme spring-night
 " colorscheme stellarized
 " colorscheme dracula
@@ -75,3 +75,7 @@ autocmd BufEnter *.rb setlocal foldmethod=syntax shiftwidth=2 tabstop=2 softtabs
 
 """ Extend GraphQL syntax to .prisma files
 au BufRead,BufNewFile *.prisma set filetype=graphql
+
+""" Elixir
+let g:mix_format_on_save = 1
+
