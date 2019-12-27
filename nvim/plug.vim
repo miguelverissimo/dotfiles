@@ -46,3 +46,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 """ GraphQL Syntax Highlighting
 Plug 'jparise/vim-graphql'
+
+""" I need NERDTree
+Plug 'scrooloose/nerdtree'

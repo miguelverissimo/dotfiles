@@ -15,6 +15,19 @@ let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
+""" For NERDTree
+nnoremap <leader>nn :NERDTreeToggle<CR>
+nnoremap \ :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+nnoremap \| :NERDTreeFind<CR>
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeChDirMode=2 " Change the NERDTree directory to the root node
+let g:NERDTreeHijackNetrw=0
+augroup luan_nerdtree
+  autocmd!
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
+
 """ For sunaku/vim-dasht
 " search related docsets
 nnoremap <Leader>k :Dasht<Space>
@@ -61,14 +74,12 @@ set background=dark
 " colorscheme zenburn
 colorscheme gruvbox
 
-""" TWO SPACES
-set expandtab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+""" TABS ARE EVIL
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd BufEnter *.js setlocal foldmethod=syntax shiftwidth=2 tabstop=2 softtabstop=2 noexpandtab
 autocmd BufEnter *.jsx setlocal foldmethod=syntax shiftwidth=2 tabstop=2 softtabstop=2 noexpandtab
-autocmd BufEnter *.rb setlocal foldmethod=syntax shiftwidth=2 tabstop=2 softtabstop=2 noexpandtab
+" autocmd BufEnter *.rb setlocal foldmethod=syntax shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
 """ Extend GraphQL syntax to .prisma files
 au BufRead,BufNewFile *.prisma set filetype=graphql
+
