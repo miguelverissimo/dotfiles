@@ -56,14 +56,15 @@ let g:UltiSnipsJumpBackwardTrigger="<M-[>"
 """ /For utilsnips
 
 """ Set the colorscheme
+set termguicolors
 set background=dark
-" colorscheme snow
-" let g:lightline = { 'colorscheme': 'snow_dark' }
-" colorscheme pink-moon
-" colorscheme carbonized-dark
+
+colorscheme blayu
+" colorscheme rigel
+" colorscheme candid
 " colorscheme lucius
 " colorscheme mysticaltutor
-" colorscheme blayu
+
 " colorscheme spring-night
 " colorscheme stellarized
 " colorscheme dracula
@@ -71,8 +72,11 @@ set background=dark
 " let g:lightline.colorscheme='onehalfdark'
 " colorscheme tender
 " let g:lightline.colorscheme='tender'
-" colorscheme zenburn
-colorscheme gruvbox
+" colorscheme gruvbox
+
+" colorscheme xcodedark
+" colorscheme synthwave84
+" colorscheme eighties
 
 """ TABS ARE EVIL
 set tabstop=2 shiftwidth=2 softtabstop=2 expandtab

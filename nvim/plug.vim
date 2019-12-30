@@ -17,19 +17,21 @@ Plug 'sunaku/vim-dasht'
 """ /For Dash integration
 
 """ colorscheme
-Plug 'nightsense/snow'
-Plug 'sts10/vim-pink-moon'
-Plug 'nightsense/carbonized'
+Plug 'Rigellute/rigel'
+Plug 'tjammer/blayu.vim'
+Plug 'flrnd/candid.vim'
+
 Plug 'jonathanfilip/vim-lucius'
 Plug 'caksoylar/vim-mysticaltutor'
-Plug 'tjammer/blayu.vim'
 Plug 'rhysd/vim-color-spring-night'
 Plug 'nightsense/stellarized'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'jacoborus/tender.vim'
-Plug 'jnurmine/Zenburn'
 Plug 'morhetz/gruvbox'
+Plug 'arzg/vim-colors-xcode'
+Plug 'artanikin/vim-synthwave84'
+Plug 'lithammer/vim-eighties'
 
 """ code snippets because lazy
 " Ultisnips
