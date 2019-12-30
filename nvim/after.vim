@@ -87,3 +87,5 @@ autocmd BufEnter *.jsx setlocal foldmethod=syntax shiftwidth=2 tabstop=2 softtab
 """ Extend GraphQL syntax to .prisma files
 au BufRead,BufNewFile *.prisma set filetype=graphql
 
+""" Relative and absolute line numbers
+set rnu
