@@ -59,13 +59,12 @@ let g:UltiSnipsJumpBackwardTrigger="<M-[>"
 set termguicolors
 set background=dark
 
-colorscheme blayu
+" colorscheme blayu
 " colorscheme rigel
 " colorscheme candid
-" colorscheme lucius
 " colorscheme mysticaltutor
 
-" colorscheme spring-night
+colorscheme spring-night
 " colorscheme stellarized
 " colorscheme dracula
 " colorscheme onehalfdark
@@ -77,6 +76,7 @@ colorscheme blayu
 " colorscheme xcodedark
 " colorscheme synthwave84
 " colorscheme eighties
+" colorscheme lucius
 
 """ TABS ARE EVIL
 set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
@@ -90,5 +90,3 @@ au BufRead,BufNewFile *.prisma set filetype=graphql
 """ Relative and absolute line numbers
 set rnu
 
-""" Make CoC expand snippet on CR
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
