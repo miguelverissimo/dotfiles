@@ -89,3 +89,6 @@ au BufRead,BufNewFile *.prisma set filetype=graphql
 
 """ Relative and absolute line numbers
 set rnu
+
+""" Make CoC expand snippet on CR
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
