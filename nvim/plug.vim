@@ -33,6 +33,8 @@ Plug 'arzg/vim-colors-xcode'
 Plug 'artanikin/vim-synthwave84'
 Plug 'lithammer/vim-eighties'
 
+Plug 'miguelverissimo/vim-color-elixizi'
+
 """ code snippets because lazy
 " Ultisnips
 Plug 'SirVer/ultisnips'

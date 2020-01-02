@@ -64,7 +64,12 @@ set background=dark
 " colorscheme candid
 " colorscheme mysticaltutor
 
-colorscheme spring-night
+" colorscheme spring-night
+" let g:airline_theme = 'spring_night'
+
+colorscheme elixizi
+let g:airline_theme = 'elixizi'
+
 " colorscheme stellarized
 " colorscheme dracula
 " colorscheme onehalfdark
@@ -90,3 +95,5 @@ au BufRead,BufNewFile *.prisma set filetype=graphql
 """ Relative and absolute line numbers
 set rnu
 
+""" remove trailing whitspace on save
+autocmd BufWritePre * %s/\s\+$//e
