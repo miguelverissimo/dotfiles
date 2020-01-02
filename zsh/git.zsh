@@ -1,6 +1,7 @@
 # Git related
 alias g="git"
 alias gaa="git add -A"
+alias gap="git add -p"
 alias gb="git branch -a -v"
 alias gtb="git branch -u origin/" #track branch 
 alias gcm="git commit -v -m"
