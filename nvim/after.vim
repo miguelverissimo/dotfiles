@@ -101,6 +101,12 @@ autocmd BufWritePre * %s/\s\+$//e
 """ Format elixir files with mix on save
 let g:mix_format_on_save = 1
 
+
+syntax on
+filetype plugin indent on
+
+set laststatus=2
+set wildmenu
 " Elixir language server setup
 " git clone git@github.com:elixir-lsp/elixir-ls.git
 " cd elixir-ls && mkdir rel
@@ -108,3 +114,29 @@ let g:mix_format_on_save = 1
 " mix elixir_ls.release -o rel
 " ln -s $(pwd)/rel $HOME/elixir-ls
 let g:ale_elixir_elixir_ls_release = '$HOME/elixir-ls'
+let g:ale_linters = {
+\   'elixir': ['elixir-ls'],
+\}
+
+let g:ale_fixers = {
+\  'elixir': ['mix_format'],
+\}
+
+let g:ale_completion_enabled = 1
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+
+noremap <Leader>ad :ALEGoToDefinition<CR>
+nnoremap <leader>af :ALEFix<cr>
+noremap <Leader>ar :ALEFindReferences<CR>
+
+"Move between linting errors
+nnoremap ]r :ALENextWrap<CR>
+nnoremap [r :ALEPreviousWrap<CR>
