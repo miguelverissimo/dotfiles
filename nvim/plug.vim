@@ -53,3 +53,8 @@ Plug 'jparise/vim-graphql'
 
 """ I need NERDTree
 Plug 'scrooloose/nerdtree'
+
+""" Elixir
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'mhinz/vim-mix-format'
