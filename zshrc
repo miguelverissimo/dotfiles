@@ -39,7 +39,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # source all the zsh files
+for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file
 
 # z!!!
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file
