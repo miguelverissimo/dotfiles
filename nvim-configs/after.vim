@@ -4,3 +4,7 @@
 " let g:UltiSnipsJumpForwardTrigger="<M-]>"
 " let g:UltiSnipsJumpBackwardTrigger="<M-[>"
 """ /For utilsnips
+
+" color elixizy
+" color elixify
+" color codeschool
