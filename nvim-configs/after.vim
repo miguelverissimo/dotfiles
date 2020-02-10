@@ -5,6 +5,8 @@
 " let g:UltiSnipsJumpBackwardTrigger="<M-[>"
 """ /For utilsnips
 
-" color elixizy
-" color elixify
+" color xoria256
 " color codeschool
+
+" colorscheme tendinitis
+" let g:lightline = { 'colorscheme': 'tendinitis' }

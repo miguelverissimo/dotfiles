@@ -4,4 +4,3 @@
 " Snippets (requires UltiSnips)
 " Plug 'miguelverissimo/vim-crutches'
 """ /code snippets because lazy
-
