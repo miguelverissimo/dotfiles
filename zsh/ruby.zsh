@@ -1,11 +1,11 @@
 # Ruby and Rails related
 alias b="bundle"
-alias bi="b install --path vendor"
-alias bil="bi --local"
-alias bu="b update"
-alias be="b exec"
-alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
-alias dbmig="rake db:migrate db:test:clone"
+alias bu="bundle update"
+alias be="bundle exec"
 
-# don't show deprecation warnings
-export RUBYOPT=-W:no-deprecated
+# Hanami
+alias ha="bundle exec hanami"
+alias hag="bundle exec hanami generate"
+alias has="bundle exec hanami server"
+alias hat="HANAMI_ENV=test bundle exec hanami"
+alias hart="bundle exec rake"
