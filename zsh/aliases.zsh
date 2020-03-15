@@ -129,3 +129,5 @@ alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 alias android-avd="emulator -avd \$(emulator -list-avds | head -n 1)"
 alias ios-emulator="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/"
 
+# MOLAN LABE
+alias dea='direnv allow .'
