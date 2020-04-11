@@ -9,9 +9,9 @@ alias cf-ruby="cf ssh -tt -c \"/tmp/lifecycle/launcher /home/vcap/app bash ''\""
 
 # Story because too lazy to copy/paste
 story() {
-  if [[ "$1" == "--query" || "$1" == "-?" ]]; then
+  if [[ "$1" == "--query" || "$1" == "-?" || "$1" == "-q" ]]; then
     cat ~/.gitmessage | tail -1
-  elif [[ "$1" == "--clear" || "$1" == "-C" ]]; then
+  elif [[ "$1" == "--clear" || "$1" == "-C" || "$1" == "-c" ]]; then
     echo -n >| ~/.gitmessage
     echo "Cleared out story number"
   elif [[ "$1" =~ ^#[0-9]+$ ]]; then
@@ -26,11 +26,11 @@ story() {
     echo -e "\n\n[#$story_id](https://www.pivotaltracker.com/story/show/$story_id)" >| ~/.gitmessage
     echo "Set story to #$story_id"
   else
-    echo "usage: story [-h] [--clear|-C] [--query|-?] [story id]"
-    echo -e "\t--query, -?:\tshows tracked story"
-    echo -e "\t--clear, -C:\tunsets tracked story"
-    echo -e "\t--help, -h:\thelp (this)"
-    echo -e "\t[story id]:\tsets tracked story to [story id]"
+    echo "usage: story [-h] [--clear|-c|-C] [--query|-q|-?] [story id]"
+    echo -e "\t--query, -q, -?\t  shows tracked story"
+    echo -e "\t--clear, -c, -C\t  unsets tracked story"
+    echo -e "\t--help, -h\t  help (this)"
+    echo -e "\t[story id]\t  sets tracked story to [story id]"
   fi
 }
 
