@@ -1,26 +1,29 @@
+alias galias="cat $HOME/.dotfiles/zsh/git.zsh"
+alias galg="galias | ag"
 alias g="git"
-alias gap="git add -p"
-alias gb="git branch -a -v"
-alias gtb="git branch -u origin/" #track branch
-alias gcm="git commit -v -m"
-alias gcam="git commit -v -a -m"
-alias gd="git diff -w"
-alias gl="git pull"
-alias gpr="git pull --rebase"
+alias gap="git add -p" # add interactively
+alias gb="git branch -a -v" # show branches (local and remote) with commit information
+alias gtb="git branch -u" # track branch
+alias gcm="git commit -m" # commit with message
+alias gcam="git commit -a -m" # add all and commit with message
+alias gd="git diff -w" # diff ignoring whitespace
+alias gp="git pull"
+alias gpr="git pull --rebase" # pull with rebase
 alias gpu="git push"
+alias gpa="git remote | xargs -L1 -I R git push R" # push to all remotes
+alias gpauc="gpa -u $(git branch --show-current)" # track and push current branch to all remotes
+alias gpac="gpa $(git branch --show-current)" # push current branch to all remotes
 alias gs="git status"
-alias gss="git status -sb"
-alias gg="git tree"
-alias ggs="gg --stat"
+alias gst="git status"
+alias gss="git status -sb" # short status with branch information
+alias gg="git tree" # show the history visually in a tree format
+alias ggs="gg --stat" # show the history visually in a tree format, with information on the files changed
 alias gsl="git shortlog -sn"
-alias glg="git log --pretty=oneline --abbrev-commit"
-alias gw="git whatchanged"
-alias gsu="git submodule update --init --recursive"
-alias uncommit="git reset --soft 'HEAD^'"
+alias glg="git log --pretty=oneline --abbrev-commit" # terse (compact) history, with short shas
+alias gw="git whatchanged" # long history, with author, commit message and files
+alias gsu="git submodule update --init --recursive" # initialize all submodules
+alias uncommit="git reset --soft 'HEAD^'" # undo the last commit
 alias gchurn="git log --pretty="format:" --name-only | grep -vE '^(vendor/|$)' | sort | uniq -c | sort"
-alias gpa="git remote | xargs -L1 -I R git push R"
-alias gpauc="gpa -u $(git branch --show-current)"
-alias gpac="gpa $(git branch --show-current)"
 alias gsw="git switch"
 
 # track all remote branches
