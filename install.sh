@@ -19,4 +19,4 @@ for CONFIG_FILE in $ROOT_FILES; do
 done
 
 echo "Now run all the symlinking for the supported software"
-# for every directory, run the config.sh
+# TODO: for every directory, run the config.sh
