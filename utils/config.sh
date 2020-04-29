@@ -3,7 +3,7 @@
 set -e
 CONFIGS_DIR=$(cd "$(dirname "$0")"; pwd)
 
-for UTILITY_FILE in colortest; do
+for UTILITY_FILE in colortest pc; do
   SYMLINK_PATH=/usr/local/bin/${UTILITY_FILE}
 
   if [ "$SYMLINK_PATH" == "/usr/local/bin/" ]; then
