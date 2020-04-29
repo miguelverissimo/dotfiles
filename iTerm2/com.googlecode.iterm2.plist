@@ -5043,7 +5043,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>HackNerdFontComplete-Regular 14</string>
+			<string>HasklugNerdFontCompleteM-Regular 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5338,7 +5338,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.1200000000000001</real>
+			<real>1</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -5363,8 +5363,10 @@
 	<true/>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Hack Nerd Font Mono</string>
-		<string>Hack Nerd Font</string>
+		<string>JetBrainsMono Nerd Font Mono</string>
+		<string>Inconsolata Nerd Font</string>
+		<string>Inconsolata Nerd Font Mono</string>
+		<string>Hasklug Nerd Font Mono</string>
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
@@ -5392,7 +5394,7 @@
 		<key>screenFrame</key>
 		<string>{{2560, 72}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{3061, 973}</string>
+		<string>{3535, 900}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -6273,7 +6275,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-28T01:23:05Z</date>
+	<date>2020-04-29T01:23:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
