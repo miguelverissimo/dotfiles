@@ -4360,7 +4360,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1329 395 574 77 0 0 2560 1417 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>3120 618 799 448 0 0 2560 1417 </string>
+	<string>3601 374 799 448 2560 72 1920 1177 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
 	<string>3212 824 616 174 2560 72 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -4372,7 +4372,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1283 0 1273 1417 0 0 2560 1417 </string>
+	<string>854 0 1705 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>3522 72 956 1177 2560 72 1920 1177 </string>
 	<key>NeverWarnAboutShortLivedSessions_76ABC66E-AE77-4E0D-8629-6907E2552C79</key>
@@ -4627,7 +4627,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blend</key>
-			<real>0.33059761597938153</real>
+			<real>0.050000000000000003</real>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -5324,7 +5324,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.015365244289340102</real>
+			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -5351,12 +5351,12 @@
 	<array>
 		<string>3.3.6</string>
 		<string>3.3.8</string>
-		<string>3.2.9</string>
+		<string>3.3.2</string>
 		<string>3.3.3</string>
 		<string>3.3.7</string>
 		<string>3.3.9</string>
+		<string>3.2.9</string>
 		<string>3.3.0</string>
-		<string>3.3.2</string>
 		<string>3.3.4</string>
 	</array>
 	<key>NoSyncAutoBurialReveal</key>
@@ -5394,7 +5394,7 @@
 		<key>screenFrame</key>
 		<string>{{2560, 72}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{3535, 900}</string>
+		<string>{3471, 977}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -5411,7 +5411,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>542311465.89470005</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>35</integer>
+	<integer>37</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -6275,7 +6275,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-29T01:23:02Z</date>
+	<date>2020-05-12T01:22:44Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
