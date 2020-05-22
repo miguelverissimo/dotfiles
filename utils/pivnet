@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+tmux new-session -s 'pivnet' -n 'running' -d
+tmux split-window -vp 90
+tmux split-window -vp 90
+tmux split-window -vp 90
+tmux send-keys -t 1 'docker-compose up' Enter
+tmux send-keys -t 2 '$(yarn bin)/webpack --mod development --watch' Enter
+tmux send-keys -t 3 'bin/webpack-dev-server' Enter
+tmux send-keys -t 4 'bundle exec rails server' Enter
+tmux new-window -n 'nvim'
+tmux send-keys 'nvim' Enter
+tmux attach-session -d

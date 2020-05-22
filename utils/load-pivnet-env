@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+export LPASS_AGENT_TIMEOUT=90000
+
+if [ "$(lpass status)" == 'Not logged in.' ]; then
+  echo 'Enter Lastpass Username:'
+  read lastpass_username
+  lpass login --trust ${lastpass_username}
+fi
+
+echo 'Loading environment variables from lastpass Work/pivnet-dev-environment-configuration'
+eval "$(lpass show 'Work/pivnet-dev-environment-configuration' --notes | sed -e 's/\(.*\): /export \1=/')" # > /dev/null
+eval "$(lpass show 'Work/pivnet-dev-bbl-env' --notes)" # > /dev/null
+
