@@ -129,7 +129,7 @@
   # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
   enabled = true
 [commit]
-    template = ~/.gitmessage
+  template = ~/.gitmessage
 [include]
   path = .gitconfig.user
 [url "git@github.com:"]
@@ -143,3 +143,5 @@
   insteadOf = https://github.com
 [url "git@gitlab.com:"]
   insteadOf = https://gitlab.com
+[init]
+  templateDir = ~/.dotfiles/git/git_template
