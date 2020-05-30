@@ -4372,7 +4372,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>854 0 1705 1417 0 0 2560 1417 </string>
+	<string>1283 0 1429 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>3522 72 956 1177 2560 72 1920 1177 </string>
 	<key>NeverWarnAboutShortLivedSessions_76ABC66E-AE77-4E0D-8629-6907E2552C79</key>
@@ -5043,7 +5043,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>HasklugNerdFontCompleteM-Regular 14</string>
+			<string>HasklugNerdFontComplete-Regular 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5355,18 +5355,18 @@
 		<string>3.3.3</string>
 		<string>3.3.7</string>
 		<string>3.3.9</string>
-		<string>3.2.9</string>
 		<string>3.3.0</string>
+		<string>3.2.9</string>
 		<string>3.3.4</string>
 	</array>
 	<key>NoSyncAutoBurialReveal</key>
 	<true/>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>JetBrainsMono Nerd Font Mono</string>
-		<string>Inconsolata Nerd Font</string>
-		<string>Inconsolata Nerd Font Mono</string>
+		<string>Hasklug Nerd Font</string>
 		<string>Hasklug Nerd Font Mono</string>
+		<string>Hack Nerd Font Mono</string>
+		<string>FantasqueSansMono Nerd Font Mono</string>
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
@@ -5394,7 +5394,7 @@
 		<key>screenFrame</key>
 		<string>{{2560, 72}, {1920, 1200}}</string>
 		<key>topLeft</key>
-		<string>{3471, 977}</string>
+		<string>{3535, 900}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
@@ -5411,7 +5411,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>542311465.89470005</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>37</integer>
+	<integer>41</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -6275,7 +6275,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-12T01:22:44Z</date>
+	<date>2020-05-28T01:23:07Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

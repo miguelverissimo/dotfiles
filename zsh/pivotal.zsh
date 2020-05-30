@@ -26,6 +26,8 @@ story() {
     echo -e "\n\n[#$story_id](https://www.pivotaltracker.com/story/show/$story_id)" >| ~/.gitmessage
     echo "Set story to #$story_id"
   else
+    current_story=$(cat ~/.gitmessage | tail -1)
+    if [ -s ~/.gitmessage ]; then echo "Current story: ${current_story}\n"; fi
     echo "usage: story [-h] [--clear|-c|-C] [--query|-q|-?] [story id]"
     echo -e "\t--query, -q, -?\t  shows tracked story"
     echo -e "\t--clear, -c, -C\t  unsets tracked story"
