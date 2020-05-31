@@ -3,8 +3,8 @@
 set -e
 CONFIGS_DIR=$(cd "$(dirname "$0")"; pwd)
 
-echo "clone prezto"
-# git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+# Run the dependencies install script first
+./_dependencies/setup.sh
 
 ROOT_FILES="zshrc"
 
