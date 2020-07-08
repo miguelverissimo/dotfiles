@@ -20,6 +20,7 @@ alias gg='git tree' # show the history visually in a tree format
 alias ggs='gg --stat' # show the history visually in a tree format, with information on the files changed
 alias gsl='git shortlog -sn'
 alias glg='git log --pretty=oneline --abbrev-commit' # terse (compact) history, with short shas
+alias gsfn='git diff-tree --no-commit-id --name-only -r' # show just the filenames on a given sha commit
 alias gw='git whatchanged' # long history, with author, commit message and files
 alias gsu='git submodule update --init --recursive' # initialize all submodules
 alias uncommit='git reset --soft "HEAD^"' # undo the last commit

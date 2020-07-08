@@ -8,6 +8,7 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 alias b="bundle"
 alias bu="bundle update"
 alias be="bundle exec"
+alias rs="PORT=3000 foreman start -f Procfile.dev"
 
 # Hanami
 alias ha="bundle exec hanami"

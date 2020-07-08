@@ -139,9 +139,5 @@
 [user]
   name = Miguel Verissimo
   email = m.verissimo@gmail.com
-[url "git@github.com:"]
-  insteadOf = https://github.com
-[url "git@gitlab.com:"]
-  insteadOf = https://gitlab.com
 [init]
   templateDir = ~/.dotfiles/git/git_template
