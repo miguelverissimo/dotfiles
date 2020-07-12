@@ -56,7 +56,7 @@ window:
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
   # disable scrolling.
-  history: 0
+  history: 10000
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
@@ -67,27 +67,47 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: Hasklug Nerd Font
-    style: Regular
+    # family: FantasqueSansMono Nerd Font Mono
+    # family: CaskaydiaCove Nerd Font
+    # family: Hack Nerd Font
+    # family: Hasklug Nerd Font
+    # family: Incosolata Nerd Font
+    # family: VictorMono Nerd Font
+    family: VictorMono Nerd Font
+    # style: Regular
+    style: Medium
 
   # The bold font face
   bold:
-    family: Hasklug Nerd Font
+    # family: FantasqueSansMono Nerd Font Mono
+    # family: CaskaydiaCove Nerd Font
+    # family: Hack Nerd Font
+    # family: Hasklug Nerd Font
+    # family: Incosolata Nerd Font
+    # family: VictorMono Nerd Font
+    family: VictorMono Nerd Font
     style: Bold
 
   # The italic font face
   italic:
-    family: Hasklug Nerd Font
+    # family: FantasqueSansMono Nerd Font Mono
+    # family: CaskaydiaCove Nerd Font
+    # family: Hack Nerd Font
+    # family: Hasklug Nerd Font
+    # family: Incosolata Nerd Font
+    # family: VictorMono Nerd Font
+    family: VictorMono Nerd Font
     style: Italic
 
   # Point size of the font
-  size: 14.0
+  size: 15.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
     x: 0
     y: 0
+    # this => that
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
@@ -110,7 +130,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: false
+  use_thin_strokes: true
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
@@ -119,12 +139,19 @@ draw_bold_text_with_bright_colors: true
 # and cursor.background colors, otherwise invert the colors of the cursor.
 # custom_cursor_colors: false
 
-# Colors (Tender)
 colors:
+  ### Tender ###
   # Default colors
   primary:
     background: '0x282828'
     foreground: '0xeeeeee'
+
+  # Colors that should be used to draw the terminal cursor. If these are unset,
+  # the cursor colour will be the inverse of the cell colour.
+  # cursor:
+  #   text: '0x2e2e2d'
+  #   # text: '0x000000'
+  #   cursor: '0xffffff'
 
   # Normal colors
   normal:
@@ -148,52 +175,7 @@ colors:
     cyan:    '0x73cef4'
     white:   '0xfeffff'
 
-  # Default colours
-  # primary:
-  #   background: '0xffffff'
-  #   foreground: '0x2e2e2d'
-
-  # # Colors that should be used to draw the terminal cursor. If these are unset,
-  # # the cursor colour will be the inverse of the cell colour.
-  # # cursor:
-  # #   text: '0x2e2e2d'
-  # #   # text: '0x000000'
-  # #   cursor: '0xffffff'
-
-  # # Normal colors
-  # normal:
-  #   black:   '0x000000'
-  #   red:     '0xc62828'
-  #   green:   '0x558b2f'
-  #   yellow:  '0xf9a825'
-  #   blue:    '0x1565c0'
-  #   magenta: '0x6a1e9a'
-  #   cyan:    '0x00838f'
-  #   white:   '0xf2f2f2'
-
-  # # Bright colors
-  # bright:
-  #   black:   '0x545454'
-  #   red:     '0xef5350'
-  #   green:   '0x8bc34a'
-  #   yellow:  '0xffeb3b'
-  #   blue:    '0x64b5f6'
-  #   magenta: '0xba68c8'
-  #   cyan:    '0x26c6da'
-  #   white:   '0xe0e0e0'
-
-  # # Dim colors (Optional)
-  # dim:
-  #   black:   '0x333333'
-  #   red:     '0xf2777a'
-  #   green:   '0x99cc99'
-  #   yellow:  '0xffcc66'
-  #   blue:    '0x6699cc'
-  #   magenta: '0xcc99cc'
-  #   cyan:    '0x66cccc'
-  #   white:   '0xdddddd'
-
-  # Tomorrow Night Bright
+  ### Tomorrow Night Bright ###
   # primary:
   #   background: '0x000000'
   #   foreground: '0xeaeaea'
