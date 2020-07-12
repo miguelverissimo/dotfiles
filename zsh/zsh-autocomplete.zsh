@@ -43,8 +43,8 @@ _zsh_autosuggest_strategy_histdb_top_fallback() {
     suggestion=$(_histdb_query "$query")
 }
 
-# ZSH_AUTOSUGGEST_STRATEGY=history
-ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
+ZSH_AUTOSUGGEST_STRATEGY=history
+# ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
 
 bindkey '^ ' autosuggest-accept
 
