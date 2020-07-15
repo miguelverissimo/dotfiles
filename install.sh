@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 set -e
+
+source ../_setup_scripts/backup_and_symlink
+
 CONFIGS_DIR=$(cd "$(dirname "$0")"; pwd)
 
 # Run the dependencies install script first
@@ -9,14 +12,28 @@ CONFIGS_DIR=$(cd "$(dirname "$0")"; pwd)
 ROOT_FILES="zshrc"
 
 for CONFIG_FILE in $ROOT_FILES; do
-  if [ -e ${HOME}/.${CONFIG_FILE} ]; then
-    echo "Backing current ${HOME}/.${CONFIG_FILE} to ${HOME}/.${CONFIG_FILE}.prev"
-    mv ${HOME}/.${CONFIG_FILE}{,.prev}
-  fi
+  ORIGIN="${CONFIG_FILE}"
+  DEST="${HOME}/.${CONFIG_FILE}"
 
-  echo "creating ${HOME}/.${CONFIG_FILE} symlinked to ${CONFIGS_DIR}/${CONFIG_FILE}"
-  ln -s ${CONFIGS_DIR}/${CONFIG_FILE} ${HOME}/.${CONFIG_FILE}
+  backup_and_symlink ${ORIGIN} ${DEST}
 done
 
 echo "Now run all the symlinking for the supported software"
-# TODO: for every directory, run the config.sh
+CONFIGURATION_DIRS="alacritty \
+                  ctags \
+                  elixir \
+                  git \
+                  javascript \
+                  nvim-user-configs \
+                  ruby \
+                  tmux \
+                  utils \
+                  vim"
+
+for CONFIGURATION in ${CONFIGURATION_DIRS}; do
+  pushd ${CONFIGURATION}
+  echo "### Configuring ${CONFIGURATION} ###"
+  ./setup.sh
+  echo "### Finished configuring ${CONFIGURATION} ###"
+  popd
+done

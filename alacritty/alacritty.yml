@@ -550,7 +550,7 @@ cursor:
   # window is not focused.
   unfocused_hollow: true
 
-# dynamic_title: false
+dynamic_title: true
 
 # Live config reload (changes require restart)
 live_config_reload: true

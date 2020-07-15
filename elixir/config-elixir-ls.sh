@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 set -e
+DEST=${HOME}/_UTIL
 
-if [ ! -d "$HOME/workspace/_util" ]; then
-  mkdir -p $HOME/workspace/_util
+if [ ! -d "$DEST" ]; then
+  mkdir -p "$DEST"
 fi
 
-pushd $HOME/workspace/_util
+pushd "$DEST"
 
 git clone git@github.com:elixir-lsp/elixir-ls.git
 pushd elixir-ls

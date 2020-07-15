@@ -1,38 +1,41 @@
-# Rspec
-alias pr='parallel_rspec'
+# No longer in pivotal/VMware
 
-# FASD
-alias j='z'
+# # Rspec
+# alias pr='parallel_rspec'
 
-# cf
-alias cf-ruby="cf ssh -tt -c \"/tmp/lifecycle/launcher /home/vcap/app bash ''\""
+# # FASD
+# alias j='z'
 
-# Story because too lazy to copy/paste
-story() {
-  if [[ "$1" == "--query" || "$1" == "-?" || "$1" == "-q" ]]; then
-    cat ~/.gitmessage | tail -1
-  elif [[ "$1" == "--clear" || "$1" == "-C" || "$1" == "-c" ]]; then
-    echo -n >| ~/.gitmessage
-    echo "Cleared out story number"
-  elif [[ "$1" =~ ^#[0-9]+$ ]]; then
-    story_id=${1#"#"}
-    echo -e "\n\n[$1](https://www.pivotaltracker.com/story/show/${story_id})" >| ~/.gitmessage
-    echo "Set story to ${story_id}"
-  elif [[ "$1" =~ ^[0-9]+$ ]]; then
-    echo -e "\n\n[#$1](https://www.pivotaltracker.com/story/show/$1)" >| ~/.gitmessage
-    echo "Set story to #$1"
-  elif [[ "$1" =~ ^https://.*$ ]]; then
-    story_id=$(echo -n $1 | cut -d'/' -f6)
-    echo -e "\n\n[#$story_id](https://www.pivotaltracker.com/story/show/$story_id)" >| ~/.gitmessage
-    echo "Set story to #$story_id"
-  else
-    current_story=$(cat ~/.gitmessage | tail -1)
-    if [ -s ~/.gitmessage ]; then echo "Current story: ${current_story}\n"; fi
-    echo "usage: story [-h] [--clear|-c|-C] [--query|-q|-?] [story id]"
-    echo -e "\t--query, -q, -?\t  shows tracked story"
-    echo -e "\t--clear, -c, -C\t  unsets tracked story"
-    echo -e "\t--help, -h\t  help (this)"
-    echo -e "\t[story id]\t  sets tracked story to [story id]"
-  fi
-}
+# # cf
+# alias cf-ruby="cf ssh -tt -c \"/tmp/lifecycle/launcher /home/vcap/app bash ''\""
+
+# # Story because too lazy to copy/paste
+# story() {
+#   if [[ "$1" == "--query" || "$1" == "-?" || "$1" == "-q" ]]; then
+#     cat ~/.gitmessage | tail -1
+#   elif [[ "$1" == "--clear" || "$1" == "-C" || "$1" == "-c" ]]; then
+#     echo -n >| ~/.gitmessage
+#     echo "Cleared out story number"
+#   elif [[ "$1" =~ ^#[0-9]+$ ]]; then
+#     story_id=${1#"#"}
+#     echo -e "\n\n[$1](https://www.pivotaltracker.com/story/show/${story_id})" >| ~/.gitmessage
+#     echo "Set story to ${story_id}"
+#   elif [[ "$1" =~ ^[0-9]+$ ]]; then
+#     echo -e "\n\n[#$1](https://www.pivotaltracker.com/story/show/$1)" >| ~/.gitmessage
+#     echo "Set story to #$1"
+#   elif [[ "$1" =~ ^https://.*$ ]]; then
+#     story_id=$(echo -n $1 | cut -d'/' -f6)
+#     echo -e "\n\n[#$story_id](https://www.pivotaltracker.com/story/show/$story_id)" >| ~/.gitmessage
+#     echo "Set story to #$story_id"
+#   else
+#     current_story=$(cat ~/.gitmessage | tail -1)
+#     if [ -s ~/.gitmessage ]; then echo "Current story: ${current_story}\n"; fi
+#     echo "usage: story [-h] [--clear|-c|-C] [--query|-q|-?] [story id]"
+#     echo -e "\t--query, -q, -?\t  shows tracked story"
+#     echo -e "\t--clear, -c, -C\t  unsets tracked story"
+#     echo -e "\t--help, -h\t  help (this)"
+#     echo -e "\t[story id]\t  sets tracked story to [story id]"
+#   fi
+# }
+
 

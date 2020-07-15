@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-
-$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
-VERSION = '0.0.2' # just to test it
-require 'git-style-binary/command'

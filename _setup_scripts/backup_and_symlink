@@ -1,0 +1,20 @@
+# backup_and_symlink ORIGIN_FILE_PATH DESTINY_FILE_PATH
+#
+backup_and_symlink() {
+  origin="${1}"
+  dest="${2}"
+
+  if [ -L ${dest} ]; then
+    echo "Removing current symlink @${dest}"
+    rm ${dest}
+  fi
+
+  if [ -f ${dest} ]; then
+    echo "Backing current ${dest} to ${dest}.prev"
+    \cp -rf ${dest}{,.prev}
+    rm ${dest}
+  fi
+
+  echo "creating ${dest} symlinked to ${origin}"
+  ln -s ${origin} ${dest}
+}

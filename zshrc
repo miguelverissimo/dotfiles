@@ -17,6 +17,11 @@ fi
 
 DEFAULT_USER="Miguel"
 
+# source all individual configs and aliases
 for config_file ($HOME/.dotfiles/zsh/*.zsh) source $config_file
+
+# source fzf zsh integration
+test -e "${HOME}/.fzf.zsh" && source "${HOME}/.fzf.zsh"
+
+# source iterm2 zsh integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
