@@ -11,6 +11,7 @@ tap 'homebrew/services'
 tap 'universal-ctags/universal-ctags'
 
 brew 'aria2'
+brew 'asdf'
 brew 'automake'
 brew 'bash'
 brew 'bash-completion'

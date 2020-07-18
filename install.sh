@@ -20,6 +20,7 @@ done
 
 echo "Now run all the symlinking for the supported software"
 CONFIGURATION_DIRS="alacritty \
+                  asdf \
                   ctags \
                   elixir \
                   git \
