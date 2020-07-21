@@ -8,6 +8,12 @@ p () {
 
 y () {
   echo "**** yaourt installing $@ ****"
+  yes | yaourt -S "$@"
+  echo "-------------------------------------------------"
+}
+
+ymanual () {
+  echo "**** yaourt installing $@ ****"
   yaourt "$@"
   echo "-------------------------------------------------"
 }
@@ -49,10 +55,16 @@ p tmux
 p xclip
 p xsel
 p unzip
+p lastpass-cli
+p ranger
+p vifm
+p zxiv
+
 
 ### windows managers
 p i3-wm
 p i3status-rust
+p qtile
 
 ### alacritty
 p alacritty
@@ -137,6 +149,11 @@ echo "-------------------------------------------------"
 
 ### universal ctags
 y universal-ctags-git
+
+# other stuff
+y picom-git
+y dmenu-git
+pip install psutil
 
 ### DONE!
 echo

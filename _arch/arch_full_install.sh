@@ -2,10 +2,21 @@
 
 set -e
 
-source ../_setup_scripts/backup_and_symlink
+./arch_deps_install.sh
+pushd ..
+./install.sh
+popd
+./remap_keyboard.sh
 
-CONFIGS_DIR=$(cd "$(dirname "$0")"; pwd)
+echo "Setup all arch software"
 
-# Run the dependencies install script first
-./_dependencies/setup.sh
+CONFIGURATION_DIRS="i3 \
+                    qtile"
 
+for CONFIGURATION in ${CONFIGURATION_DIRS}; do
+  pushd ${CONFIGURATION}
+  echo "### Configuring ${CONFIGURATION} ###"
+  ./setup.sh
+  echo "### Finished configuring ${CONFIGURATION} ###"
+  popd
+done
