@@ -18,7 +18,7 @@ DEST=${HOME}/elixir-ls
 
 if [ ! -d "${ELIXIR_LS_DIR}" ]; then
   echo "Configuring elixir-ls"
-  ./config-elixir-ls.sh
+  $CONFIGS_DIR/config-elixir-ls.sh
 else
   echo "${ELIXIR_LS_DIR} already present, skipping cloning"
 

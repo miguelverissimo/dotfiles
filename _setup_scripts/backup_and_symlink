@@ -3,18 +3,35 @@
 backup_and_symlink() {
   origin="${1}"
   dest="${2}"
+  sudo="${3}"
 
   if [ -L ${dest} ]; then
+    if [ "$sudo" == "sudo" ]; then
+    echo "Removing current symlink @${dest} with sudo"
+      sudo rm ${dest}
+    else
     echo "Removing current symlink @${dest}"
-    rm ${dest}
+      rm ${dest}
+    fi
   fi
 
   if [ -f ${dest} ]; then
-    echo "Backing current ${dest} to ${dest}.prev"
-    \cp -rf ${dest}{,.prev}
-    rm ${dest}
+    if [ "$sudo" == "sudo" ]; then
+      echo "Backing current ${dest} to ${dest}.prev with sudo"
+      sudo \cp -rf ${dest}{,.prev}
+      sudo rm ${dest}
+    else
+      echo "Backing current ${dest} to ${dest}.prev"
+      \cp -rf ${dest}{,.prev}
+      rm ${dest}
+    fi
   fi
 
-  echo "creating ${dest} symlinked to ${origin}"
-  ln -s ${origin} ${dest}
+  if [ "$sudo" == "sudo" ]; then
+    echo "creating ${dest} symlinked to ${origin} with sudo"
+    sudo ln -s ${origin} ${dest}
+  else
+    echo "creating ${dest} symlinked to ${origin}"
+    ln -s ${origin} ${dest}
+  fi
 }

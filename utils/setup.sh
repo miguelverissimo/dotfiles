@@ -15,5 +15,5 @@ for UTILITY_FILE in pivnet load-pivnet-env colortest pc; do
     exit 1
   fi
 
-  backup_and_symlink ${ORIGIN} ${DEST}
+  backup_and_symlink ${ORIGIN} ${DEST} sudo
 done

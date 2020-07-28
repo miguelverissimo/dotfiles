@@ -8,13 +8,13 @@ p () {
 
 y () {
   echo "**** yaourt installing $@ ****"
-  yes | yaourt -S "$@"
+  yay -S "$@"
   echo "-------------------------------------------------"
 }
 
 ymanual () {
   echo "**** yaourt installing $@ ****"
-  yaourt "$@"
+  yay "$@"
   echo "-------------------------------------------------"
 }
 
@@ -25,14 +25,22 @@ p wget
 p yajl
 echo "**** git installing yaourt ****"
 pushd /tmp/
-git clone https://aur.archlinux.org/package-query.git
-pushd package-query/
-yes | makepkg -si
-git clone https://aur.archlinux.org/yaourt.git
-pushd yaourt/
-yes | makepkg -si
+  git clone https://aur.archlinux.org/package-query.git
+  pushd package-query/
+    yes | makepkg -si
+    git clone https://aur.archlinux.org/yaourt.git
+    pushd yaourt/
+      yes | makepkg -si
+    popd
+  popd
 popd
-popd
+echo "-------------------------------------------------"
+
+echo "**** git installing yay ****"
+pushd /tmp/
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
 popd
 echo "-------------------------------------------------"
 
@@ -46,6 +54,8 @@ p jq
 p libxml2
 p libyaml
 p fasd
+p jre-openjdk
+p fop
 p openssl
 p readline
 p ripgrep
@@ -60,9 +70,8 @@ p ranger
 p vifm
 p zxiv
 
-
 ### windows managers
-p i3-wm
+p i3-gaps
 p i3status-rust
 p qtile
 
@@ -121,7 +130,7 @@ ruby 2.7.0 2.6.6
 rust 1.45.0
 EOF
 pushd $HOME
-asdf install
+  asdf install
 popd
 echo "-------------------------------------------------"
 
@@ -130,8 +139,8 @@ python3 -m pip install --upgrade pip
 python2 -m pip install --upgrade pip
 p neovim
 pushd $HOME/.config
-echo "**** git installing asdf ****"
-git clone git@gitlab.com:miguelverissimo/nvim.git
+  echo "**** git installing asdf ****"
+  git clone git@gitlab.com:miguelverissimo/nvim.git
 popd
 yarn global add neovim
 gem install neovim
@@ -148,12 +157,16 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 echo "-------------------------------------------------"
 
 ### universal ctags
-y universal-ctags-git
+y universal-ctags
 
 # other stuff
-y picom-git
-y dmenu-git
+y picom
+y dmenu
+y direnv
 pip install psutil
+
+# make zsh the default shell
+chsh -s /bin/zsh
 
 ### DONE!
 echo

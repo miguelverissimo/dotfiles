@@ -140,4 +140,6 @@
   name = Miguel Verissimo
   email = m.verissimo@gmail.com
 [init]
-  templateDir = ~/.dotfiles/git/git_template
+	templatedir = /home/miguel/.dotfiles/git/git_template
+[pull]
+	rebase = false

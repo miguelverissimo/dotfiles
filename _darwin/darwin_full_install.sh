@@ -2,8 +2,9 @@
 
 set -e
 
+# TODO:
+# install homebrew
 # install all dependencies
-./arch_deps_install.sh
 
 # configure all the apps
 pushd ..
@@ -21,14 +22,11 @@ pushd modules
   done
 popd
 
-# make keys go vrrroooooom
-./remap_keyboard.sh
+# setup darwin specific software
+echo "Setup all darwin software"
 
-# setup arch specific software
-echo "Setup all arch software"
-
-CONFIGURATION_DIRS="i3 \
-                    qtile"
+CONFIGURATION_DIRS="iTerm2 \
+                    "
 
 for CONFIGURATION in ${CONFIGURATION_DIRS}; do
   pushd ${CONFIGURATION}
