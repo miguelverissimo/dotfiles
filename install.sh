@@ -11,13 +11,13 @@ CONFIGS_DIR=$(cd "$(dirname "$0")"; pwd)
 
 # Link zsh and prezto dotfiles
 DOTFILES_DIRS="zsh \
-               zprezto"
+               prezto"
 
-for CONFIGURATION in ${CONFIGURATION_DIRS}; do
-  pushd ${CONFIGURATION}
-  echo "### Configuring ${CONFIGURATION} ###"
+for DOTFILE in ${DOTFILES_DIRS}; do
+  pushd ${DOTFILE}
+  echo "### Configuring ${DOTFILE} ###"
   ./setup.sh
-  echo "### Finished configuring ${CONFIGURATION} ###"
+  echo "### Finished configuring ${DOTFILE} ###"
   popd
 done
 

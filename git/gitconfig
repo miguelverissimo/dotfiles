@@ -1,145 +1,148 @@
 # set your user tokens as environment variables, such as ~/.secrets
 # See the README for examples.
-[color]
-  ui = true
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red
-  new = green
 [alias]
-  a = add                           # add
-  ap = add --patch                  # stage commits chunk by chunk
+	a = add                           # add
+	ap = add --patch                  # stage commits chunk by chunk
 
-  # via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-  snap = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-  snaps = !git stash list --grep snapshot
+	# via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+	snap = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	snaps = !git stash list --grep snapshot
 
-  #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
-  recent = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+	recent = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
 
-  b = branch -v                     # branch (verbose)
+	b = branch -v                     # branch (verbose)
+	bl = blame -w                     # ignore whitespace changes in git blame
 
-  # commit
-  c = commit -m                     # commit with message
-  cam = commit -am                  # commit all with message
-  ci = commit -v                    # commit
-  amend = commit --amend            # ammend your last commit
-  ammend = commit --amend           # ammend your last commit
-  fix = commit --amend --no-edit    # add to the previous commit without edits
-  edit = commit --amend             # add to the previous commit
+	# commit
+	c = commit -m                     # commit with message
+	cam = commit -am                  # commit all with message
+	ci = commit -v                    # commit
+	amend = commit --amend            # ammend your last commit
+	ammend = commit --amend           # ammend your last commit
+	fix = commit --amend --no-edit    # add to the previous commit without edits
+	edit = commit --amend             # add to the previous commit
 
-  # checkout
-  co = checkout                     # checkout
+	# checkout
+	co = checkout                     # checkout
 
-  # cherry-pick
-  cp = cherry-pick -x               # grab a change from a branch
+	# cherry-pick
+	cp = cherry-pick -x               # grab a change from a branch
 
-  # diff
-  d = diff                          # diff unstaged changes
-  dc = diff --cached                # diff staged changes
-  last = diff HEAD^                 # diff last committed change
+	# diff
+	d = diff                          # diff unstaged changes
+	dc = diff --cached                # diff staged changes
+	last = diff HEAD^                 # diff last committed change
 
-  # log
-  l = log --graph --date=short
-  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-  short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-  simple = log --pretty=format:\" * %s\"
-  shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
-  tree = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
-  lc = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset' --abbrev-commit --date=relative
+	# log
+	l = log --graph --date=short
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	simple = log --pretty=format:\" * %s\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+	tree = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+	lc = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset' --abbrev-commit --date=relative
 
-  # pull
-  pl = pull                         # pull
+	# pull
+	pl = pull                         # pull
 
-  # push
-  ps = push                         # push
+	# push
+	ps = push                         # push
 
-  # rebase
-  rc = rebase --continue            # continue rebase
-  rs = rebase --skip                # skip rebase
+	# rebase
+	rc = rebase --continue            # continue rebase
+	rs = rebase --skip                # skip rebase
 
-  # remote
-  r = remote -v                     # show remotes (verbose)
+	# remote
+	r = remote -v                     # show remotes (verbose)
 
-  # reset
-  unstage = reset HEAD              # remove files from index (tracking)
-  uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
-  filelog = log -u                  # show changes to a file
-  mt = mergetool                    # fire up the merge tool
+	# reset
+	unstage = reset HEAD              # remove files from index (tracking)
+	uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+	filelog = log -u                  # show changes to a file
+	mt = mergetool                    # fire up the merge tool
 
-  # stash
-  ss = stash                        # stash changes
-  sl = stash list                   # list stashes
-  sa = stash apply                  # apply stash (restore changes)
-  sd = stash drop                   # drop stashes (destory changes)
-  sa = stash save -u                # stash including untracked
+	# stash
+	ss = stash                        # stash changes
+	sl = stash list                   # list stashes
+	sa = stash apply                  # apply stash (restore changes)
+	sd = stash drop                   # drop stashes (destory changes)
+	sa = stash save -u                # stash including untracked
 
-  # status
-  s = status                        # status
-  st = status                       # status
-  stat = status                     # status
+	# status
+	s = status                        # status
+	st = status                       # status
+	stat = status                     # status
 
-  # switch
-  sw = switch                       # switch
-  nb = switch -c                    # create and switch to a new branch (mnemonic: "git new branch branchname...")
+	# switch
+	sw = switch                       # switch
+	nb = switch -c                    # create and switch to a new branch (mnemonic: "git new branch branchname...")
 
-  # restore
-  re = restore                      # restore
+	# restore
+	re = restore                      # restore
 
-  # tag
-  t = tag -n                        # show tags with <n> lines of each tag message
+	# tag
+	t = tag -n                        # show tags with <n> lines of each tag message
 
 [format]
-  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+	pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [mergetool]
-  prompt = false
+	prompt = false
 [mergetool "vimdiff"]
-  cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
-  keepbackup=false
+	cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+	keepbackup=false
 [merge]
-  summary = true
-  verbosity = 1
-  tool = vimdiff
+	summary = true
+	verbosity = 1
+	tool = vimdiff
 [apply]
-  whitespace = nowarn
+	whitespace = nowarn
 [branch]
-  autosetupmerge = true
+	autosetupmerge = true
 [push]
-  # 'git push' will push the current branch to its tracking branch
-  # the usual default is to push all branches
-  default = upstream
-[core]
-  autocrlf = false
-  editor = nvim
-  excludesfile = ~/.dotfiles/git/gitignore
-[advice]
-  statusHints = false
-[diff]
-  # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
-  # instead of a/b/c/d as prefixes for patches
-  mnemonicprefix = true
-  algorithm = patience
-[rerere]
-  # Remember my merges
-  # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
-  enabled = true
-[commit]
-  template = ~/.gitmessage
-[include]
-  path = .gitconfig.user
-[url "git@github.com:"]
-  pushInsteadOf = https://github.com/
-[rebase]
-  autosquash = true
-[user]
-  name = Miguel Verissimo
-  email = m.verissimo@gmail.com
-[init]
-	templatedir = /home/miguel/.dotfiles/git/git_template
+	default = simple
 [pull]
 	rebase = false
+[core]
+	autocrlf = false
+	editor = nvim
+	excludesfile = ~/.dotfiles/git/gitignore
+	pager = diff-so-fancy | less --tabs=1,5 -R
+[advice]
+	statusHints = false
+[diff]
+	mnemonicprefix = true
+	algorithm = patience
+[rerere]
+	# Remember my merges
+	# http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
+	enabled = true
+[commit]
+	template = ~/.gitmessage
+[include]
+	path = .gitconfig.user
+[rebase]
+	autosquash = true
+[user]
+	name = Miguel Verissimo
+	email = m.verissimo@gmail.com
+[init]
+	templateDir = ~/.dotfiles/git/git_template
+[color]
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+  meta = "yellow bold"
+  commit = "green bold"
+  frag = "magenta bold"
+  old = "red bold"
+  new = "green bold"
+  whitespace = "red reverse"
+[color "diff-highlight"]
+  oldNormal = "red bold"
+  oldHighlight = "red bold 52"
+  newNormal = "green bold"
+  newHighlight = "green bold 22"

@@ -3,7 +3,7 @@
 set -e
 
 # install all dependencies
-./arch_deps_install.sh
+# ./deps_install.sh
 
 # configure all the apps
 pushd ..

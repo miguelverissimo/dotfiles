@@ -1,5 +1,5 @@
-ruby 2.7.1 2.6.6
-elixir 1.10.4-otp-23
+ruby 2.7.0 2.6.6
+elixir 1.10.43
 erlang 23.0.1
 rust 1.45.0
 golang 1.14.6

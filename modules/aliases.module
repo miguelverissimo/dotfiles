@@ -27,11 +27,7 @@ function zipr() {
   zip -r $1.zip $1
 }
 
-# vim
-alias vi='vim'
-
 alias rm='rm -i'
-# alias cp='cp -i'
 alias mv='mv -i'
 
 alias h='history'
@@ -57,15 +53,14 @@ alias df='df -kTh'
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
-#alias ls='ls -a -h --color'
-alias ll='ls -a -l --color'
+alias ls='exa'
+alias ll='ls -alhg --git'
 alias lx='ls -lXB'         #  Sort by extension.
 alias lk='ls -lSr'         #  Sort by size, biggest last.
 alias lt='ls -ltr'         #  Sort by date, most recent last.
 alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
 alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
 alias lh="ls -alh"
-alias ll='ls -alhG'  # -l long listing, human readable, no group info
 alias la="ls -A -l -h -G"
 alias lt='ls -lt' # sort with recently modified first
 alias l.='ls -d .[^.]*'
@@ -125,9 +120,9 @@ alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 
-# launch android and ios emulators without the IDE bloat
-alias android-avd="emulator -avd \$(emulator -list-avds | head -n 1)"
-alias ios-emulator="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/"
-
 # MOLAN LABE
 alias dea='direnv allow .'
+
+# Override of sys tools with external tools
+alias ht='glances'
+alias man='tldr'

@@ -4,7 +4,7 @@ set -e
 
 # TODO:
 # install homebrew
-# install all dependencies
+# brew install all dependencies
 
 # configure all the apps
 pushd ..
@@ -35,3 +35,6 @@ for CONFIGURATION in ${CONFIGURATION_DIRS}; do
     echo "### Finished configuring ${CONFIGURATION} ###"
   popd
 done
+
+# install other tools
+npm install -g dockly
