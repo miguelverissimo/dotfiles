@@ -1,112 +1,61 @@
 #!/usr/bin/env bash
 
-p () {
-  echo "**** pacman installing $@ ****"
-  sudo pacman -Syu --needed "$@"
+a () {
+  echo "**** apt installing $@ ****"
+  sudo apt install -y "$@"
   echo "-------------------------------------------------"
 }
 
-y () {
-  echo "**** yaourt installing $@ ****"
-  yay --nocleanmenu --nodiffmenu -Syu --needed "$@"
-  echo "-------------------------------------------------"
-}
-
-### install core dependencies
-echo "**** installing needed dependencies for yaourt ****"
-p base-devel git wget yajl
-echo "-------------------------------------------------"
-
-### install yaourt
-echo "**** git installing yaourt ****"
-pushd /tmp/
-  git clone https://aur.archlinux.org/package-query.git
-  pushd package-query/
-    yes | makepkg -si
-    git clone https://aur.archlinux.org/yaourt.git
-    pushd yaourt/
-      yes | makepkg -si
-    popd
-  popd
-popd
-echo "-------------------------------------------------"
-
-echo "**** git installing yay ****"
-pushd /tmp/
-  git clone https://aur.archlinux.org/yay.git
-  cd yay
-  makepkg -si
-popd
-echo "-------------------------------------------------"
-
+sudo apt update
 ### all base packages
 echo "**** installing base packages ****"
-base_packages=" alacritty \
+base_packages=" autojump \
                 bash-completion \
                 bat \
                 curl \
-                dmenu \
+                direnv \
                 docker \
                 docker-compose \
-                docker-machine \
                 emacs \
-                exa \
                 fasd \
                 feh \
                 fop \
+                gdebi \
+                git \
                 glances \
                 graphviz \
                 httpie \
-                i3-gaps \
                 jq \
-                jre-openjdk \
                 keychain \
                 lastpass-cli \
                 libxml2 \
-                libyaml \
+                libyaml-0-2 \
                 neovim \
+                openjdk-14-jre \
                 openssl \
-                polybar \
-                pyxdg \
-                qtile \
                 ranger \
-                readline \
-                redshift \
+                readline-common \
                 ripgrep \
                 scrot \
+                silversearcher-ag \
                 snapd \
-                the_silver_searcher \
+                stterm \
+                suckless-tools \
+                terminology \
                 tig \
                 tldr \
                 tmate \
                 tmux \
+                universal-ctags \
                 unzip \
                 vifm \
+                wget \
                 xclip \
                 xsel \
                 zathura \
                 zsh \
                 zsh-autosuggestions"
-aur_packages="  autojump \
-                cheat \
-                diff-so-fancy-git \
-                direnv \
-                dmenu \
-                dockly \
-                gotop \
-                insomnia \
-                nerd-fonts-cascadia-code  \
-                nerd-fonts-fantasque-sans-mono  \
-                nerd-fonts-fira-code  \
-                nerd-fonts-hack  \
-                nerd-fonts-iosevka  \
-                nerd-fonts-jetbrains-mono  \
-                nerd-fonts-victor-mono \
-                picom \
-                universal-ctags \
-                zoom"
-p $base_packages
-y $aur_packages
+a $base_packages
 
 ### nix
 echo "**** installing nixos ****"
@@ -179,10 +128,80 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 echo "-------------------------------------------------"
 
 # other stuff
+echo "**** pip installing psutil ****"
 pip install psutil
+echo "-------------------------------------------------"
 
 # make zsh the default shell
+echo "**** changing shell to zsh ****"
 chsh -s /usr/bin/zsh
+echo "-------------------------------------------------"
 
+echo "**** installing zoom ****"
+wget https://zoom.us/client/lates/zoom_amd64.deb
+sudo apt install ./zoom_amd64.deb
+echo "-------------------------------------------------"
+
+echo "**** installing docker ****"
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo usermod -aG docker miguel
+echo "-------------------------------------------------"
+
+echo "**** installing exa ****"
+https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip
+unzip exa-linux-x86_64-0.9.0.zip
+sudo install exa-linux-x86_64 /usr/local/bin/exa
+echo "-------------------------------------------------"
+
+echo "**** installing diff-so-fancy ****"
+git clone https://github.com/so-fancy/diff-so-fancy $HOME/.dotfiles/bin/diff-so-fancy
+echo "-------------------------------------------------"
+
+echo "**** installing insomnia ****"
+echo "deb https://dl.bintray.com/getinsomnia/Insomnia /" \
+    | sudo tee -a /etc/apt/sources.list.d/insomnia.list
+wget --quiet -O - https://insomnia.rest/keys/debian-public.key.asc \
+    | sudo apt-key add -
+sudo apt update
+sudo apt install -y insomnia
+echo "-------------------------------------------------"
+
+echo "**** installing dockly ****"
+npm install -g dockly
+echo "-------------------------------------------------"
+
+echo "**** installing ytop ****"
+cargo install ytop
+echo "-------------------------------------------------"
+
+echo "**** installing fonts ****"
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FantasqueSansMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/VictorMono.zip
+unzip -o CascadiaCode.zip -d ~/.fonts
+unzip -o FantasqueSansMono.zip -d ~/.fonts
+unzip -o FiraCode.zip -d ~/.fonts
+unzip -o Hack.zip -d ~/.fonts
+unzip -o Iosevka.zip -d ~/.fonts
+unzip -o JetBrainsMono.zip -d ~/.fonts
+unzip -o VictorMono.zip -d ~/.fonts
+fc-cache -fv
+echo "-------------------------------------------------"
 ### DONE!
 echo "\n\nAll done installing packages!\n\n"

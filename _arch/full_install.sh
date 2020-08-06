@@ -26,14 +26,15 @@ popd
 
 # setup arch specific software
 echo "Setup all arch software"
+pushd ../_nix_common
+  CONFIGURATION_DIRS="i3 \
+                      qtile"
 
-CONFIGURATION_DIRS="i3 \
-                    qtile"
-
-for CONFIGURATION in ${CONFIGURATION_DIRS}; do
-  pushd ${CONFIGURATION}
-    echo "### Configuring ${CONFIGURATION} ###"
-    ./setup.sh
-    echo "### Finished configuring ${CONFIGURATION} ###"
-  popd
-done
+  for CONFIGURATION in ${CONFIGURATION_DIRS}; do
+    pushd ${CONFIGURATION}
+      echo "### Configuring ${CONFIGURATION} ###"
+      ./setup.sh
+      echo "### Finished configuring ${CONFIGURATION} ###"
+    popd
+  done
+popd
