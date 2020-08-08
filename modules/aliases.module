@@ -115,10 +115,8 @@ function duf() {
 # cheer me up (needs cowsay and fortune packages)
 alias fdx='fortune | cowsay'
 
-# use nvim because hipster
-alias v='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+# vi is nvim, vim is vim
 alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
-alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
 
 # MOLAN LABE
 alias dea='direnv allow .'

@@ -42,6 +42,7 @@ echo "-------------------------------------------------"
 ### all base packages
 echo "**** installing base packages ****"
 base_packages=" alacritty \
+                aria2 \
                 bash-completion \
                 bat \
                 curl \
@@ -168,8 +169,8 @@ popd
 yarn global add neovim
 gem install neovim
 gem install solargraph
-python2 install -m pip install --user --upgrade pynvim
-python3 install -m pip install --user --upgrade pynvim
+python2 -m pip install --user --upgrade pynvim
+python3 -m pip install --user --upgrade pynvim
 echo "-------------------------------------------------"
 
 ### doom-emacs

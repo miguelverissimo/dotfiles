@@ -9,7 +9,10 @@ a () {
 sudo apt update
 ### all base packages
 echo "**** installing base packages ****"
-base_packages=" autojump \
+base_packages=" aria2 \
+                autoconf \
+                autojump \
+                automake \
                 bash-completion \
                 bat \
                 curl \
@@ -28,6 +31,9 @@ base_packages=" autojump \
                 jq \
                 keychain \
                 lastpass-cli \
+                libncurses5-dev \
+                libssl-dev \
+                libreadline-dev \
                 libxml2 \
                 libyaml-0-2 \
                 neovim \
@@ -117,8 +123,8 @@ popd
 yarn global add neovim
 gem install neovim
 gem install solargraph
-python2 install -m pip install --user --upgrade pynvim
-python3 install -m pip install --user --upgrade pynvim
+python2 -m pip install --user --upgrade pynvim
+python3 -m pip install --user --upgrade pynvim
 echo "-------------------------------------------------"
 
 ### doom-emacs
@@ -186,22 +192,41 @@ echo "**** installing ytop ****"
 cargo install ytop
 echo "-------------------------------------------------"
 
+echo "**** installing alacritty ****"
+pushd /tmp
+  git clone https://github.com/jwilm/alacritty
+  cargo install --path alacritty/
+  sudo install alacitty/target/release/alacritty /usr/local/bin
+  sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50
+  echo "**** Select Alacritty ****"
+  sudo update-alternatives --config x-terminal-emulator
+popd
+echo "-------------------------------------------------"
+
+echo "**** installing spacevim ****"
+pushd /tmp
+  curl -sLf https://spacevim.org/install.sh | bash
+popd
+echo "-------------------------------------------------"
+
 echo "**** installing fonts ****"
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FantasqueSansMono.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/VictorMono.zip
-unzip -o CascadiaCode.zip -d ~/.fonts
-unzip -o FantasqueSansMono.zip -d ~/.fonts
-unzip -o FiraCode.zip -d ~/.fonts
-unzip -o Hack.zip -d ~/.fonts
-unzip -o Iosevka.zip -d ~/.fonts
-unzip -o JetBrainsMono.zip -d ~/.fonts
-unzip -o VictorMono.zip -d ~/.fonts
-fc-cache -fv
+pushd /tmp
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FantasqueSansMono.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/VictorMono.zip
+  unzip -o CascadiaCode.zip -d ~/.fonts
+  unzip -o FantasqueSansMono.zip -d ~/.fonts
+  unzip -o FiraCode.zip -d ~/.fonts
+  unzip -o Hack.zip -d ~/.fonts
+  unzip -o Iosevka.zip -d ~/.fonts
+  unzip -o JetBrainsMono.zip -d ~/.fonts
+  unzip -o VictorMono.zip -d ~/.fonts
+  fc-cache -fv
+popd
 echo "-------------------------------------------------"
 ### DONE!
 echo "\n\nAll done installing packages!\n\n"

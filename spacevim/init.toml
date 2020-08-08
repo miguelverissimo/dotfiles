@@ -1,0 +1,122 @@
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2017 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg at 163.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+  vimcompatible = true
+  colorscheme = 'nord'
+  colorscheme_bg = 'dark'
+  enable_guicolors = true
+  statusline_separator = 'arrow'
+  statusline_inactive_separator = 'arrow'
+  buffer_index_type = 4
+  enable_tabline_filetype_icon = true
+  enable_statusline_mode = false
+  autocomplete_method = 'coc'
+  filemanager = 'nerdtree'
+  enable_vimfiler_gitstatus = true
+  filetree_direction = 'left'
+  enable_ale = true
+  enable_neomake = false
+  lint_on_the_fly = true
+  bootstrap_before = 'myspacevim#before'
+  bootstrap_after = 'myspacevim#after'
+   
+
+# Enable autocomplete layer
+[[layers]]
+  name = 'autocomplete'
+  auto_completion_return_key_behavior = "complete"
+  auto_completion_tab_key_behavior = "smart"
+
+[[layers]]
+  name = 'shell'
+  default_position = 'bottom'
+  default_height = 30
+
+[[layers]]
+  name = 'lsp'
+  filetypes = [
+    'javascript',
+    'ruby',
+    'rust'
+  ]
+  [layers.override_cmd]
+    ruby = ['solargraph', 'stdio']
+    rust = ['rustup', 'run', 'stable', 'rls']
+
+[[layers]]
+  name = 'fzf'
+
+[[layers]]
+  name = "lang#ruby"
+
+[[layers]]
+  name = "lang#typescript"
+
+[[layers]]
+  name = "lang#vue"
+
+[[layers]]
+  name = "lang#rust"
+
+[[layers]]
+  name = "lang#markdown"
+
+[[layers]]
+  name = "lang#elixir"
+
+[[layers]]
+  name = 'git'
+  git-plugin = 'fugitive'
+
+# Nix
+[[custom_plugins]]
+  repo = "LnL7/vim-nix"
+  merged = false
+
+# ember
+[[custom_plugins]]
+  repo = 'joukevandermaas/vim-ember-hbs'
+  merged = false
+
+# mustache & handlebars
+[[custom_plugins]]
+  repo = 'mustache/vim-mustache-handlebars'
+  merged = false
+
+# colorschemes
+[[custom_plugins]]
+  repo = 'rafi/awesome-vim-colorschemes'
+  merged = false
+
+# colorscheme
+[[custom_plugins]]
+  repo = 'miguelverissimo/tendinitis'
+  branch = 'foo'
+  merged = false
+
+# move lines up and down
+[[custom_plugins]]
+  repo = 'matze/vim-move'
+  merged = false
+
+# show absolute line numbers on unfocused buffers
+[[custom_plugins]]
+  repo = 'jeffkreeftmeijer/vim-numbertoggle'
+  merged = false
+
+# expand selection
+[[custom_plugins]]
+  repo = 'terryma/vim-expand-region'
+  merged = false
+
+# multiple cursors
+[[custom_plugins]]
+  repo = 'mg979/vim-visual-multi'
+  merged = false
