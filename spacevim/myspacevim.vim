@@ -5,6 +5,10 @@ function! myspacevim#before() abort
 endfunction
 
 function! myspacevim#after() abort
+  " Split like a normal human being
+  set splitbelow
+  set splitright
+
   call SpaceVim#logger#info('myspacevim#after called')
 
   " Save with enter
@@ -13,7 +17,7 @@ function! myspacevim#after() abort
   endfunction
 
   nnoremap <silent> <expr> <CR> keyboard#should_save_on_enter() ? ':call SaveIfUnsaved()<CR>' : '<CR>'
-  
+
   " Escape to clear search
   nnoremap <silent> <esc> :noh<cr>
 
@@ -65,7 +69,7 @@ function! myspacevim#after() abort
   \ 'ruby':       ['rubocop', 'standardrb'],
   \}
 
-  " Ale mappings 
+  " Ale mappings
   noremap <Leader>ad :ALEGoToDefinition<CR>
   nnoremap <leader>af :ALEFix<cr>
   noremap <Leader>ar :ALEFindReferences<CR>
@@ -176,12 +180,12 @@ function! myspacevim#after() abort
 
   " Fix autofix problem of current line
   nmap <leader>qf  <Plug>(coc-fix-current)
-  
+
   " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
   nmap <silent> <TAB> <Plug>(coc-range-select)
   xmap <silent> <TAB> <Plug>(coc-range-select)
   xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
-  
+
   " Use `:Format` to format current buffer
   command! -nargs=0 Format :call CocAction('format')
 
@@ -191,5 +195,5 @@ function! myspacevim#after() abort
   " use `:OR` for organize import of current buffer
   command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-  call SpaceVim#logger#info('myspacevim#after ran all the way to the end')
+  let g:gruvbox_material_background = 'hard'
 endfunction

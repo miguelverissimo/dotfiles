@@ -9,7 +9,10 @@
 # All SpaceVim option below [option] section
 [options]
   vimcompatible = true
-  colorscheme = 'nord'
+  # colorscheme = 'nord'
+  # colorscheme = 'elixizy'
+  # colorscheme = 'gruvbox-material'
+  colorscheme = 'snow'
   colorscheme_bg = 'dark'
   enable_guicolors = true
   statusline_separator = 'arrow'
@@ -26,7 +29,7 @@
   lint_on_the_fly = true
   bootstrap_before = 'myspacevim#before'
   bootstrap_after = 'myspacevim#after'
-   
+
 
 # Enable autocomplete layer
 [[layers]]
@@ -100,6 +103,31 @@
   repo = 'miguelverissimo/tendinitis'
   branch = 'foo'
   merged = false
+
+# colorscheme
+[[custom_plugins]]
+  repo = 'sainnhe/gruvbox-material'
+  merged = false
+
+# colorscheme
+[[custom_plugins]]
+  repo = 'nightsense/snow'
+  merged = false
+
+# comment code
+[[custom_plugins]]
+  repo = 'tpope/vim-commentary'
+  merged = false
+
+# Save sessions
+[[custom_plugins]]
+  repo = 'tpope/vim-obsession'
+  merged = false
+
+# close my blocks
+# [[custom_plugins]]
+#   repo = 'tpope/vim-endwise'
+#   merged = false
 
 # move lines up and down
 [[custom_plugins]]

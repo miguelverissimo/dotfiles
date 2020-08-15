@@ -3,7 +3,10 @@ source ~/.pn_anonymize_creds
 
 # Story because too lazy to copy/paste
 story() {
-  if [[ "${1}" == "--query" || "${1}" == "-?" || "${1}" == "-q" ]]; then
+  if [[ "${1}" == "master" ]]; then
+    echo -n >| ~/.gitmessage
+    echo "Cleared out story number"
+  elif [[ "${1}" == "--query" || "${1}" == "-?" || "${1}" == "-q" ]]; then
     cat ~/.gitmessage | tail -1
   elif [[ "${1}" == "--clear" || "${1}" == "-C" || "${1}" == "-c" ]]; then
     echo -n >| ~/.gitmessage
@@ -37,3 +40,29 @@ pnswc() {
   git switch -c "${ticket}"
   story "${ticket}"
 }
+
+pndebug() {
+  tmux split-window -vp 80
+  tmux split-window -vp 80
+  tmux send-keys -t 1 'cd ~/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'bundle exec sidekiq start' Enter
+  tmux send-keys -t 2 'cd ~/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 2 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 3 'cd ~/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 3 'pndev shell' Enter
+  tmux send-keys -t 3 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
+}
+
+alias p=pndev
+alias psh='cd ~/DEV/PN/eternal-sledgehammer && pndev shell'
+alias pst='cd ~/DEV/PN/eternal-sledgehammer && pndev start'
+
+# noe aliases
+alias npr='source ~/.noe-prod-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] prod activated\e[0m"'
+alias ncd='source ~/.noe-cd-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] cd activated\e[0m"'
+alias nut='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] utility activated\e[0m"'
+alias nqa='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] qa activated\e[0m"'
+alias nbur='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] burrito activated\e[0m"'
+alias ntaco='source ~/.noe-cd-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] taco activated\e[0m"'

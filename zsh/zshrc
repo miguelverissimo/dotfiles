@@ -27,3 +27,6 @@ test -e "${HOME}/.fzf.zsh" && source "${HOME}/.fzf.zsh"
 
 # source iterm2 zsh integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# load zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions

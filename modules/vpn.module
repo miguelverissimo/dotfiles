@@ -1,0 +1,8 @@
+vpnlogin() {
+  nordvpn login --username `lpass show nordvpn.com --username` --password `lpass show nordvpn.com --password`
+  nordvpn connect
+}
+
+vpnlogout() {
+  nordvpn logout
+}
