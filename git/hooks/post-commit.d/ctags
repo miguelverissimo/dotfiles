@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-.git/hooks/_scripts/ctags >/dev/null 2>&1 &
-

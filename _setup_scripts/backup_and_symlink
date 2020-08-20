@@ -27,6 +27,18 @@ backup_and_symlink() {
     fi
   fi
 
+  if [ -d ${dest} ]; then
+    if [ "$sudo" == "sudo" ]; then
+      echo "Backing current ${dest} to ${dest}.prev with sudo"
+      sudo \cp -rf ${dest}{,.prev}
+      sudo rm -r ${dest}
+    else
+      echo "Backing current ${dest} to ${dest}.prev"
+      \cp -rf ${dest}{,.prev}
+      rm -r ${dest}
+    fi
+  fi
+
   if [ "$sudo" == "sudo" ]; then
     echo "creating ${dest} symlinked to ${origin} with sudo"
     sudo ln -s ${origin} ${dest}
