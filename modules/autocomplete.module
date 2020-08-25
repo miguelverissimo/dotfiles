@@ -1,2 +1,4 @@
+# vi: ft=bash
+
 autoload bashcompinit
 bashcompinit

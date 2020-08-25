@@ -4,6 +4,8 @@
 # DPI value for HiDPI screen
 dpi =
 
+module-margin = 120
+
 # bar position, apply globally
 width = 100%
 height = 3%
@@ -36,16 +38,17 @@ override-redirect = false
 # show-desktop: Display desktop (i3 only)
 
 # Top modules
-top-left = i3 title
-top-center = spotify previous playpause next
-top-right = keyboard backlight alsa battery network-short date
+top-left = i3
+; top-center = spotify previous playpause next
+top-center = title
+top-right = github weather network-detail temperature memory cpu keyboard alsa notify battery network-short date
 
 # Bottom modules
-bottom-left = info-hackspeed
-bottom-center =
-bottom-right = weather network-detail temperature memory cpu
+# bottom-left = info-hackspeed
+# bottom-center =
+# bottom-right = weather network-detail temperature memory cpu
 
-systray-top = none
+systray-top = right
 systray-bottom = left
 
 # global style
@@ -56,7 +59,7 @@ line-size = 4
 # if some of them doesn't suit your environment, you can change
 # it from here.
 # network interface, check by `ip link show`
-interface = wlp58s0
+interface = wlp82s0
 
 # when the current battery capacity excess this value,
 # the full-capacity format will be displayed.
@@ -84,7 +87,7 @@ warn-temperature = 70
 
 # GitHub personal token, generate from https://github.com/settings/tokens/new?scopes=notifications&description=Notifier+for+Polybar
 # where select at least `notifications` option
-github-token =
+github-token = 4958b8df6de10d7df4037c8e7a74e1becc012618
 
 # notify module setting
 notify-click-left = xdotool key control+grave

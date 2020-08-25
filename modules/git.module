@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 alias galias='cat ${HOME}/.dotfiles/zsh/git.zsh'
 alias galg='galias | ag'
 alias g='git'

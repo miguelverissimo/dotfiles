@@ -1,1 +1,3 @@
+# vi: ft=bash
+
 export GOBIN=$HOME/go/bin

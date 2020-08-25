@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 eval "$(fasd --init posix-alias zsh-hook)"
 alias z='fasd_cd -d'
 alias zz='fasd_cd -d -i'

@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 export ASDF_RUBY_BUILD_VERSION=master
 source ${HOME}/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)

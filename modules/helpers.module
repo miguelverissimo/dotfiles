@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 alias nav='printf "\
 |====================  $(tput sgr0)$(tput bold)$(tput setaf 3)MOVING$(tput sgr0)  =====================|
 | $(tput bold)$(tput setaf 2)ctrl + a$(tput sgr0)   move to the $(tput setaf 1)beginning$(tput sgr0) of the line      |

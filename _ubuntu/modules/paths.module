@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 # PATH STUFF
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
 export PATH="$PATH:/usr/local/sbin"

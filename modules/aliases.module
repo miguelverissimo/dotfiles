@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 # Utility
 alias reload='source ~/.zshrc'
 
@@ -115,8 +117,14 @@ function duf() {
 # cheer me up (needs cowsay and fortune packages)
 alias fdx='fortune | cowsay'
 
-# vi is nvim, vim is vim
-alias vi='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+# v and vi is nvim with session, vim is vim and nvim is nvim
+v() {
+  if [ -d './.git' ]; then
+    NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim -S .git/.session.vim
+  else
+    NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim -S .session.vim
+  fi
+}
 
 # MOLAN LABE
 alias dea='direnv allow .'

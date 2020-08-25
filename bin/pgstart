@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+$HOME/.asdf/installs/postgres/12.4/bin/pg_ctl -D $HOME/.asdf/installs/postgres/12.4/data -l logfile start
+

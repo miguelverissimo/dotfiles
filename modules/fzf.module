@@ -1,2 +1,4 @@
+# vi: ft=bash
+
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
 alias f='fzf --preview "bat --color \"always\" {}"'

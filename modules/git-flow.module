@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 # git flow
 alias gf="git flow"
 alias gff="git flow feature"
