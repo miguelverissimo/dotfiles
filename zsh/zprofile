@@ -3,6 +3,11 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
+### Super Secure Stuff (i.e. tokens) ###
+if [[ -e ~/.super_secret ]]; then
+  source ~/.super_secret
+fi
+
 ### Editors ###
 export EDITOR='nvim'
 export VISUAL='nvim'

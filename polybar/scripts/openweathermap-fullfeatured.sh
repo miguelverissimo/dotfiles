@@ -52,7 +52,7 @@ get_duration() {
 }
 
 # KEY="7ff4bb68d1d411e46d14ee432dfcffaa"
-KEY="14891b51111ed3dc1e0270e445a8746d"
+KEY=$OPENWEATHER_POLYBAR_TOKEN
 CITY="Burlington,CA"
 UNITS="metric"
 SYMBOL="°"

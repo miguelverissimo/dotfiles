@@ -83,11 +83,11 @@ thermal-zone = 0
 # Base temperature for where to start the ramp (in degrees celsius)
 base-temperature = 20
 # Threshold temperature to display warning label (in degrees celsius)
-warn-temperature = 70
+warn-temperature = 78
 
 # GitHub personal token, generate from https://github.com/settings/tokens/new?scopes=notifications&description=Notifier+for+Polybar
 # where select at least `notifications` option
-github-token = 4958b8df6de10d7df4037c8e7a74e1becc012618
+github-token = ${env:GITHUB_POLYBAR_TOKEN}
 
 # notify module setting
 notify-click-left = xdotool key control+grave

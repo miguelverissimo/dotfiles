@@ -1,13 +1,36 @@
 i3-wm.bar.position: top
 i3-wm.bar.font: pango:FiraCode Nerd Font, Material Design Icons 13
-i3-wm.workspace.01.name: 1:TERMINAL
-i3-wm.workspace.02.name: 2:BROWSER
-i3-wm.workspace.03.name: 3:WORK
-i3-wm.workspace.04.name: 4:DOCS
-i3-wm.workspace.05.name: 5:GIT
-i3-wm.workspace.06.name: 6:PRESENT
+i3-wm.workspace.01.name: 1
+i3-wm.workspace.02.name: 2
+i3-wm.workspace.03.name: 3
+i3-wm.workspace.04.name: 4
+i3-wm.workspace.05.name: 5
+i3-wm.workspace.06.name: 6
 i3-wm.workspace.07.name: 7
 i3-wm.workspace.08.name: 8
 i3-wm.workspace.09.name: 9
-i3-wm.workspace.10.name: 10:ZOOM
-
+i3-wm.workspace.10.name: 10
+*.font: "VictorMono Nerd Font-13:antialias=true:autohint=true"
+*.fontalt0: "Hack Nerd Font-13:antialias=true:autohint=true"
+*.tabspaces: 4
+*.alpha: 1
+*.color0: #161821
+*.color1: #e27878
+*.color2: #b4be82
+*.color3: #e2a478
+*.color4: #84a0c6
+*.color5: #a093c7
+*.color6: #89b8c2
+*.color7: #c6c8d1
+*.color8: #6b7089
+*.color9: #e98989
+*.color10: #c0ca8e
+*.color11: #e9b189
+*.color12: #91acd1
+*.color13: #ada0d3
+*.color14: #95c4ce
+*.color15: #d2d4de
+*.background: #add8e6
+*.foreground: #555555
+*.cursorColor: #28282C
+*.color: #ebdbb2

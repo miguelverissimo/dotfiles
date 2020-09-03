@@ -72,9 +72,8 @@ font:
     # family: CaskaydiaCove Nerd Font
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
-    # family: Incosolata Nerd Font
-    # family: VictorMono Nerd Font
     family: VictorMono Nerd Font
+    # family: UbuntuMono Nerd Font
     # style: Regular
     style: Medium
 
@@ -85,7 +84,6 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: Incosolata Nerd Font
-    # family: VictorMono Nerd Font
     family: VictorMono Nerd Font
     style: Bold
 
@@ -96,7 +94,6 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: Incosolata Nerd Font
-    # family: VictorMono Nerd Font
     family: VictorMono Nerd Font
     style: Italic
 
