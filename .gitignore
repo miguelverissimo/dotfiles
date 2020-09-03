@@ -1,5 +1,6 @@
-/bin/diff-so-fancy/
-/modules/paths.module
-/modules/arch.module
-/modules/darwin.module
-
+bin/diff-so-fancy/
+modules/paths.module
+modules/arch.module
+modules/darwin.module
+secrets
+!secrets/.super_secret.example

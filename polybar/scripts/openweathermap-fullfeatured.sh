@@ -51,7 +51,6 @@ get_duration() {
 
 }
 
-# KEY="7ff4bb68d1d411e46d14ee432dfcffaa"
 KEY=$OPENWEATHER_POLYBAR_TOKEN
 CITY="Burlington,CA"
 UNITS="metric"
