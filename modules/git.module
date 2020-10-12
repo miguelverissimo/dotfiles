@@ -10,6 +10,7 @@ alias gcm='git commit -m' # commit with message
 alias gcam='git commit -a -m' # add all and commit with message
 alias gd='git diff -w' # diff ignoring whitespace
 alias gp='git pull'
+alias gpp='git pull --prune' # pull with prune of merged branches
 alias gpr='git pull --rebase' # pull with rebase
 alias gpu='git push'
 alias gpa='git remote | xargs -L1 -I R git push R' # push to all remotes
