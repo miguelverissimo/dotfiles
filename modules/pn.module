@@ -61,7 +61,7 @@ pndebug() {
   tmux send-keys -t 4 'bundle exec rails console' Enter
 }
 
-alias p=pndev
+alias p=pndebug
 alias psh='pndev shell'
 alias pst='cd ~/DEV/PN/eternal-sledgehammer && pndev start'
 
