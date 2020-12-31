@@ -64,6 +64,8 @@ scrolling:
   multiplier: 3
 
 # Font configuration (changes require restart)
+# TO FIND OUT THE FONT FAMILY NAME:
+# fc-list : family style
 font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
@@ -72,10 +74,12 @@ font:
     # family: CaskaydiaCove Nerd Font
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
-    family: VictorMono Nerd Font
     # family: UbuntuMono Nerd Font
-    # style: Regular
-    style: Medium
+    # family: JetBrainsMono Nerd Font
+    # family: VictorMono Nerd Font
+    # style: Medium
+    family: Recursive Monospace # https://fonts.google.com/specimen/Recursive?selection.family=Recursive:wght@300;400;700&sidebar.open=true
+    style: Regular
 
   # The bold font face
   bold:
@@ -84,7 +88,8 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: Incosolata Nerd Font
-    family: VictorMono Nerd Font
+    # family: VictorMono Nerd Font
+    family: Recursive Monospace
     style: Bold
 
   # The italic font face
@@ -94,7 +99,8 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: Incosolata Nerd Font
-    family: VictorMono Nerd Font
+    # family: VictorMono Nerd Font
+    family: Rec Mono Linear
     style: Italic
 
   # Point size of the font

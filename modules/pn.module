@@ -46,7 +46,6 @@ pnswc() {
 pndebug() {
   tmux split-window -vp 80
   tmux split-window -vp 80
-  tmux split-window -vp 60
   tmux send-keys -t 1 'cd ~/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 1 'pndev shell' Enter
   tmux send-keys -t 1 'bundle exec sidekiq start' Enter
@@ -56,9 +55,6 @@ pndebug() {
   tmux send-keys -t 3 'cd ~/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 3 'pndev shell' Enter
   tmux send-keys -t 3 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
-  tmux send-keys -t 4 'cd ~/DEV/PN/eternal-sledgehammer' Enter
-  tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'bundle exec rails console' Enter
 }
 
 alias p=pndebug

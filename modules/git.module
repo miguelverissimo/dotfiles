@@ -1,6 +1,6 @@
 # vi: ft=bash
 
-alias galias='cat ${HOME}/.dotfiles/zsh/git.zsh'
+alias galias='cat ${HOME}/.dotfiles/modules/git.module'
 alias galg='galias | ag'
 alias g='git'
 alias gap='git add -p' # add interactively

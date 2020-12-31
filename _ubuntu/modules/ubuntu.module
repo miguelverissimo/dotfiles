@@ -3,4 +3,4 @@
 alias cat='batcat'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-
+alias reload-bar='${HOME}/.dotfiles/polybar/launch.sh > /dev/null 2>&1 &'
