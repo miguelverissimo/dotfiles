@@ -13,6 +13,7 @@ alias gp='git pull'
 alias gpp='git pull --prune' # pull with prune of merged branches
 alias gpr='git pull --rebase' # pull with rebase
 alias gpu='git push'
+alias gpufl='git push --force-with-lease'
 alias gpa='git remote | xargs -L1 -I R git push R' # push to all remotes
 alias gpauc='gpa -u $(git branch --show-current)' # track and push current branch to all remotes
 alias gpac='gpa $(git branch --show-current)' # push current branch to all remotes

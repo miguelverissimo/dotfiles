@@ -554,13 +554,13 @@ key_bindings:
   - { key: Delete,                        chars: "\x1b[3~"                     }
 
     # shortcuts for tmux. the leader key is control-b (0x02)
-  - { key: W,        mods: Super,       chars: "\x02&"                       }  # close tab (kill)
-  - { key: T,        mods: Super,       chars: "\x02c"                       }  # new tab
-  - { key: RBracket, mods: Super|Shift, chars: "\x02n"                       }  # select next tab
-  - { key: LBracket, mods: Super|Shift, chars: "\x02p"                       }  # select previous tab
-  - { key: RBracket, mods: Super,       chars: "\x02o"                       }  # select next pane
-  - { key: LBracket, mods: Super,       chars: "\x02;"                       }  # select last (previously used) pane
-  - { key: F,        mods: Super,       chars: "\x02/"                       }  # search (upwards) (see tmux.conf)
+  - { key: W,        mods: Super,       chars: "\x02&" }  # close tab (kill)
+  - { key: T,        mods: Super,       chars: "\x02c" }  # new tab
+  - { key: RBracket, mods: Super|Shift, chars: "\x02n" }  # select next tab
+  - { key: LBracket, mods: Super|Shift, chars: "\x02p" }  # select previous tab
+  - { key: RBracket, mods: Super,       chars: "\x02o" }  # select next pane
+  - { key: LBracket, mods: Super,       chars: "\x02;" }  # select last (previously used) pane
+  - { key: F,        mods: Super,       chars: "\x02/" }  # search (upwards) (see tmux.conf)
 
 mouse:
   # Click settings

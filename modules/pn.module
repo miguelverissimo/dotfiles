@@ -67,4 +67,5 @@ alias ncd='source ~/.noe-cd-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] cd acti
 alias nut='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] utility activated\e[0m"'
 alias nqa='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] qa activated\e[0m"'
 alias nbur='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] burrito activated\e[0m"'
+alias ntos='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] tostada activated\e[0m"'
 alias ntaco='source ~/.noe-cd-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] taco activated\e[0m"'

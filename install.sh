@@ -31,6 +31,7 @@ CONFIGURATION_DIRS="alacritty \
                     elixir \
                     git \
                     javascript \
+                    kitty \
                     nvim-user-configs \
                     ruby \
                     tmux \

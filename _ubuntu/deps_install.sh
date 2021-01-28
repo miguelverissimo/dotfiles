@@ -30,6 +30,7 @@ base_packages=" aria2 \
                 httpie \
                 jq \
                 keychain \
+                kitty \
                 lastpass-cli \
                 libncurses5-dev \
                 libssl-dev \
@@ -228,5 +229,9 @@ pushd /tmp
   fc-cache -fv
 popd
 echo "-------------------------------------------------"
+echo "**** configuring editor ***"
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
 ### DONE!
 echo "\n\nAll done installing packages!\n\n"
