@@ -57,7 +57,7 @@ window:
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
   # disable scrolling.
-  history: 10000
+  history: 100000
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
@@ -75,10 +75,10 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: UbuntuMono Nerd Font
-    # family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font
     # family: VictorMono Nerd Font
     # style: Medium
-    family: Recursive Monospace # https://fonts.google.com/specimen/Recursive?selection.family=Recursive:wght@300;400;700&sidebar.open=true
+    # family: Recursive Monospace # https://fonts.google.com/specimen/Recursive?selection.family=Recursive:wght@301;400;700&sidebar.open=true
     style: Regular
 
   # The bold font face
@@ -88,8 +88,9 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: Incosolata Nerd Font
+    family: JetBrainsMono Nerd Font
     # family: VictorMono Nerd Font
-    family: Recursive Monospace
+    # family: Recursive Monospace
     style: Bold
 
   # The italic font face
@@ -99,8 +100,9 @@ font:
     # family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: Incosolata Nerd Font
+    family: JetBrainsMono Nerd Font
     # family: VictorMono Nerd Font
-    family: Rec Mono Linear
+    # family: Rec Mono Linear
     style: Italic
 
   # Point size of the font
@@ -111,7 +113,6 @@ font:
   offset:
     x: 0
     y: 0
-    # this => that
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
