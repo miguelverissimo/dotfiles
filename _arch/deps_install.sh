@@ -62,6 +62,7 @@ base_packages=" alacritty \
                 jq \
                 jre-openjdk \
                 keychain \
+                lazygit \
                 lastpass-cli \
                 libxml2 \
                 libyaml \

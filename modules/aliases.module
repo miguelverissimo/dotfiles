@@ -133,3 +133,6 @@ alias dea='direnv allow .'
 # Override of sys tools with external tools
 alias ht='glances'
 alias man='tldr'
+
+# lazygit rocks
+alias lg='lazygit'

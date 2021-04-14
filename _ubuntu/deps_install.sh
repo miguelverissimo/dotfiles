@@ -204,6 +204,12 @@ pushd /tmp
 popd
 echo "-------------------------------------------------"
 
+echo "**** installing lazygit ****"
+sudo add-apt-repository ppa:lazygit-team/release
+sudo apt-get update
+sudo apt-get install lazygit
+echo "-------------------------------------------------"
+
 echo "**** installing spacevim ****"
 pushd /tmp
   curl -sLf https://spacevim.org/install.sh | bash
