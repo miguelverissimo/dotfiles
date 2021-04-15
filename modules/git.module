@@ -17,6 +17,7 @@ alias gpufl='git push --force-with-lease'
 alias gpa='git remote | xargs -L1 -I R git push R' # push to all remotes
 alias gpauc='gpa -u $(git branch --show-current)' # track and push current branch to all remotes
 alias gpac='gpa $(git branch --show-current)' # push current branch to all remotes
+alias gpafl='gpa --force-with-lease' # force-push current branch to all remotes
 alias gs='git status'
 alias gst='git status'
 alias gss='git status -sb' # short status with branch information

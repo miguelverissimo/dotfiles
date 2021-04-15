@@ -43,29 +43,81 @@ pnswc() {
   story "${ticket}"
 }
 
-pndebug() {
-  tmux split-window -vp 80
-  tmux split-window -vp 80
-  tmux send-keys -t 1 'cd ~/DEV/PN/eternal-sledgehammer' Enter
+pnall() {
+  # pnedit
+  cd /home/miguel/DEV/PN/eternal-sledgehammer
+  tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'bundle exec sidekiq start' Enter
-  tmux send-keys -t 2 'cd ~/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 1 'nvim' Enter
   tmux send-keys -t 2 'pndev shell' Enter
-  tmux send-keys -t 2 'bundle exec bin/webpack-dev-server' Enter
-  tmux send-keys -t 3 'cd ~/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 3 'pndev shell' Enter
+
+  tmux new-window -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+
+  # pnsupport
+  tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux select-pane -t 1
+  tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux send-keys -t 3 'pndev shell' Enter
+  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 4 'pndev shell' Enter
+  tmux send-keys -t 4 'bundle exec sidekiq start' Enter
+  tmux send-keys -t 5 'pndev shell' Enter
+  tmux send-keys -t 5 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
+  tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'lg' Enter
+  tmux send-keys -t 2 'pndev shell' Enter
+  tmux select-pane -t 1
+
+  tmux select-window -t !
+}
+
+pnedit() {
+  cd /home/miguel/DEV/PN/eternal-sledgehammer
+  tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'nvim' Enter
+  tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 3 'pndev shell' Enter
+}
+
+pnsupport() {
+  tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux select-pane -t 1
+  tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux send-keys -t 3 'pndev shell' Enter
+  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 4 'pndev shell' Enter
+  tmux send-keys -t 4 'bundle exec sidekiq start' Enter
+  tmux send-keys -t 5 'pndev shell' Enter
+  tmux send-keys -t 5 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
+  tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'lg' Enter
+  tmux send-keys -t 2 'pndev shell' Enter
+  tmux select-pane -t 1
+}
+
+pndebug() {
+  tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 2 'bundle exec sidekiq start' Enter
   tmux send-keys -t 3 'pndev shell' Enter
   tmux send-keys -t 3 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
 }
 
-alias p=pndebug
+alias pe=pnedit
+alias pd=pndebug
 alias psh='pndev shell'
 alias pst='cd ~/DEV/PN/eternal-sledgehammer && pndev start'
-
-# noe aliases
-alias npr='source ~/.noe-prod-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] prod activated\e[0m"'
-alias ncd='source ~/.noe-cd-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] cd activated\e[0m"'
-alias nut='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] utility activated\e[0m"'
-alias nqa='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] qa activated\e[0m"'
-alias nbur='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] burrito activated\e[0m"'
-alias ntos='source ~/.noe-staging-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] tostada activated\e[0m"'
-alias ntaco='source ~/.noe-cd-aws-creds &&  echo -en "\e[96m[\xE2\x9C\x94] taco activated\e[0m"'
