@@ -1,6 +1,6 @@
 #=============================================================================
 # dark_powered.toml --- dark powered configuration example for SpaceVim
-# Copyright (c) 2016-2017 Wang Shidong & Contributors
+# Copyright (c) 2016-2020 Wang Shidong & Contributors
 # Author: Wang Shidong < wsdjeg at 163.com >
 # URL: https://spacevim.org
 # License: GPLv3
@@ -8,28 +8,44 @@
 
 # All SpaceVim option below [option] section
 [options]
-  vimcompatible = true
-  # colorscheme = 'nord'
-  # colorscheme = 'elixizy'
-  # colorscheme = 'gruvbox-material'
-  colorscheme = 'snow'
-  colorscheme_bg = 'dark'
-  enable_guicolors = true
-  statusline_separator = 'arrow'
-  statusline_inactive_separator = 'arrow'
-  buffer_index_type = 4
-  enable_tabline_filetype_icon = true
-  enable_statusline_mode = false
-  autocomplete_method = 'coc'
-  filemanager = 'nerdtree'
-  enable_vimfiler_gitstatus = true
-  filetree_direction = 'left'
-  enable_ale = true
-  enable_neomake = false
-  lint_on_the_fly = true
-  bootstrap_before = 'myspacevim#before'
-  bootstrap_after = 'myspacevim#after'
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    colorscheme = "dracula_pro_morbius"
+    colorscheme_bg = "dark"
+    custom_color_palette = [
+      ['#44475A',  '#8BE9FD',  117,  239],
+      ['#6272A4',  '#343746', 237, 61],
+      ['#6272A4',  '#343746', 237, 61],
+      ['#343746', 273],
+      [255,  141,  255, 141],
+      [255,  84, 255, 84],
+      [255,  203, 255, 141],
+    ]
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = true
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "arrow"
+    statusline_iseparator = "arrow"
+    buffer_index_type = 4
+    enable_tabline_filetype_icon = true
+    enable_statusline_mode = false
 
+    autocomplete_method = "coc"
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
+    filemanager = "nerdtree"
+    enable_vimfiler_welcome = 0
+    enable_vimfiler_gitstatus = true
+    filetree_direction = "left"
+    relativenumber = false
+
+    enable_ale = true
+    enable_neomake = false
+    lint_on_the_fly = true
+    # project_rooter_automatically = 0
 
 # Enable autocomplete layer
 [[layers]]
@@ -38,32 +54,50 @@
   auto_completion_tab_key_behavior = "smart"
 
 [[layers]]
+  name = 'checkers'
+
+[[layers]]
   name = 'shell'
-  default_position = 'bottom'
+  default_position = 'top'
   default_height = 30
 
 [[layers]]
-  name = 'lsp'
+  name = "lsp"
   filetypes = [
-    'javascript',
-    'ruby',
-    'rust'
+    "javascript",
+    "ruby",
+    "rust"
   ]
   [layers.override_cmd]
-    ruby = ['solargraph', 'stdio']
-    rust = ['rustup', 'run', 'stable', 'rls']
+    ruby = ["solargraph", "stdio"]
+    rust = ["rustup", "run", "stable", "rls"]
 
 [[layers]]
-  name = 'fzf'
+  name = "fzf"
+
+[[layers]]
+  name = "test"
+
+[[layers]]
+  name = "format"
+
+[[layers]]
+  name = "edit"
 
 [[layers]]
   name = "lang#ruby"
+  enabled_linters = ['rubocop']
+  repl_command = "pry"
+  format_on_save = true
+
+[[layers]]
+  name = "lang#javascript"
 
 [[layers]]
   name = "lang#typescript"
 
 [[layers]]
-  name = "lang#vue"
+  name = "lang#elixir"
 
 [[layers]]
   name = "lang#rust"
@@ -72,79 +106,57 @@
   name = "lang#markdown"
 
 [[layers]]
-  name = "lang#elixir"
+  name = "lang#go"
 
 [[layers]]
-  name = 'git'
-  git-plugin = 'fugitive'
+  name = "lang#sh"
 
-# Nix
+[[layers]]
+  name = "git"
+  git-plugin = "fugitive"
+
+# note: you need to disable merged feature in custom plugins
 [[custom_plugins]]
-  repo = "LnL7/vim-nix"
+   name = "LnL7/vim-nix"
+   merged = false
+
+[[custom_plugins]]
+   name = "SirVer/ultisnips"
+   merged = false
+
+[[custom_plugins]]
+   name = "joukevandermaas/vim-ember-hbs"
+   merged = false
+
+[[custom_plugins]]
+   name = "mustache/vim-mustache-handlebars"
+   merged = false
+
+[[custom_plugins]]
+   name = "antoinemadec/coc-fzf"
+   merged = false
+   rev = "release"
+
+[[custom_plugins]]
+   name = "tpope/vim-obsession"
+   merged = false
+
+[[custom_plugins]]
+   name = "benmills/vimux"
+   merged = false
+
+[[custom_plugins]]
+   name = "keith/tmux.vim"
+   merged = false
+
+[[custom_plugins]]
+   name = "mg979/vim-visual-multi"
+   merged = false
+
+[[custom_plugins]]
+  name = "tpope/vim-commentary"
   merged = false
 
-# ember
 [[custom_plugins]]
-  repo = 'joukevandermaas/vim-ember-hbs'
-  merged = false
-
-# mustache & handlebars
-[[custom_plugins]]
-  repo = 'mustache/vim-mustache-handlebars'
-  merged = false
-
-# colorschemes
-[[custom_plugins]]
-  repo = 'rafi/awesome-vim-colorschemes'
-  merged = false
-
-# colorscheme
-[[custom_plugins]]
-  repo = 'miguelverissimo/tendinitis'
-  branch = 'foo'
-  merged = false
-
-# colorscheme
-[[custom_plugins]]
-  repo = 'sainnhe/gruvbox-material'
-  merged = false
-
-# colorscheme
-[[custom_plugins]]
-  repo = 'nightsense/snow'
-  merged = false
-
-# comment code
-[[custom_plugins]]
-  repo = 'tpope/vim-commentary'
-  merged = false
-
-# Save sessions
-[[custom_plugins]]
-  repo = 'tpope/vim-obsession'
-  merged = false
-
-# close my blocks
-# [[custom_plugins]]
-#   repo = 'tpope/vim-endwise'
-#   merged = false
-
-# move lines up and down
-[[custom_plugins]]
-  repo = 'matze/vim-move'
-  merged = false
-
-# show absolute line numbers on unfocused buffers
-[[custom_plugins]]
-  repo = 'jeffkreeftmeijer/vim-numbertoggle'
-  merged = false
-
-# expand selection
-[[custom_plugins]]
-  repo = 'terryma/vim-expand-region'
-  merged = false
-
-# multiple cursors
-[[custom_plugins]]
-  repo = 'mg979/vim-visual-multi'
-  merged = false
+   name = "miguelverissimo/dracula_pro_vim"
+   merged = false

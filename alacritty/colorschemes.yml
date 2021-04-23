@@ -1,0 +1,137 @@
+  # ### Iceberg ###
+  # primary:
+  #   background: '#161821'
+  #   foreground: '#d2d4de'
+  #
+  # # Normal colors
+  # normal:
+  #   black:   '#161821'
+  #   red:     '#e27878'
+  #   green:   '#b4be82'
+  #   yellow:  '#e2a478'
+  #   blue:    '#84a0c6'
+  #   magenta: '#a093c7'
+  #   cyan:    '#89b8c2'
+  #   white:   '#c6c8d1'
+  #
+  # # Bright colors
+  # bright:
+  #   black:   '#6b7089'
+  #   red:     '#e98989'
+  #   green:   '#c0ca8e'
+  #   yellow:  '#e9b189'
+  #   blue:    '#91acd1'
+  #   magenta: '#ada0d3'
+  #   cyan:    '#95c4ce'
+  #   white:   '#d2d4de'
+  #
+  # # ### Hybrid ###
+  # # primary:
+  # #   background: '#27292c'
+  # #   foreground: '#d0d2d1'
+  #
+  # # # Normal colors
+  # # normal:
+  # #   black:   '#35383b'
+  # #   red:     '#b05655'
+  # #   green:   '#769972'
+  # #   yellow:  '#e1a574'
+  # #   blue:    '#7693ac'
+  # #   magenta: '#977ba0'
+  # #   cyan:    '#749e99'
+  # #   white:   '#848b92'
+  #
+  # # # Bright colors
+  # # bright:
+  # #   black:   '#484c52'
+  # #   red:     '#d27c7b'
+  # #   green:   '#dffebe'
+  # #   yellow:  '#f0d189'
+  # #   blue:    '#96b1c9'
+  # #   magenta: '#bfa5c7'
+  # #   cyan:    '#9fc9c3'
+  # #   white:   '#fcf7e2'
+
+  # ### Nord  ###
+  # primary:
+  #   background: '0x2E3440'
+  #   foreground: '0xD8DEE9'
+  # cursor:
+  #   text: '0x2E3440'
+  #   cursor: '0xD8DEE9'
+  # normal:
+  #   black: '0x3B4252'
+  #   red: '0xBF616A'
+  #   green: '0xA3BE8C'
+  #   yellow: '0xEBCB8B'
+  #   blue: '0x81A1C1'
+  #   magenta: '0xB48EAD'
+  #   cyan: '0x88C0D0'
+  #   white: '0xE5E9F0'
+  # bright:
+  #   black: '0x4C566A'
+  #   red: '0xBF616A'
+  #   green: '0xA3BE8C'
+  #   yellow: '0xEBCB8B'
+  #   blue: '0x81A1C1'
+  #   magenta: '0xB48EAD'
+  #   cyan: '0x8FBCBB'
+  #   white: '0xECEFF4'
+
+  # ### Tender ###
+  # # Default colors
+  # primary:
+  #   background: '0x282828'
+  #   foreground: '0xeeeeee'
+
+  # # Normal colors
+  # normal:
+  #   black:   '0x282828'
+  #   red:     '0xf43753'
+  #   green:   '0xc9d05c'
+  #   yellow:  '0xffc24b'
+  #   blue:    '0xb3deef'
+  #   magenta: '0xd3b987'
+  #   cyan:    '0x73cef4'
+  #   white:   '0xeeeeee'
+
+  # # Bright colors
+  # bright:
+  #   black:   '0x4c4c4c'
+  #   red:     '0xf43753'
+  #   green:   '0xc9d05c'
+  #   yellow:  '0xffc24b'
+  #   blue:    '0xb3deef'
+  #   magenta: '0xd3b987'
+  #   cyan:    '0x73cef4'
+  #   white:   '0xfeffff'
+
+  ### Tomorrow Night Bright ###
+  # primary:
+  #   background: '0x000000'
+  #   foreground: '0xeaeaea'
+  #
+  # cursor:
+  #   text: '0x000000'
+  #   cursor: '0xffffff'
+  #
+  # normal:
+  #   black:   '0x000000'
+  #   red:     '0xd54e53'
+  #   green:   '0xb9ca4a'
+  #   yellow:  '0xe6c547'
+  #   blue:    '0x7aa6da'
+  #   magenta: '0xc397d8'
+  #   cyan:    '0x70c0ba'
+  #   white:   '0xffffff'
+  #
+  # bright:
+  #   black:   '0x666666'
+  #   red:     '0xff3334'
+  #   green:   '0x9ec400'
+  #   yellow:  '0xe7c547'
+  #   blue:    '0x7aa6da'
+  #   magenta: '0xb77ee0'
+  #   cyan:    '0x54ced6'
+  #   white:   '0xffffff'
+
