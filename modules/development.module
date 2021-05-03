@@ -5,7 +5,7 @@
 
 # for Rails projects
 rall () {
-  tmux split-window -vp 20
+  tmux split-window -vp 15
   tmux split-window -hp 45
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'nvim' Enter
@@ -34,7 +34,7 @@ rall () {
 }
 
 redit () {
-  tmux split-window -vp 20
+  tmux split-window -vp 15
   tmux split-window -hp 45
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'nvim' Enter
@@ -62,7 +62,7 @@ rsupport() {
 
 # for Ember projects
 eall () {
-  tmux split-window -vp 20
+  tmux split-window -vp 15
   tmux split-window -hp 45
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'nvim' Enter
@@ -89,7 +89,7 @@ eall () {
 }
 
 eedit () {
-  tmux split-window -vp 20
+  tmux split-window -vp 15
   tmux split-window -hp 45
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'nvim' Enter

@@ -64,6 +64,15 @@ base_packages=" aria2 \
                 zsh-autosuggestions"
 a $base_packages
 
+# correct international keyboard
+echo "**** installing international keyboard support ****"
+sudo apt-add-repository -y ppa:rael-gc/utils
+sudo apt update
+a win-us-intl
+gsettings set org.gnome.settings-daemon.plugins.xsettings disabled-gtk-modules '["'keyboard'"]'
+im-config -n uim
+echo "-------------------------------------------------"
+
 ### nix
 echo "**** installing nixos ****"
 curl -L https://nixos.org/nix/install | sh
