@@ -55,6 +55,7 @@ base_packages=" alacritty \
                 fasd \
                 feh \
                 fop \
+                github-cli \
                 glances \
                 graphviz \
                 httpie \
@@ -95,6 +96,7 @@ aur_packages="  autojump \
                 direnv \
                 dmenu \
                 dockly \
+                gitlab-glab-bin \
                 gotop \
                 insomnia \
                 nerd-fonts-cascadia-code  \

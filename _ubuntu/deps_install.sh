@@ -219,6 +219,22 @@ sudo apt-get update
 sudo apt-get install lazygit
 echo "-------------------------------------------------"
 
+echo "**** installing gihub cli ****"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt update
+a dirmngr gh
+echo "-------------------------------------------------"
+
+echo "**** installing gitlab cli ****"
+pushd /tmp
+  git clone https://github.com/profclems/glab.git
+  cd glab
+  make
+  sudo install ./bin/glab /usr/local/bin/glab
+popd
+echo "-------------------------------------------------"
+
 echo "**** installing spacevim ****"
 pushd /tmp
   curl -sLf https://spacevim.org/install.sh | bash
@@ -244,9 +260,11 @@ pushd /tmp
   fc-cache -fv
 popd
 echo "-------------------------------------------------"
+
 echo "**** configuring editor ***"
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
 sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+echo "-------------------------------------------------"
 ### DONE!
 echo "\n\nAll done installing packages!\n\n"

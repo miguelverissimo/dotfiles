@@ -37,6 +37,7 @@ CONFIGURATION_DIRS="alacritty \
                     ruby \
                     tmux \
                     utils \
+                    psqlrc \
                     vim"
 
 for CONFIGURATION in ${CONFIGURATION_DIRS}; do

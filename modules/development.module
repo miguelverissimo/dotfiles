@@ -113,7 +113,21 @@ esupport() {
   tmux select-pane -t 1
 }
 
+create_repo() {
+  gh repo create "$@"
+  glab repo create "$@"
+  git remote add hub git@github.com:miguelverissimo/"$@".git
+  git remote add lab git@github.com:miguelverissimo/"$@".git
+  git remote set-url --push all git@github.com:miguelverissimo/"$@".git
+  git remote set-url --push all git@gitlab.com:miguelverissimo/"$@".git
+}
+
+alias ns='nix-shell'
 alias rsh='nix-shell'
 alias esh='nix-shell'
-alias rdbm='rails db:migrate && rails erd'
+alias rdbm='rails db:migrate'
+alias dbmig='rails db:migrate && rails erd'
 alias be='bundle exec'
+alias dcu='docker-compose up'
+alias dcud='docker-compose up -d'
+alias dcd='docker-compose down'
