@@ -70,15 +70,15 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
+    # family: Recursive Monospace # https://fonts.google.com/specimen/Recursive?selection.family=Recursive:wght@301;400;700&sidebar.open=true
     # family: FantasqueSansMono Nerd Font Mono
     # family: CaskaydiaCove Nerd Font
     family: Hack Nerd Font
     # family: Hasklug Nerd Font
     # family: UbuntuMono Nerd Font
     # family: JetBrainsMono Nerd Font
-    # family: VictorMono Nerd Font
     # style: Medium
-    # family: Recursive Monospace # https://fonts.google.com/specimen/Recursive?selection.family=Recursive:wght@301;400;700&sidebar.open=true
+    # family: VictorMono Nerd Font
     style: Regular
 
   bold:
@@ -105,7 +105,8 @@ font:
     style: Italic
 
   # Point size of the font
-  size: 12.0
+  size: 9.4
+  # size: 10
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.

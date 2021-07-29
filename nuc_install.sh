@@ -25,14 +25,12 @@ source $HOME/.zshrc
 
 # All configuration
 echo "Running all the symlinking for the supported software"
-CONFIGURATION_DIRS="alacritty \
-                    asdf \
+CONFIGURATION_DIRS="asdf \
                     ctags \
                     desktop_files \
                     elixir \
                     git \
                     javascript \
-                    kitty \
                     lazygit \
                     nvim-user-configs \
                     psqlrc \

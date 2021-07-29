@@ -1,0 +1,6 @@
+# vi: ft=bash
+
+alias cat='batcat'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias open='xdg-open'

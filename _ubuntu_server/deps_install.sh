@@ -18,6 +18,7 @@ base_packages=" aria2 \
                 automake \
                 bash-completion \
                 bat \
+                build-essential \
                 curl \
                 direnv \
                 docker \
@@ -28,25 +29,23 @@ base_packages=" aria2 \
                 fop \
                 gdebi \
                 git \
-                glances \
-                graphviz \
                 httpie \
                 jq \
                 keychain \
-                kitty \
                 lastpass-cli \
                 libncurses5-dev \
                 libssl-dev \
                 libreadline-dev \
-                libxml2 \
+                libxml2-dev \
+                libxstl-dev \
                 libyaml-0-2 \
+                libz-dev \
                 neovim \
                 openjdk-14-jre \
+                openssh-server \
                 openssl \
-                ranger \
                 readline-common \
                 ripgrep \
-                scrot \
                 silversearcher-ag \
                 snapd \
                 stterm \
@@ -62,7 +61,6 @@ base_packages=" aria2 \
                 wget \
                 xclip \
                 xsel \
-                zathura \
                 zsh \
                 zsh-autosuggestions"
 a $base_packages
@@ -113,9 +111,9 @@ echo "-------------------------------------------------"
 ### ruby
 echo "**** asdf installing ruby ****"
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf install ruby 2.7.0
+asdf install ruby 3.0.0
 asdf install ruby 2.6.6
-asdf global ruby 2.7.0 2.6.6
+asdf global ruby 3.0.0 2.6.6
 echo "-------------------------------------------------"
 
 ### rust
@@ -140,12 +138,6 @@ python2 -m pip install --user --upgrade pynvim
 python3 -m pip install --user --upgrade pynvim
 echo "-------------------------------------------------"
 
-### doom-emacs
-echo "**** git installing doom-emacs ****"
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-echo "-------------------------------------------------"
-
 # other stuff
 echo "**** pip installing psutil ****"
 pip install psutil
@@ -154,11 +146,6 @@ echo "-------------------------------------------------"
 # make zsh the default shell
 echo "**** changing shell to zsh ****"
 chsh -s /usr/bin/zsh
-echo "-------------------------------------------------"
-
-echo "**** installing zoom ****"
-wget https://zoom.us/client/lates/zoom_amd64.deb
-sudo apt install ./zoom_amd64.deb
 echo "-------------------------------------------------"
 
 echo "**** installing docker ****"
@@ -186,19 +173,6 @@ echo "-------------------------------------------------"
 
 echo "**** installing diff-so-fancy ****"
 git clone https://github.com/so-fancy/diff-so-fancy $HOME/.dotfiles/bin/diff-so-fancy
-echo "-------------------------------------------------"
-
-echo "**** installing insomnia ****"
-echo "deb https://dl.bintray.com/getinsomnia/Insomnia /" \
-    | sudo tee -a /etc/apt/sources.list.d/insomnia.list
-wget --quiet -O - https://insomnia.rest/keys/debian-public.key.asc \
-    | sudo apt-key add -
-sudo apt update
-sudo apt install -y insomnia
-echo "-------------------------------------------------"
-
-echo "**** installing dockly ****"
-npm install -g dockly
 echo "-------------------------------------------------"
 
 echo "**** installing ytop ****"
@@ -235,12 +209,6 @@ pushd /tmp
   cd glab
   make
   sudo install ./bin/glab /usr/local/bin/glab
-popd
-echo "-------------------------------------------------"
-
-echo "**** installing spacevim ****"
-pushd /tmp
-  curl -sLf https://spacevim.org/install.sh | bash
 popd
 echo "-------------------------------------------------"
 

@@ -46,6 +46,7 @@ pnswc() {
 pnall() {
   # pnedit
   cd /home/miguel/DEV/PN/eternal-sledgehammer
+  tmux rename-window 'es edit'
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
@@ -56,6 +57,7 @@ pnall() {
   tmux new-window -c '/home/miguel/DEV/PN/eternal-sledgehammer'
 
   # pnsupport
+  tmux rename-window 'es support'
   tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
@@ -78,6 +80,7 @@ pnall() {
 
 pnedit() {
   cd /home/miguel/DEV/PN/eternal-sledgehammer
+  tmux rename-window 'es edit'
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
@@ -87,6 +90,7 @@ pnedit() {
 }
 
 pnsupport() {
+  tmux rename-window 'es support'
   tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'

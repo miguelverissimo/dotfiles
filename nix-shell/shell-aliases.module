@@ -1,0 +1,24 @@
+alias gs='git status'
+alias gpp='git pull --prune'
+alias gpa='git remote | xargs -L1 -I R git push R'
+alias gpu='git push'
+alias gpauc='gpa -u $(git branch --show-current)'
+alias gpac='gpa $(git branch --show-current)'
+alias uncommit='git reset --soft "HEAD^"'
+alias gap='git add -p'
+alias gpufl='git push --force-with-lease'
+alias gpafl='gpa --force-with-lease'
+alias gsm='git switch master'
+alias gs-='git switch -'
+
+function gsw {
+  if [ -z "$1" ]; then
+    git switch master
+  else
+    git switch $*
+  fi
+}
+
+alias lg='lazygit'
+
+source $HOME/.dotfiles/modules/development.module
