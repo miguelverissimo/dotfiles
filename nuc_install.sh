@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
+emulate -LR bash
 set -e
 
 source ./_setup_scripts/backup_and_symlink
@@ -14,11 +15,11 @@ DOTFILES_DIRS="zsh \
                prezto"
 
 for DOTFILE in ${DOTFILES_DIRS}; do
-  pushd ${DOTFILE}
+  cd ${DOTFILE}
   echo "### Configuring ${DOTFILE} ###"
   ./setup.sh
   echo "### Finished configuring ${DOTFILE} ###"
-  popd
+  cd ..
 done
 
 source $HOME/.zshrc
@@ -41,9 +42,9 @@ CONFIGURATION_DIRS="asdf \
                     wezterm"
 
 for CONFIGURATION in ${CONFIGURATION_DIRS}; do
-  pushd ${CONFIGURATION}
+  cd ${CONFIGURATION}
   echo "### Configuring ${CONFIGURATION} ###"
   ./setup.sh
   echo "### Finished configuring ${CONFIGURATION} ###"
-  popd
+  cd ..
 done
