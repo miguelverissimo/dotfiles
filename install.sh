@@ -34,6 +34,7 @@ CONFIGURATION_DIRS="alacritty \
                     javascript \
                     kitty \
                     lazygit \
+                    lazydocker \
                     nvim-user-configs \
                     psqlrc \
                     ruby \
