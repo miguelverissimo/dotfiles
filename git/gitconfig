@@ -95,6 +95,7 @@
 	summary = true
 	verbosity = 1
 	tool = vimdiff
+	conflictstyle = diff3
 [apply]
 	whitespace = nowarn
 [branch]
@@ -107,13 +108,14 @@
 	autocrlf = false
 	editor = nvim
 	excludesfile = ~/.dotfiles/git/gitignore
-	pager = diff-so-fancy | less --tabs=1,5 -R
+	pager = delta
 	hooksPath = /home/miguel/.dotfiles/git/hooks
 [advice]
 	statusHints = false
 [diff]
 	mnemonicprefix = true
 	algorithm = patience
+	colorMoved = default
 [rerere]
 	# Remember my merges
 	# http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
@@ -147,3 +149,5 @@
 	newHighlight = "green bold 22"
 [credential]
 	helper = store
+[delta]
+	navigate = true

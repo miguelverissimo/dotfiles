@@ -18,3 +18,7 @@ for CONFIG_FILE in gitconfig gitignore; do
 
   backup_and_symlink ${ORIGIN} ${DEST}
 done
+
+print "***************************************************************************"
+print "* MANUALLY install delta https://github.com/dandavison/delta#installation *"
+print "***************************************************************************"
