@@ -49,4 +49,4 @@ fi
 eval `ssh-agent`
 
 ### keychain
-eval `keychain --eval --agents ssh id_rsa`
+eval `keychain --eval --agents ssh id_rsa github id_rsa_main`
