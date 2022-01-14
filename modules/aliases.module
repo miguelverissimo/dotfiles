@@ -136,3 +136,6 @@ alias man='tldr'
 
 # lazygit rocks
 alias lg='lazygit'
+
+# lazy
+alias sshm='ssh maschine -X'
