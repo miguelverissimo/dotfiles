@@ -117,16 +117,6 @@ function duf() {
 # cheer me up (needs cowsay and fortune packages)
 alias fdx='fortune | cowsay'
 
-# v and vi is nvim with session, vim is vim and nvim is nvim
-v() {
-  if [ -d './.git' ]; then
-    NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim -S .git/.session.vim
-  else
-    NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim -S .session.vim
-  fi
-}
-alias vi=v
-
 # MOLAN LABE
 alias dea='direnv allow .'
 
@@ -139,3 +129,4 @@ alias lg='lazygit'
 
 # lazy
 alias sshm='ssh maschine -X'
+alias sshk='kitty +kitten ssh'
