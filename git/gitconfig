@@ -151,3 +151,5 @@
 	helper = store
 [delta]
 	navigate = true
+[init]
+	defaultBranch = master

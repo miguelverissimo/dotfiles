@@ -64,9 +64,9 @@ pnall() {
   tmux select-pane -t 1
   tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 3 'forego start webpacker -e .env' Enter
   tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'bundle exec sidekiq start' Enter
+  tmux send-keys -t 4 'DEBUG_RULES=true forego start job -e .env' Enter
   tmux send-keys -t 5 'pndev shell' Enter
   tmux send-keys -t 5 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
@@ -97,9 +97,9 @@ pnsupport() {
   tmux select-pane -t 1
   tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 3 'forego start webpacker -e .env' Enter
   tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'bundle exec sidekiq start' Enter
+  tmux send-keys -t 4 'DEBUG_RULES=true forego start job -e .env' Enter
   tmux send-keys -t 5 'pndev shell' Enter
   tmux send-keys -t 5 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
