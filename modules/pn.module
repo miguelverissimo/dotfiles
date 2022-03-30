@@ -43,6 +43,13 @@ pnswc() {
   story "${ticket}"
 }
 
+load_dotenv() {
+  set -o allexport
+  source .env
+  source .env.local
+  set +o allexport
+}
+
 pnall() {
   # pnedit
   cd /home/miguel/DEV/PN/eternal-sledgehammer
@@ -50,9 +57,12 @@ pnall() {
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'load_dotenv' Enter
   tmux send-keys -t 1 'nvim' Enter
   tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 2 'load_dotenv' Enter
   tmux send-keys -t 3 'pndev shell' Enter
+  tmux send-keys -t 3 'load_dotenv' Enter
 
   tmux new-window -c '/home/miguel/DEV/PN/eternal-sledgehammer'
 
@@ -64,15 +74,20 @@ pnall() {
   tmux select-pane -t 1
   tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'forego start webpacker -e .env' Enter
+  tmux send-keys -t 3 'load_dotenv' Enter
+  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
   tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'DEBUG_RULES=true forego start job -e .env' Enter
+  tmux send-keys -t 4 'load_dotenv' Enter
+  tmux send-keys -t 4 'DEBUG_RULES=true sidekiq start' Enter
   tmux send-keys -t 5 'pndev shell' Enter
-  tmux send-keys -t 5 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
+  tmux send-keys -t 5 'load_dotenv' Enter
+  tmux send-keys -t 5 'bundle exec rails s -b 0.0.0.0 -p 3000' Enter
   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'load_dotenv' Enter
   tmux send-keys -t 1 'lg' Enter
   tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 2 'load_dotenv' Enter
   tmux select-pane -t 1
 
   tmux select-window -t !
@@ -84,9 +99,12 @@ pnedit() {
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'load_dotenv' Enter
   tmux send-keys -t 1 'nvim' Enter
   tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 2 'load_dotenv' Enter
   tmux send-keys -t 3 'pndev shell' Enter
+  tmux send-keys -t 3 'load_dotenv' Enter
 }
 
 pnsupport() {
@@ -97,31 +115,21 @@ pnsupport() {
   tmux select-pane -t 1
   tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'forego start webpacker -e .env' Enter
+  tmux send-keys -t 3 'load_dotenv' Enter
+  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
   tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'DEBUG_RULES=true forego start job -e .env' Enter
+  tmux send-keys -t 4 'load_dotenv' Enter
+  tmux send-keys -t 4 'DEBUG_RULES=true sidekiq start' Enter
   tmux send-keys -t 5 'pndev shell' Enter
-  tmux send-keys -t 5 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
+  tmux send-keys -t 5 'load_dotenv' Enter
+  tmux send-keys -t 5 'bundle exec rails s -b 0.0.0.0 -p 3000' Enter
   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'load_dotenv' Enter
   tmux send-keys -t 1 'lg' Enter
   tmux send-keys -t 2 'pndev shell' Enter
+  tmux send-keys -t 2 'load_dotenv' Enter
   tmux select-pane -t 1
 }
 
-pndebug() {
-  tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
-  tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'bundle exec bin/webpack-dev-server' Enter
-  tmux send-keys -t 2 'pndev shell' Enter
-  tmux send-keys -t 2 'bundle exec sidekiq start' Enter
-  tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'bundle exec rails server -b 0.0.0.0 -p 3000' Enter
-}
-
-alias pe=pnedit
-alias pd=pndebug
 alias psh='pndev shell'
-alias pst='cd ~/DEV/PN/eternal-sledgehammer && pndev start'
