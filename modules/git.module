@@ -36,6 +36,8 @@ alias gpufl='git push --force-with-lease'
 alias gpafl='gpa --force-with-lease' # force-push current branch to all remotes
 alias gsm='git switch master'
 alias gs-='git switch -'
+alias gci='git ci'
+alias gsha='git rev-parse' # show long sha from short sha
 
 # track all remote branches
 #alias gtab="git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs"

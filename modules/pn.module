@@ -50,6 +50,18 @@ load_dotenv() {
   set +o allexport
 }
 
+pn_server() {
+  bundle exec rails s -b 0.0.0.0 -p 3000
+}
+
+pn_sidekiq() {
+  DEBUG_RULES=true sidekiq start
+}
+
+pn_webpacker() {
+  bin/webpacker-dev-server
+}
+
 pnall() {
   # pnedit
   cd /home/miguel/DEV/PN/eternal-sledgehammer
@@ -57,8 +69,7 @@ pnall() {
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv' Enter
-  tmux send-keys -t 1 'nvim' Enter
+  tmux send-keys -t 1 'load_dotenv; nvim' Enter
   tmux send-keys -t 2 'pndev shell' Enter
   tmux send-keys -t 2 'load_dotenv' Enter
   tmux send-keys -t 3 'pndev shell' Enter
@@ -74,18 +85,14 @@ pnall() {
   tmux select-pane -t 1
   tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'load_dotenv' Enter
-  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 3 'load_dotenv; pn_webpacker' Enter
   tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'load_dotenv' Enter
-  tmux send-keys -t 4 'DEBUG_RULES=true sidekiq start' Enter
+  tmux send-keys -t 4 'load_dotenv; pn_sidekiq' Enter
   tmux send-keys -t 5 'pndev shell' Enter
-  tmux send-keys -t 5 'load_dotenv' Enter
-  tmux send-keys -t 5 'bundle exec rails s -b 0.0.0.0 -p 3000' Enter
+  tmux send-keys -t 5 'load_dotenv; pn_server' Enter
   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv' Enter
-  tmux send-keys -t 1 'lg' Enter
+  tmux send-keys -t 1 'load_dotenv; lg' Enter
   tmux send-keys -t 2 'pndev shell' Enter
   tmux send-keys -t 2 'load_dotenv' Enter
   tmux select-pane -t 1
@@ -99,8 +106,7 @@ pnedit() {
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv' Enter
-  tmux send-keys -t 1 'nvim' Enter
+  tmux send-keys -t 1 'load_dotenv; nvim' Enter
   tmux send-keys -t 2 'pndev shell' Enter
   tmux send-keys -t 2 'load_dotenv' Enter
   tmux send-keys -t 3 'pndev shell' Enter
@@ -115,18 +121,14 @@ pnsupport() {
   tmux select-pane -t 1
   tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'load_dotenv' Enter
-  tmux send-keys -t 3 'bundle exec bin/webpack-dev-server' Enter
+  tmux send-keys -t 3 'load_dotenv; pn_webpacker' Enter
   tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'load_dotenv' Enter
-  tmux send-keys -t 4 'DEBUG_RULES=true sidekiq start' Enter
+  tmux send-keys -t 4 'load_dotenv; pn_sidekiq' Enter
   tmux send-keys -t 5 'pndev shell' Enter
-  tmux send-keys -t 5 'load_dotenv' Enter
-  tmux send-keys -t 5 'bundle exec rails s -b 0.0.0.0 -p 3000' Enter
+  tmux send-keys -t 5 'load_dotenv, pn_server' Enter
   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv' Enter
-  tmux send-keys -t 1 'lg' Enter
+  tmux send-keys -t 1 'load_dotenv; lg' Enter
   tmux send-keys -t 2 'pndev shell' Enter
   tmux send-keys -t 2 'load_dotenv' Enter
   tmux select-pane -t 1
