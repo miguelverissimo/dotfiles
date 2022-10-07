@@ -133,3 +133,7 @@ alias lg='lazygit'
 # lazy
 alias sshm='ssh maschine -X'
 alias sshk='kitty +kitten ssh'
+
+# use neovim appimage because otherwise everything is broken
+# https://github.com/neovim/neovim/wiki/Installing-Neovim
+alias nvim='nvim.appimage'
