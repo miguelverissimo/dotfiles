@@ -1,88 +1,55 @@
 # set your user tokens as environment variables, such as ~/.secrets
 # See the README for examples.
 [alias]
-	a = add                           # add
-	ap = add --patch                  # stage commits chunk by chunk
-
-	# via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
-	snap = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-	snaps = !git stash list --grep snapshot
-
-	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
-	recent = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
-
-	b = branch -v                     # branch (verbose)
-	bl = blame -w                     # ignore whitespace changes in git blame
-
-	# commit
-	c = commit -m                     # commit with message
-	cam = commit -am                  # commit all with message
-	ci = commit -v                    # commit
-	amend = commit --amend            # ammend your last commit
-	ammend = commit --amend           # ammend your last commit
-	fix = commit --amend --no-edit    # add to the previous commit without edits
-	edit = commit --amend             # add to the previous commit
-
-	# checkout
-	co = checkout                     # checkout
-
-	# cherry-pick
-	cp = cherry-pick -x               # grab a change from a branch
-
-	# diff
-	d = diff                          # diff unstaged changes
-	dc = diff --cached                # diff staged changes
-	last = diff HEAD^                 # diff last committed change
-
-	# log
-	l = log --graph --date=short
-	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
-	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
-	simple = log --pretty=format:\" * %s\"
-	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
-	tree = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
-	lc = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset' --abbrev-commit --date=relative
-
-	# pull
-	pl = pull                         # pull
-
-	# push
-	ps = push                         # push
-
-	# rebase
-	rc = rebase --continue            # continue rebase
-	rs = rebase --skip                # skip rebase
-
-	# remote
-	r = remote -v                     # show remotes (verbose)
-
-	# reset
-	unstage = reset HEAD              # remove files from index (tracking)
-	uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
-	filelog = log -u                  # show changes to a file
-	mt = mergetool                    # fire up the merge tool
-
-	# stash
-	ss = stash                        # stash changes
-	sl = stash list                   # list stashes
-	sa = stash apply                  # apply stash (restore changes)
-	sd = stash drop                   # drop stashes (destory changes)
-	sa = stash save -u                # stash including untracked
-
-	# status
-	s = status                        # status
-	st = status                       # status
-	stat = status                     # status
-
-	# switch
-	sw = switch                       # switch
-	nb = switch -c                    # create and switch to a new branch (mnemonic: "git new branch branchname...")
-
-	# restore
-	re = restore                      # restore
-
-	# tag
-	t = tag -n                        # show tags with <n> lines of each tag message
+	a             = add                           # add
+	amend         = commit --amend            # ammend your last commit
+	ammend        = commit --amend           # ammend your last commit
+	ap            = add --patch                  # stage commits chunk by chunk
+	b             = branch -v                     # branch (verbose)
+	bl            = blame -w                     # ignore whitespace changes in git blame
+	c             = commit -m                     # commit with message
+	cam           = commit -am                  # commit all with message
+	changes       = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status # log changes
+	ci            = commit -v                    # commit
+	co            = checkout                     # checkout
+	cp            = cherry-pick -x               # cherry-pick a change from a branch
+	d             = diff                          # diff unstaged changes
+	dc            = diff --cached                # diff staged changes
+	edit          = commit --amend             # add to the previous commit
+	filelog       = log -u                  # show changes to a file
+	fix           = commit --amend --no-edit    # add to the previous commit without edits
+  gitdir        = rev-parse --git-dir # path of the repo's .git dir
+	l             = log --graph --date=short # log
+	last          = diff HEAD^                 # diff last committed change
+	lc            = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset' --abbrev-commit --date=relative # log full with graph
+	mt            = mergetool                    # fire up the merge tool
+	nb            = switch -c                    # create and switch to a new branch (mnemonic: "git new branch branchname...")
+	pl            = pull                         # pull
+  ps            = push                         # push
+	r             = remote -v                     # show remotes (verbose)
+	rc            = rebase --continue            # continue rebase
+	re            = restore                      # restore
+	recent        = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)' # show branches most recent first
+  root          = rev-parse --show-toplevel  # repository root
+	rs            = rebase --skip                # skip rebase
+	s             = status                        # status
+	sa            = stash apply                  # apply stash (restore changes)
+	sd            = stash drop                   # drop stashes (destory changes)
+	short         = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" # log short
+	shortnocolor  = log --pretty=format:\"%h %cr %cn %s\" # log short with no colors
+	simple        = log --pretty=format:\" * %s\" # log simple
+	sl            = stash list                   # list stashes
+	snap          = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}" # snapshot
+	snaps         = !git stash list --grep snapshot # snapshot list
+	ss            = stash                        # stash changes
+	st            = status                       # status
+	stat          = status                        # status
+	su            = stash save -u                # stash including untracked
+	sw            = switch                       # switch
+	t             = tag -n                        # show tags with <n> lines of each tag message
+	tree          = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s" # log tree
+	uncommit      = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+	unstage       = reset HEAD              # remove files from index (tracking)
 
 [format]
 	pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
@@ -121,7 +88,7 @@
 	# http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
 	enabled = true
 [commit]
-	template = ~/.gitmessage
+	template = .git/commit-msg
 [include]
 	path = .gitconfig.user
 [rebase]

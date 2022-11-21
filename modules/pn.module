@@ -5,30 +5,58 @@ source ~/.pn_anonymize_creds
 
 # Story because too lazy to copy/paste
 story() {
-  if [[ "${1}" == "master" ]]; then
-    echo -n >| ~/.gitmessage
+  git_dir="$(git gitdir)"
+  commit_template="${git_dir}/commit-msg"
+  if [ ! -e "${commit_template}" ]; then
+    touch "${commit_template}"
+  fi
+
+  if [[ "${1}" == "master" || "${1}" == "main" ]]; then
+    echo -n >| $commit_template
     echo "Cleared out story number"
   elif [[ "${1}" == "--query" || "${1}" == "-?" || "${1}" == "-q" ]]; then
-    cat ~/.gitmessage | tail -1
+    cat $commit_template | tail -1
   elif [[ "${1}" == "--clear" || "${1}" == "-C" || "${1}" == "-c" ]]; then
-    echo -n >| ~/.gitmessage
+    echo -n >| $commit_template
     echo "Cleared out story number"
   elif [[ "${1}" =~ ^[A-Z0-9]+-[0-9]+$ ]]; then
-    echo -e "[${1}]\n\n[${1}](https://precisionnutrition.atlassian.net/browse/${1})" >| ~/.gitmessage
+    echo -e "[${1}]\n\n[${1}](https://precisionnutrition.atlassian.net/browse/${1})" >| $commit_template
     echo "Set story to ${1}"
   elif [[ "${1}" =~ ^https://.*$ ]]; then
     story_id=$(echo -n ${1} | cut -d'/' -f5)
-    echo -e "[${story_id}]\n\n[${story_id}](https://precisionnutrition.atlassian.net/browse/${story_id})" >| ~/.gitmessage
+    echo -e "[${story_id}]\n\n[${story_id}](https://precisionnutrition.atlassian.net/browse/${story_id})" >| $commit_template
     echo "Set story to ${story_id}"
   else
-    current_story=$(cat ~/.gitmessage | tail -1)
-    if [ -s ~/.gitmessage ]; then echo "Current story: ${current_story}\n"; fi
+    current_story=$(cat $commit_template | tail -1)
+    if [ -s $commit_template ]; then echo "Current story: ${current_story}\n"; fi
     echo "usage: story [-h] [--clear|-c|-C] [--query|-q|-?] [story id]"
     echo -e "\t--query, -q, -?\t  shows tracked story"
     echo -e "\t--clear, -c, -C\t  unsets tracked story"
     echo -e "\t--help, -h\t  help (this)"
     echo -e "\t[story id]\t  sets tracked story to [story id]"
   fi
+}
+
+prepare-commit-message() {
+  git_dir="$(git gitdir)"
+  prepare_commit_msg_file="${git_dir}/prepare-commit-msg"
+  commit_template="${git_dir}/commit-msg"
+
+  if [ ! -e "${commit_template}" ]; then
+    touch "${commit_template}"
+  fi
+
+  if [ -e "${prepare_commit_msg_file}" ] && [ "${1}" != "-f" ]; then
+    echo "ERROR:\n${prepare_commit_msg_file} alread exists, force regeneration with prepare-commit-message -f\nCurrent content:"
+  else
+    arr=('#!/bin/sh' 'firstLine=$(head -n1 $1)' '' 'if [ -z "$firstLine"  ]; then' '  commitTemplate=$(cat $commit_template)' '  echo -e "$commitTemplate\n $(cat $1)" > $1' 'fi')
+    printf '%s\n' "${arr[@]}" > $prepare_commit_msg_file
+    chmod +x $prepare_commit_msg_file
+    echo "Done!"
+  fi
+
+  cat $prepare_commit_msg_file
+  echo
 }
 
 pnsw() {
