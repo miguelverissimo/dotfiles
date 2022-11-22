@@ -6,17 +6,11 @@ alias reload='source ~/.zshrc'
 # default params
 alias less='less -R'
 
-# Common -- Some are from Damian Conway
-#alias a='ls -A' # -A all except literal . ..
-alias c='clear'
-alias cdd='cd -'  # goto last dir cd'ed from
-function cdc() {
+cdc() {
     cd $1; ls
 }
 
-alias md='mkdir -p'
-
-function take() {
+take() {
     mkdir -p "$1"
     cd "$1"
 }
@@ -24,14 +18,19 @@ function take() {
 alias e='exit'
 alias k9="killall -9"
 
-function killnamed () {
+killnamed() {
     ps ax | grep $1 | cut -d ' ' -f 2 | xargs kill
 }
 
-function zipr() {
+nuke() {
+  pkill -9 -f $1
+}
+
+zipr() {
   zip -r $1.zip $1
 }
 
+alias md='mkdir -p'
 alias rm='rm -i'
 alias mv='mv -i'
 
@@ -41,99 +40,89 @@ alias which='type -a'
 alias ..='cd ..'
 alias cl='clear; l'
 alias cls='clear; ls'
-alias h='history'
 
-# Pretty-print of some PATH variables:
-alias path='echo -e ${PATH//:/\\n}'
-alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
+alias untar='tar -zxvf'
+
+alias path='echo -e ${PATH//:/\\n}' # easier to read
 
 alias du='du -kh'    # Makes a more readable output.
 alias df='df -kTh'
 
-#-------------------------------------------------------------
-# The 'ls' family (this assumes you use a recent GNU ls).
-#-------------------------------------------------------------
-# Add colors for filetype and  human-readable sizes by default on 'ls':
 
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+alias ls='exa'              # use EXA instead of ls
 
-alias ls='exa'
-alias ll='ls -alhg --git'
-alias lx='ls -lXB'         #  Sort by extension.
-alias lk='ls -lssize'         #  Sort by size, biggest last.
-alias lt='ls -ltr'         #  Sort by date, most recent last.
-alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
-alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
-alias lh="ls -alh"
-alias la="ls -A -l -h -G"
-alias lt='ls -lt' # sort with recently modified first
-alias l.='ls -d .[^.]*'
-alias l='ls -lhG -snew'  # -l long listing, most recent first
-                    # -G color
-# The ubiquitous 'll': directories first, with alphanumeric sorting:
-alias lm='ll |more'        #  Pipe through 'more'
-alias lr='ll -R'           #  Recursive ls.
-alias laa='ls -la | grep "^d" && ls -la | grep -v "^d"'
+alias l.='ls -d .[^.]*'     # List hidden directories only
+alias l='ls -lhG -snew'     # -l long listing, most recent first -G color
+alias lc='ls -ltcr'         # Sort by/show change time,most recent last.
+alias lh="ls -alh"          # most recent first
+alias lk='ls -lssize'       # Sort by size, biggest last.
+alias ll='ls -alhg --git'   # show git status (exa feature)
+alias lm='ll | less'        # Pipe through 'less'
+alias lr='ll -R'            # Recursive ls.
+alias lt='ls -lt'           # sort with recently modified first
+alias lt='ls -ltr'          # Sort by date, most recent last.
+alias lu='ls -ltur'         # Sort by/show access time,most recent last.
+alias lx='ls -lXB'          # Sort by extension.
 
-# encontrar um ficheiro no filesystem deste dir para baixo
-function ff()
-{
+# find a file inside this directory tree
+ff() {
   find . -type f -iname '*'"$*"'*' -ls ;
 }
 
-# encontrar um ficheiro no filesystem em todo o filesystem
-function ffr()
-{
+# find a file in the entire filesystem
+ffr() {
   find / -type f -iname '*'"$*"'*' -ls ;
 }
 
-# encontrar ficheiros que contenham o texto, desta pasta para baixo
-function fif()
-{
+# find a file inside the $HOME tree
+ffh() {
+  find ${HOME} -type f -iname '*'"$*"'*' -ls ;
+}
+
+# find file containing the supplied text, inside this directory tree
+fif() {
   find . -type f -exec grep -l "${1}" "{}" \;
 }
 
-# encontar ficheiros que contenham o texto do param, desde a root do filesystem
-function fifa()
-{
+# find file containing the supplied text, in the entire filesystem
+fifa() {
   find / -type f -exec grep -l "${1}" "{}" \;
 }
 
-# encontrar ficheiros que contenham o texto, desta pasta para baixo COM DESCRICAO DO TEXTO NO LOCAL
-function fifd()
-{
+# find file containing the supplied text, inside the $HOME tree
+fifd() {
+  find ${HOME} -type f -exec grep -l "${1}" "{}" \;
+}
+
+# find file containing the supplied text, inside this directory tree and print its contents
+fifp() {
   find . -type f -exec grep -i "${1}" "{}" \; -print
 }
 
-# encontar ficheiros que contenham o texto do param, desde a root do filesystem COM DESCRICAO DO TEXTO NO LOCAL
-function fifad()
-{
+# find file containing the supplied text, in the entire filesystem and print its contents
+fifap() {
   find / -type f -exec grep -i "${1}" "{}" \; -print
 }
 
-# du, mas usável (ordenado por tamanho e human-readable
-function duf() {
-  du -s $* | sort -n | cut -f 2- | while read a; do du -sh $a; done
+# find file containing the supplied text, inside the $HOME tree and print its contents
+fifdp() {
+  find ${HOME} -type f -exec grep -l "${1}" "{}" \; -print
 }
 
-# cheer me up (needs cowsay and fortune packages)
-alias fdx='fortune | cowsay'
-
-# MOLAN LABE
-alias dea='direnv allow .'
-
-# Override of sys tools with external tools
-alias ht='glances'
-alias man='tldr'
+# du, sorted by size and human-readable
+duf() {
+  du -s $* | sort -n | cut -f 2- | while read a; do du -sh $a; done
+}
 
 # lazygit rocks
 alias lg='lazygit'
 
-# lazy
 alias sshm='ssh maschine -X'
 alias sshk='kitty +kitten ssh'
 
-# use neovim appimage because otherwise everything is broken
-# https://github.com/neovim/neovim/wiki/Installing-Neovim
-alias nvim='nvim.appimage'
+# mount the home directory of the development machine in this filesystem
+mount_maschine() {
+  sshfs -o IdentityFile=/home/miguel/.ssh/id_rsa miguel@maschine:/home/miguel ~/maschine/
+}
+
+alias whatsmyip="curl https://api.myip.com"
