@@ -1,3 +1,17 @@
 gui:
   returnImmediately: true
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - underline
+    selectedLineBgColor:
+      - blue # set to `default` to have no background colour
+    selectedRangeBgColor:
+      - blue
+
 reporting: "off"
+

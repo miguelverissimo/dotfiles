@@ -1,0 +1,11 @@
+# vi: ft=bash
+
+alias dockerhelp='cat ~/.dotfiles/modules/docker.module'
+
+nuke-container() {
+  docker container ls -aqf "name=${1}" | xargs -O -I {} docker container rm {}
+}
+
+nuke-image() {
+  docker image rm ${1}
+}
