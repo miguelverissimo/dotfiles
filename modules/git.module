@@ -86,3 +86,25 @@ function gswcn {
 
   git branch -vv | ag -Q "${branch_name}"
 }
+
+prepare-commit-message() {
+  git_dir="$(git gitdir)"
+  prepare_commit_msg_file="${git_dir}/prepare-commit-msg"
+  commit_template="${git_dir}/commit-msg"
+
+  if [ ! -e "${commit_template}" ]; then
+    touch "${commit_template}"
+  fi
+
+  if [ -e "${prepare_commit_msg_file}" ] && [ "${1}" != "-f" ]; then
+    echo "ERROR:\n${prepare_commit_msg_file} alread exists, force regeneration with prepare-commit-message -f\nCurrent content:"
+  else
+    arr=('#!/bin/sh' 'firstLine=$(head -n1 $1)' '' 'if [ -z "$firstLine"  ]; then' '  commitTemplate=$(cat $commit_template)' '  echo -e "$commitTemplate\n $(cat $1)" > $1' 'fi')
+    printf '%s\n' "${arr[@]}" > $prepare_commit_msg_file
+    chmod +x $prepare_commit_msg_file
+    echo "Done!"
+  fi
+
+  cat $prepare_commit_msg_file
+  echo
+}

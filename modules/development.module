@@ -3,8 +3,41 @@
 # load the creds
 # source ~/.pn_anonymize_creds
 
+rall() {
+  redit
+  tmux new-window
+  rsupport
+  tmux select-window -t !
+}
+
+redit() {
+  tmux rename-window 'rb edit'
+  tmux split-window -vp 15
+  tmux split-window -hp 45
+  tmux send-keys -t 1 'nix-shell' Enter
+  tmux send-keys -t 1 'nvim' Enter
+  tmux send-keys -t 2 'nix-shell' Enter
+  tmux send-keys -t 3 'nix-shell' Enter
+}
+
+rsupport() {
+  tmux rename-window 'rb support'
+  tmux split-window -hp 50
+  tmux select-pane -t 1
+  tmux split-window -vp 80
+  tmux split-window -vp 70
+  tmux send-keys -t 1 'nix-shell' Enter
+  tmux send-keys -t 1 'docker-compose up' Enter
+  tmux send-keys -t 2 'nix-shell' Enter
+  tmux send-keys -t 2 'rails_css' Enter
+  tmux send-keys -t 4 'nix-shell' Enter
+  tmux send-keys -t 4 'rails_s' Enter
+  tmux send-keys -t 3 'nix-shell' Enter
+  tmux select-pane -t 3
+}
+
 # for Rails projects
-rall () {
+orall () {
   tmux rename-window 'rb edit'
   tmux split-window -vp 15
   tmux split-window -hp 45
@@ -24,9 +57,9 @@ rall () {
   tmux send-keys -t 3 'nix-shell' Enter
   tmux send-keys -t 3 'docker-compose up' Enter
   tmux send-keys -t 4 'nix-shell' Enter
-  tmux send-keys -t 4 'rails tailwindcss:watch' Enter
+  tmux send-keys -t 4 'rails_css' Enter
   tmux send-keys -t 5 'nix-shell' Enter
-  tmux send-keys -t 5 'rails server -b 0.0.0.0 -p 3999' Enter
+  tmux send-keys -t 5 'rails_s' Enter
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'lazygit' Enter
   tmux send-keys -t 2 'nix-shell' Enter
@@ -35,7 +68,7 @@ rall () {
   tmux select-window -t !
 }
 
-redit () {
+oredit () {
   tmux rename-window 'rb edit'
   tmux split-window -vp 15
   tmux split-window -hp 45
@@ -45,7 +78,7 @@ redit () {
   tmux send-keys -t 3 'nix-shell' Enter
 }
 
-rsupport() {
+orsupport() {
   tmux rename-window 'rb support'
   tmux split-window -hp 50
   tmux split-window -vp 80
@@ -55,9 +88,9 @@ rsupport() {
   tmux send-keys -t 3 'nix-shell' Enter
   tmux send-keys -t 3 'docker-compose up' Enter
   tmux send-keys -t 4 'nix-shell' Enter
-  tmux send-keys -t 4 'rails tailwindcss:watch' Enter
+  tmux send-keys -t 4 'rails_css' Enter
   tmux send-keys -t 5 'nix-shell' Enter
-  tmux send-keys -t 5 'rails server -b 0.0.0.0 -p 3999' Enter
+  tmux send-keys -t 5 'rails_s' Enter
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'lazygit' Enter
   tmux send-keys -t 2 'nix-shell' Enter
@@ -128,6 +161,24 @@ create_repo() {
   git remote add lab git@github.com:miguelverissimo/"$@".git
   git remote set-url --push all git@github.com:miguelverissimo/"$@".git
   git remote set-url --push all git@gitlab.com:miguelverissimo/"$@".git
+}
+
+rails_s() {
+  if [ -e Procfile.dev ]; then
+    $(grep -oP 'bin/rails\sserver.*' Procfile.dev)
+  else
+    echo "Can't find Procfile.dev"
+    exit 1
+  fi
+}
+
+rails_css() {
+  if [ -e Procfile.dev ]; then
+    $(grep -oP 'bin/rails.*css.*' Procfile.dev)
+  else
+    echo "Can't find Procfile.dev"
+    exit 1
+  fi
 }
 
 alias ns='nix-shell'
