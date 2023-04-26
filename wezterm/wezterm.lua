@@ -41,7 +41,6 @@ return {
     left = 3,
     -- This will become the scrollbar width if you have enabled the scrollbar!
     right = 2,
-
     top = 0,
     bottom = 0,
   },

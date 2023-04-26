@@ -11,36 +11,36 @@ Pry.commands.alias_command 's', 'step' rescue nil
 Pry.commands.alias_command 'n', 'next' rescue nil
 Pry.commands.alias_command 'f', 'finish' rescue nil
 
-# === CUSTOM PROMPT ===
-def formatted_env
-  case Rails.env
-  when 'production'
-    bold_upcased_env = Pry::Helpers::Text.bold(Rails.env.upcase)
-    Pry::Helpers::Text.red(bold_upcased_env)
-  when 'staging'
-    Pry::Helpers::Text.yellow(Rails.env)
-  when 'development'
-    Pry::Helpers::Text.green(Rails.env)
-  else
-    Rails.env
-  end
-end
-
-default_prompt = Pry::Prompt[:default]
-env = if defined?(Rails)
-        formatted_env
-      else
-        Pry::Helpers::Text.cyan('non-rails')
-      end
-
-Pry.config.prompt = Pry::Prompt.new(
-    'maschine',
-    'maschine prompt',
-    [
-      proc{ |*args| "#{env} #{default_prompt.wait_proc.call(*args)}" },
-      proc{ |*args| "#{env} #{default_prompt.incomplete_proc.call(*args)}" },
-    ],
-  )
+# # === CUSTOM PROMPT ===
+# def formatted_env
+#   case Rails.env
+#   when 'production'
+#     bold_upcased_env = Pry::Helpers::Text.bold(Rails.env.upcase)
+#     Pry::Helpers::Text.red(bold_upcased_env)
+#   when 'staging'
+#     Pry::Helpers::Text.yellow(Rails.env)
+#   when 'development'
+#     Pry::Helpers::Text.green(Rails.env)
+#   else
+#     Rails.env
+#   end
+# end
+#
+# default_prompt = Pry::Prompt[:default]
+# env = if defined?(Rails)
+#         formatted_env
+#       else
+#         Pry::Helpers::Text.cyan('non-rails')
+#       end
+#
+# Pry.config.prompt = Pry::Prompt.new(
+#     'maschine',
+#     'maschine prompt',
+#     [
+#       proc{ |*args| "#{env} #{default_prompt.wait_proc.call(*args)}" },
+#       proc{ |*args| "#{env} #{default_prompt.incomplete_proc.call(*args)}" },
+#     ],
+#   )
 # Pry.prompt = [proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} ᚹᚱᛘ => " }, proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level}   |> " }]
 
 # === Listing config ===
@@ -62,17 +62,12 @@ end
 # == PLUGINS ===
 # awesome_print gem: great syntax colorized printing
 # look at ~/.aprc for more settings for awesome_print
-begin
-  require 'awesome_print'
-  # The following line enables awesome_print for all pry output,
-  # and it also enables paging
-  Pry.config.print = proc {|output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output)}
-
-  # If you want awesome_print without automatic pagination, use the line below
-  # Pry.config.print = proc { |output, value| output.puts value.ai }
-rescue LoadError => err
-  puts "gem install awesome_print  # <-- highly recommended"
-end
+# begin
+#   require 'awesome_print'
+#   AwesomePrint.pry!
+# rescue LoadError => err
+#   puts "gem install awesome_print  # <-- highly recommended"
+# end
 
 # === CUSTOM COMMANDS ===
 # from: https://gist.github.com/1297510
@@ -109,43 +104,43 @@ end
 Pry.config.commands.import default_command_set
 
 
-# === CONVENIENCE METHODS ===
-# Stolen from https://gist.github.com/807492
-# Use Array.toy or Hash.toy to get an array or hash to play with
-class Array
-  def self.toy(n=10, &block)
-    block_given? ? Array.new(n,&block) : Array.new(n) {|i| i+1}
-  end
-end
-
-class Hash
-  def self.toy(n=10)
-    Hash[Array.toy(n).zip(Array.toy(n){|c| (96+(c+1)).chr})]
-  end
-end
-
-# # === COLOR CUSTOMIZATION ===
-# # Everything below this line is for customizing colors, you have to use the ugly
-# # color codes, but such is life.
-# CodeRay.scan("example", :ruby).term # just to load necessary files
-# # Token colors pulled from: https://github.com/rubychan/coderay/blob/master/lib/coderay/encoders/terminal.rb
-
-# $LOAD_PATH << File.dirname(File.realpath(__FILE__))
-
-# # In CodeRay >= 1.1.0 token colors are defined as pre-escaped ANSI codes
-# if Gem::Version.new(CodeRay::VERSION) >= Gem::Version.new('1.1.0')
-#   require "escaped_colors"
-# else
-#   require "unescaped_colors"
-# end
-
-# module CodeRay
-#   module Encoders
-#     class Terminal < Encoder
-#       # override old colors
-#       TERM_TOKEN_COLORS.each_pair do |key, value|
-#         TOKEN_COLORS[key] = value
-#       end
-#     end
-#   end
-# end
+# # === CONVENIENCE METHODS ===
+# # Stolen from https://gist.github.com/807492
+# # Use Array.toy or Hash.toy to get an array or hash to play with
+# # class Array
+# #   def self.toy(n=10, &block)
+# #     block_given? ? Array.new(n,&block) : Array.new(n) {|i| i+1}
+# #   end
+# # end
+# #
+# # class Hash
+# #   def self.toy(n=10)
+# #     Hash[Array.toy(n).zip(Array.toy(n){|c| (96+(c+1)).chr})]
+# #   end
+# # end
+#
+# # # === COLOR CUSTOMIZATION ===
+# # # Everything below this line is for customizing colors, you have to use the ugly
+# # # color codes, but such is life.
+# # CodeRay.scan("example", :ruby).term # just to load necessary files
+# # # Token colors pulled from: https://github.com/rubychan/coderay/blob/master/lib/coderay/encoders/terminal.rb
+#
+# # $LOAD_PATH << File.dirname(File.realpath(__FILE__))
+#
+# # # In CodeRay >= 1.1.0 token colors are defined as pre-escaped ANSI codes
+# # if Gem::Version.new(CodeRay::VERSION) >= Gem::Version.new('1.1.0')
+# #   require "escaped_colors"
+# # else
+# #   require "unescaped_colors"
+# # end
+#
+# # module CodeRay
+# #   module Encoders
+# #     class Terminal < Encoder
+# #       # override old colors
+# #       TERM_TOKEN_COLORS.each_pair do |key, value|
+# #         TOKEN_COLORS[key] = value
+# #       end
+# #     end
+# #   end
+# # end
