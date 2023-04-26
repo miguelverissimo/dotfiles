@@ -9,29 +9,20 @@ return {
   font = wezterm.font("Hack Nerd Font", { weight = "Regular", italic = false }),
   font_rules = {
     {
-      italic = false,
-      bold = false,
-      font = wezterm.font("Hack Nerd Font", { weight = "Regular", italic = false }),
+      font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Normal" }),
     },
     {
-      italic = true,
-      bold = false,
-      font = wezterm.font("Hack Nerd Font", { weight = "Regular", italic = true }),
+      font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Italic" }),
     },
     {
-      italic = false,
-      bold = true,
-      font = wezterm.font("Hack Nerd Font", { weight = "Bold", italic = false }),
+      font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Normal" }),
     },
     {
-      italic = true,
-      bold = true,
-      font = wezterm.font("Hack Nerd Font", { weight = "Bold", italic = true }),
+      font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Italic" }),
     },
   },
-  font_size = 9.5,
+  font_size = 9,
   dpi = 96.0,
-  font_antialias = "Greyscale",
   default_cursor_style = "BlinkingBlock",
   keys = {
     { key = "t", mods = "SUPER", action = wezterm.action { SendString = "\x02c" } },
