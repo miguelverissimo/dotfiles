@@ -51,7 +51,6 @@ vendor/bundle/*
 !/app/assets/builds/.keep
 vendor/apps/*
 vendor/assets/*
-docs/erd.pdf
 /public/packs/*
 /public/packs-test
 /node_modules

@@ -5,7 +5,8 @@ return {
   use_fancy_tab_bar = false,
   scrollback_lines = 10000,
   default_prog = { "/usr/bin/zsh", "-l" },
-  color_scheme = "Dracula+",
+  --[[ color_scheme = "Dracula+", ]]
+  color_scheme = "Kanagawa (Gogh)",
   font = wezterm.font("Hack Nerd Font", { weight = "Regular", italic = false }),
   font_rules = {
     {
