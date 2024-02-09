@@ -115,22 +115,20 @@ pnedit() {
 }
 
 pnsupport() {
+  cd /home/miguel/DEV/PN/eternal-sledgehammer
   tmux rename-window 'es support'
   tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux select-pane -t 1
-  tmux split-window -vp 15 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+  tmux split-window -vp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
   tmux send-keys -t 3 'load_dotenv; pn_webpacker' Enter
-  tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'load_dotenv; pn_sidekiq' Enter
-  tmux send-keys -t 5 'pndev shell' Enter
-  tmux send-keys -t 5 'load_dotenv; pn_server' Enter
-  tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
   tmux send-keys -t 1 'pndev shell' Enter
+  tmux send-keys -t 1 'load_dotenv; pn_sidekiq' Enter
   tmux send-keys -t 2 'pndev shell' Enter
-  tmux send-keys -t 2 'load_dotenv' Enter
+  tmux send-keys -t 2 'load_dotenv; pn_server' Enter
+  tmux send-keys -t 4 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
+  tmux send-keys -t 4 'pndev shell' Enter
   tmux select-pane -t 1
 }
 

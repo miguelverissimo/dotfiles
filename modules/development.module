@@ -133,9 +133,6 @@ eedit () {
   tmux split-window -hp 45
   tmux send-keys -t 1 'nix-shell' Enter
   tmux send-keys -t 1 'nvim' Enter
-  tmux send-keys -t 2 'nix-shell' Enter
-  tmux send-keys -t 3 'nix-shell' Enter
-  tmux send-keys -t 3 'yarn start' Enter
 }
 
 esupport() {
@@ -161,6 +158,13 @@ create_repo() {
   git remote add lab git@github.com:miguelverissimo/"$@".git
   git remote set-url --push all git@github.com:miguelverissimo/"$@".git
   git remote set-url --push all git@gitlab.com:miguelverissimo/"$@".git
+}
+
+devsplits() {
+  tmux rename-window 'devsplits'
+  tmux split-window -vp 15
+  tmux split-window -hp 45
+  tmux send-keys -t 1 'nvim' Enter
 }
 
 rails_s() {
