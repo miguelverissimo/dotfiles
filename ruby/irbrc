@@ -1,14 +1,5 @@
 # frozen_string_literal: true
 
-# require 'rubygems'
-# require 'awesome_print'
-#
-# IRB::Irb.class_eval do
-#   def output_value
-#     ap @context.last_value
-#   end
-# end
-
 def application_name
   Rails.application.class.module_parent.name
 end
@@ -32,4 +23,7 @@ if defined?(Rails)
 
   # Setting our custom prompt as prompt mode
   IRB.conf[:PROMPT_MODE] = :RAILS
+
+  # Show attributes, dammit!
+  IRB.conf[:ECHO_ON_ASSIGNMENT] = true
 end
