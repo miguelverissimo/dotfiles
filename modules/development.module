@@ -13,27 +13,20 @@ rall() {
 redit() {
   tmux rename-window 'rb edit'
   tmux split-window -vp 15
-  tmux split-window -hp 45
-  tmux send-keys -t 1 'nix-shell' Enter
+  tmux split-window -hp 70
+  tmux split-window -hp 50
   tmux send-keys -t 1 'nvim' Enter
-  tmux send-keys -t 2 'nix-shell' Enter
-  tmux send-keys -t 3 'nix-shell' Enter
+  tmux send-keys -t 3 'bin/rails s -b 0.0.0.0' Enter
+  tmux select-pane -t 1
 }
 
 rsupport() {
   tmux rename-window 'rb support'
+  tmux split-window -hp 66
   tmux split-window -hp 50
   tmux select-pane -t 1
-  tmux split-window -vp 80
-  tmux split-window -vp 70
-  tmux send-keys -t 1 'nix-shell' Enter
-  tmux send-keys -t 1 'docker-compose up' Enter
-  tmux send-keys -t 2 'nix-shell' Enter
-  tmux send-keys -t 2 'rails_css' Enter
-  tmux send-keys -t 4 'nix-shell' Enter
-  tmux send-keys -t 4 'rails_s' Enter
-  tmux send-keys -t 3 'nix-shell' Enter
-  tmux select-pane -t 3
+  tmux send-keys -t 1 'bin/rails tailwindcss:watch' Enter
+  tmux select-pane -t 2
 }
 
 # for Rails projects
@@ -76,6 +69,7 @@ oredit () {
   tmux send-keys -t 1 'nvim' Enter
   tmux send-keys -t 2 'nix-shell' Enter
   tmux send-keys -t 3 'nix-shell' Enter
+  tmux select-pane -t 1
 }
 
 orsupport() {
