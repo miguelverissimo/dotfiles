@@ -26,7 +26,7 @@ rsupport() {
   tmux split-window -hp 50
   tmux select-pane -t 1
   tmux split-window -vp 50
-  tmux send-keys -t 1 'bin/rails tailwindcss:watch' Enter
+  tmux send-keys -t 1 'bin/csswatch' Enter
   tmux send-keys -t 2 'bin/rails solid_queue:start' Enter
   tmux select-pane -t 2
 }
@@ -179,6 +179,21 @@ rails_css() {
     echo "Can't find Procfile.dev"
     exit 1
   fi
+}
+
+fssh() {
+  for key in SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT; do
+    value=`tmux show-environment | grep "^${key}" | sed -e "s/^[A-Z_]*=//"`
+    export ${key}="${value}"
+  done
+}
+
+zfssh() {
+  for key in SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT; do
+    value=$(printenv | grep "^${key}" | sed -e "s/^[A-Z_]*=//")
+      unset ${key}
+    export ${key}="${value}"
+  done
 }
 
 alias ns='nix-shell'

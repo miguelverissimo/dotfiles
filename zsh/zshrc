@@ -22,17 +22,20 @@ DEFAULT_USER="Miguel"
 # source all individual configs and aliases
 for config_file ($HOME/.dotfiles/modules/*.module) source $config_file
 
-# source fzf zsh integration
-test -e "${HOME}/.fzf.zsh" && source "${HOME}/.fzf.zsh"
-
 # source iterm2 zsh integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # load zsh_functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/bit bit
+
+# Zellij
+# eval "$(zellij setup --generate-auto-start zsh)"
+
+# tmux
+# adjust in zprestorc:213
+
+# mise (asdf replacement)
+eval "$(/home/miguel/.local/bin/mise activate zsh)"

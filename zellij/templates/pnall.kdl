@@ -1,0 +1,25 @@
+layout {
+  pane {
+    borderless true
+    cwd "~/DEV/PN/eternal-sledgehammer/"
+    command "pndev shell"
+    command "nvim"
+  }
+  pane {
+    size= "15%"
+    split_direction "horizontal"
+    pane {
+      cwd "~/DEV/PN/eternal-sledgehammer/"
+      command "pndev shell"
+    }
+    pane {
+      cwd "~/DEV/PN/infrastructure/"
+      command "nix-shell"
+    }
+    pane {
+      cwd "~/DEV/PN/eternal-sledgehammer/"
+      command "pndev shell"
+      command "rails c"
+    }
+  }
+}

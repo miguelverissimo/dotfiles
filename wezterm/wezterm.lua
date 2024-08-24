@@ -6,21 +6,13 @@ return {
   scrollback_lines = 10000,
   default_prog = { "/usr/bin/zsh", "-l" },
   --[[ color_scheme = "Dracula+", ]]
-  color_scheme = "Kanagawa (Gogh)",
+  color_scheme = "Catppuccin Frappe",
   font = wezterm.font("Hack Nerd Font", { weight = "Regular", italic = false }),
   font_rules = {
-    {
-      font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Normal" }),
-    },
-    {
-      font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Italic" }),
-    },
-    {
-      font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Normal" }),
-    },
-    {
-      font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Italic" }),
-    },
+    { font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Normal" }), intensity = "Normal" },
+    { font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Italic" }), intensity = "Normal", italic = true },
+    { font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Normal" }),    intensity = "Bold" },
+    { font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Italic" }),    intensity = "Bold",   italic = true },
   },
   font_size = 9,
   dpi = 96.0,

@@ -126,3 +126,6 @@ mount_maschine() {
 }
 
 alias whatsmyip="curl https://api.myip.com"
+
+unalias gdu 2>/dev/null
+alias freespace="/bin/gdu"

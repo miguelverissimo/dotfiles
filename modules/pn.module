@@ -74,8 +74,23 @@ swc() {
 
 load_dotenv() {
   set -o allexport
-  source .env
-  source .env.local
+
+  if [ -f .env ]; then
+    source .env
+  fi
+
+  if [ -f .env.local ]; then
+    source .env.local
+  fi
+
+  if [ -f .env.development ]; then
+    source .env.development
+  fi
+
+  if [ -f .env.development.local ]; then
+    source .env.development.local
+  fi
+
   set +o allexport
 }
 
