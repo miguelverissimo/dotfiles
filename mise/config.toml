@@ -1,0 +1,17 @@
+[settings]
+experimental = true
+
+[tools]
+nodejs = "21.6.1"
+yarn = "1.22.4"
+bun = "1.1.22"
+pnpm = "9.12.3"
+lua = "5.4.7"
+php = "8.3.12RC1"
+ruby = "3.3.1"
+elixir = "1.16.1-otp-26"
+erlang = "26.2.1"
+rust = "1.85.0"
+golang = "1.21.6"
+ripgrep = "14.1.0"
+

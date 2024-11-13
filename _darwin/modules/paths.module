@@ -1,4 +1,10 @@
-# PATH STUFF
-export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/bin"
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:$HOME/.dotfiles/bin"
+export PATH="$PATH:$HOME/Applications"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.yarn/bin"
+echo "I DID PATH STUFF!"
