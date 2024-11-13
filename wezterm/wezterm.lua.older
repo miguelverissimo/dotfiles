@@ -1,0 +1,32 @@
+local wezterm = require 'wezterm';
+
+return {
+  term = "xterm-256color",
+  use_fancy_tab_bar = false,
+  scrollback_lines = 10000,
+  default_prog = { "/usr/bin/zsh", "-l" },
+  --[[ color_scheme = "Dracula+", ]]
+  color_scheme = "Catppuccin Mocha",
+  font = wezterm.font("Monaspace Argon", { weight = "Regular", italic = false }),
+  font_rules = {
+    { font = wezterm.font("Monaspace Argon", { weight = "Regular", style = "Normal" }) },
+    { font = wezterm.font("Monaspace Radon", { weight = "Regular", style = "Italic" }) },
+    { font = wezterm.font("Monaspace Argon", { weight = "Bold", style = "Normal" }) },
+    { font = wezterm.font("Monaspace Argon", { weight = "Bold", style = "Italic" }) },
+  },
+  font_size = 10,
+  dpi = 96.0,
+  default_cursor_style = "BlinkingBlock",
+  keys = {
+    { key = "t", mods = "SUPER", action = wezterm.action { SendString = "\x02c" } },
+    { key = "s", mods = "SUPER", action = wezterm.action { SendString = "\x02/" } },
+  },
+  window_padding = {
+    left = 3,
+    -- This will become the scrollbar width if you have enabled the scrollbar!
+    right = 2,
+    top = 0,
+    bottom = 0,
+  },
+  warn_about_missing_glyphs = false,
+}

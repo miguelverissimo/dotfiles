@@ -1,32 +1,111 @@
-local wezterm = require 'wezterm';
+-- https://github.com/sravioli/wezterm
+-- https://github.com/jameshaston/wezterm-config-example-3
 
-return {
-  term = "xterm-256color",
-  use_fancy_tab_bar = false,
-  scrollback_lines = 10000,
-  default_prog = { "/usr/bin/zsh", "-l" },
-  --[[ color_scheme = "Dracula+", ]]
-  color_scheme = "Catppuccin Mocha",
-  font = wezterm.font("Monaspace Argon", { weight = "Regular", italic = false }),
-  font_rules = {
-    { font = wezterm.font("Monaspace Argon", { weight = "Regular", style = "Normal" }) },
-    { font = wezterm.font("Monaspace Radon", { weight = "Regular", style = "Italic" }) },
-    { font = wezterm.font("Monaspace Argon", { weight = "Bold", style = "Normal" }) },
-    { font = wezterm.font("Monaspace Argon", { weight = "Bold", style = "Italic" }) },
-  },
-  font_size = 10,
-  dpi = 96.0,
-  default_cursor_style = "BlinkingBlock",
-  keys = {
-    { key = "t", mods = "SUPER", action = wezterm.action { SendString = "\x02c" } },
-    { key = "s", mods = "SUPER", action = wezterm.action { SendString = "\x02/" } },
-  },
-  window_padding = {
-    left = 3,
-    -- This will become the scrollbar width if you have enabled the scrollbar!
-    right = 2,
-    top = 0,
-    bottom = 0,
-  },
-  warn_about_missing_glyphs = false,
+local wezterm = require 'wezterm'
+local act = wezterm.action
+local config = wezterm.config_builder()
+local Utils = require "utils"
+local fs = Utils.fn.fs
+
+-- config.launch_menu = {
+--   {
+--     label = "View system activity",
+--     args = { "btop" },
+--   },
+-- }
+wezterm.on("augment-command-palette", function(_, _)
+  return {
+    {
+      brief = "Rename tab",
+      icon = "md_rename_box",
+
+      action = act.PromptInputLine {
+        description = "Enter new name for tab",
+        action = wt.action_callback(function(inner_window, _, line)
+          if line then
+            inner_window:active_tab():set_title(line)
+          end
+        end),
+      },
+    },
+    {
+      brief = "Fucking Search Up",
+      icon = "md_palette",
+      action = act.Multiple {
+        act.SendKey { key = 'a', mods = 'CTRL' },
+        act.SendKey { key = '[' },
+        act.SendKey { key = '?' },
+      },
+    },
+  }
+end)
+
+config.term = "xterm-256color"
+
+config.use_fancy_tab_bar = false
+
+config.scrollback_lines = 10000
+
+config.default_prog = { "/usr/bin/zsh", "-l" }
+
+--[[ color_scheme = "Dracula+" ]]
+config.color_scheme = "Catppuccin Mocha"
+
+config.font = wezterm.font("Hack Nerd Font", { weight = "Regular", italic = false })
+config.font_rules = {
+  { font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Normal" }) },
+  { font = wezterm.font("Hack Nerd Font", { weight = "Regular", style = "Italic" }) },
+  { font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Normal" }) },
+  { font = wezterm.font("Hack Nerd Font", { weight = "Bold", style = "Italic" }) },
 }
+config.font_size = 10
+config.dpi = 96.0
+config.warn_about_missing_glyphs = false
+config.cursor_blink_ease_in = "EaseIn"
+config.cursor_blink_ease_out = "EaseOut"
+config.cursor_blink_rate = 500
+config.default_cursor_style = "BlinkingUnderline"
+config.cursor_thickness = 1
+config.force_reverse_video_cursor = true
+
+config.enable_scroll_bar = true
+
+config.default_cursor_style = "BlinkingBlock"
+
+config.keys = {
+  { key = "t", mods = "SUPER", action = act { SendString = "\x02c" } },
+  { key = "s", mods = "SUPER", action = act { SendString = "\x02/" } },
+  { 
+    key = 'a',
+    mods = 'SUPER',
+    description = "Send Ctrl-A",
+    action = act.Multiple {
+      act.SendKey { key = 'a', mods = 'CTRL' },
+      act.SendKey { key = '[' },
+      act.SendKey { key = '?' },
+      -- act { SendString = "\x02a" },
+      -- act { SendString = "[" },
+      -- act { SendString = "?" },
+    },
+  },
+}
+
+-- config.window_padding = {
+--   left = 3,
+--   -- This will become the scrollbar width if you have enabled the scrollbar!
+--   right = 2,
+--   top = 0,
+--   bottom = 0,
+-- }
+
+---window appearance
+config.window_padding = { left = 2, right = 2, top = 2, bottom = 1 }
+if fs.platform().is_win then
+  config.window_decorations = "RESIZE"
+end
+config.integrated_title_button_alignment = "Right"
+config.integrated_title_button_style = "Windows"
+config.integrated_title_buttons = { "Hide", "Maximize", "Close" }
+
+return config
+

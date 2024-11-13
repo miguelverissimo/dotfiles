@@ -87,7 +87,7 @@ function gswcn {
   git branch -vv | ag -Q "${branch_name}"
 }
 
-prepare-commit-message() {
+init-commit-message() {
   git_dir="$(git gitdir)"
   prepare_commit_msg_file="${git_dir}/prepare-commit-msg"
   commit_template="${git_dir}/commit-msg"

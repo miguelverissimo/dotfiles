@@ -1,0 +1,16 @@
+#!/bin/bash
+
+APPIMAGE_PATH=$HOME/Applications/cursor-0.41.3-build-240925fkhcqg263-x86_64_b16e5157723d668b2b15d3033ea4401a.AppImage
+
+# Method 1: Using nohup
+# This will launch the AppImage and detach it from the terminal
+#nohup "$APPIMAGE_PATH" > /dev/null 2>&1 &
+
+# Method 2: Using disown
+# This will launch the AppImage, send it to the background, and disown it
+#"$APPIMAGE_PATH" &
+#disown
+
+# Method 3: Using setsid
+# This will start the AppImage in a new session, detaching it from the terminal
+setsid "$APPIMAGE_PATH" &
