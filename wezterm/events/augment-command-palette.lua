@@ -20,7 +20,7 @@ wt.on("augment-command-palette", function(_, _)
     },
     {
       brief = "tmux Search Up",
-      icon = "md_palette",
+      icon = "md_upload_multiple",
       action = act.Multiple {
         act.SendKey { key = 'a', mods = 'CTRL' },
         act.SendKey { key = '[' },
@@ -29,7 +29,7 @@ wt.on("augment-command-palette", function(_, _)
     },
     {
       brief = "tmux Search Down",
-      icon = "md_palette",
+      icon = "md_download_multiple",
       action = act.Multiple {
         act.SendKey { key = 'a', mods = 'CTRL' },
         act.SendKey { key = '[' },
