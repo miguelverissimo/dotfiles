@@ -26,7 +26,7 @@ alias gchurn='git log --pretty='format:" --name-only | grep -vE '^(vendor/|$)' |
 # most used
 alias gs='git status'
 alias gpp='git pull --prune' # pull with prune of merged branches
-alias gpa='git remote | xargs -L1 -I R git push R' # push to all remotes
+alias gpa='git remote | xargs -I R git push R' # push to all remotes
 alias gpu='git push'
 alias gpauc='gpa -u $(git branch --show-current)' # track and push current branch to all remotes
 alias gpac='gpa $(git branch --show-current)' # push current branch to all remotes
@@ -34,10 +34,11 @@ alias uncommit='git reset --soft "HEAD^"' # undo the last commit
 alias gap='git add -p' # add interactively
 alias gpufl='git push --force-with-lease'
 alias gpafl='gpa --force-with-lease' # force-push current branch to all remotes
-alias gsm='git switch master'
+alias gsm='git switch $(git branch --list master main | sed "s/* //" | head -n1)' # switch to main or master branch
 alias gs-='git switch -'
 alias gci='git ci'
 alias gsha='git rev-parse' # show long sha from short sha
+alias gfs='git log --pretty=oneline'
 
 # track all remote branches
 #alias gtab="git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs"

@@ -1,0 +1,100 @@
+alias 1psignin='eval "$(op signin --account my)"'
+
+next-starter-legacy() {
+  # Check if the argument is provided
+  if [ -z "$1" ]; then
+    echo "Error: Target directory name is required."
+    return 1
+  fi
+
+
+  # Use a subshell to ensure `set -e` only applies within the function
+  (
+    1psignin
+    if [ $? -ne 0 ]; then
+      echo "Error: Failed to log in to 1Password."
+      return 1
+    fi
+
+    set -e
+
+    wget --header="Authorization: token $(op item get 4vryv2xmmfuye55ww3723tj72a --reveal --field token2)" https://github.com/miguelverissimo/$1/archive/refs/heads/master.zip -O nextjs-starter-latest.zip
+    unzip nextjs-starter-latest.zip
+    mv nextjs-starter-master "$1"
+    cd "$1"
+    rm -rf .git
+    git init
+    git add .
+    git commit -m "Initial commit from nextjs-starter"
+
+    echo "Done! 🎉 Run 'cd $1' to start working on your new project. 🚀 Also don't forget to add your remote repository with 'git remote add origin <url>' and push your changes with 'git push -u origin master'. "
+
+  )
+}
+
+# Function to download the latest tag zip file
+next-starter() {
+  # Check if the argument is provided
+  if [ -z "$1" ]; then
+    echo "Error: Target directory name is required."
+    return 1
+  fi
+
+  # Use a subshell to ensure `set -e` only applies within the function
+  (
+    1psignin
+    if [ $? -ne 0 ]; then
+      echo "🚨🚨🚨 Error: Failed to log in to 1Password."
+      return 1
+    fi
+
+    set -e
+
+    repo_name="canibug"
+    token=$(op item get 4vryv2xmmfuye55ww3723tj72a --reveal --field token)
+
+    # Get the latest tag information using GitHub API
+    repo_url="https://api.github.com/repos/miguelverissimo/$repo_name/tags"
+    response=$(curl -L --header "Accept: application/vnd.github.json" --header "Authorization: Bearer $token" --header "X-GitHub-Api-Version: 2022-11-28" "$repo_url")
+    echo $response
+
+    # Parse JSON to get the download URL for the latest tag (assuming first item is latest)
+    latest_tag=$(echo $response | jq -r '.[0].name')
+    zip_url=$(echo $response | jq -r '.[0].zipball_url')
+
+    if [ -z "$latest_tag" ]; then
+      echo "Error: Could not find any tags for this repository."
+      return 1
+    fi
+
+    # Download the latest tag zip file
+    download_url="https://github.com/miguelverissimo/$repo_name/archive/refs/tags/${latest_tag}.zip"
+    wget --header="Authorization: Bearer $token" "$zip_url" -O "${repo_name}-${latest_tag}.zip"
+
+    # Unzip and rename the downloaded file
+    unzip "${repo_name}-${latest_tag}.zip" -d "$1-temp"
+
+    # Get the name of the extracted directory (this changes with the commit hash)
+    code_dir=$(ls "$1-temp")
+
+    # Move the extracted directory to the target directory
+    mv "$1-temp/${code_dir}" "$1"
+    cd "$1"
+
+    # Initialize a new git repository
+    rm -rf .git
+    git init
+    git add .
+    git commit -m "Initial commit from starter: ${repo_name}@${latest_tag}"
+
+    # cleanup
+    cd -
+    rm -rf "$1-temp"
+    rm -f "${repo_name}-${latest_tag}.zip"
+
+    echo "\n\n\n🎊 All done! 🎉"
+    echo "Run 'cd $1' to start working on your new project. 🚀🔥🦄"
+    echo "⚠️  Be sure to copy and adjust credentials from the .env.example file"
+    echo "⚠️ Don't forget to add your remote repository with 'git remote add origin <url>' and push your changes with 'git push -u origin master'. "
+  )
+}

@@ -1,5 +1,10 @@
 # vi: ft=bash
 
+# rubocop fix staged files
+rb-fix-staged() {
+  rubocop -A $(git diff --cached --name-only --diff-filter=ACM | grep '\.rb$')
+}
+
 # load the creds
 source ~/.pn_anonymize_creds
 
@@ -72,6 +77,17 @@ swc() {
   fi
 }
 
+function pnc() {
+  if [[ -z "$1" ]]; then
+    echo "Error: Commit message is required."
+    return 1
+  fi
+
+  local branch
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+  git commit -m "[${branch}] $1"
+}
+
 load_dotenv() {
   set -o allexport
 
@@ -104,9 +120,9 @@ pn_sidekiq() {
   DEBUG_RULES=true sidekiq start
 }
 
-pn_webpacker() {
+pn_vite() {
   load_dotenv
-  bin/webpacker-dev-server
+  bin/vite dev
 }
 
 pnall() {
@@ -122,7 +138,7 @@ pnedit() {
   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv; nvim' Enter
+  tmux send-keys -t 1 'load_dotenv; lg' Enter
   tmux send-keys -t 2 'pndev shell' Enter
   tmux send-keys -t 2 'load_dotenv' Enter
   tmux send-keys -t 3 'pndev shell' Enter
@@ -137,7 +153,7 @@ pnsupport() {
   tmux select-pane -t 1
   tmux split-window -vp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
   tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'load_dotenv; pn_webpacker' Enter
+  tmux send-keys -t 3 'load_dotenv; pn_vite' Enter
   tmux send-keys -t 1 'pndev shell' Enter
   tmux send-keys -t 1 'load_dotenv; pn_sidekiq' Enter
   tmux send-keys -t 2 'pndev shell' Enter
@@ -149,40 +165,89 @@ pnsupport() {
 
 alias psh='pndev shell'
 
-esall() {
-  esedit
-  tmux new-window
-  essupport
-  tmux select-window -t !
+# esall() {
+#   esedit
+#   tmux new-window
+#   essupport
+#   tmux select-window -t !
+# }
+#
+# esedit() {
+#   cd /home/miguel/DEV/PN/eternal-sledgehammer
+#   tmux rename-window 'es edit'
+#   tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+#   tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+#   tmux send-keys -t 1 'pndev shell' Enter
+#   tmux send-keys -t 1 'load_dotenv; nvim' Enter
+#   tmux send-keys -t 2 'pndev shell' Enter
+#   tmux send-keys -t 2 'load_dotenv' Enter
+#   tmux send-keys -t 3 'pndev shell' Enter
+#   tmux send-keys -t 3 'load_dotenv' Enter
+# }
+#
+# essupport() {
+#   tmux rename-window 'es support'
+#   tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+#   tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+#   tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
+#   tmux select-pane -t 1
+#   tmux send-keys -t 2 'pndev shell' Enter
+#   tmux send-keys -t 2 'pn_vite' Enter
+#   tmux send-keys -t 3 'pndev shell' Enter
+#   tmux send-keys -t 3 'pn_sidekiq' Enter
+#   tmux send-keys -t 4 'pndev shell' Enter
+#   tmux send-keys -t 4 'pn_server' Enter
+#   tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
+#   tmux send-keys -t 1 'pndev shell' Enter
+#   tmux send-keys -t 1 'load_dotenv' Enter
+#   tmux select-pane -t 1
+# }
+
+pnall() {
+  SESSION="pn"
+  pnedit "$SESSION"
+  pnsupport "$SESSION"
+  tmux select-window -t "$SESSION:pn edit"
 }
 
-esedit() {
-  cd /home/miguel/DEV/PN/eternal-sledgehammer
-  tmux rename-window 'es edit'
-  tmux split-window -vp 20 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux split-window -hp 45 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv; nvim' Enter
-  tmux send-keys -t 2 'pndev shell' Enter
-  tmux send-keys -t 2 'load_dotenv' Enter
-  tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'load_dotenv' Enter
+pnedit() {
+  local SESSION="$1"
+  local DIR="/home/miguel/DEV/PN/eternal-sledgehammer"
+
+  tmux new-window -t "$SESSION" -n 'pn edit' -c "$DIR"
+
+  tmux split-window -t "$SESSION:pn edit".0 -v -p 20 -c "$DIR"
+  tmux split-window -t "$SESSION:pn edit".0 -h -p 45 -c "$DIR"
+
+  tmux send-keys -t "$SESSION:pn edit".0 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn edit".0 'load_dotenv; lg' Enter
+
+  tmux send-keys -t "$SESSION:pn edit".2 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn edit".2 'load_dotenv' Enter
+
+  tmux send-keys -t "$SESSION:pn edit".1 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn edit".1 'load_dotenv' Enter
 }
 
-essupport() {
-  tmux rename-window 'es support'
-  tmux split-window -hp 50 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux split-window -vp 80 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux split-window -vp 70 -c '/home/miguel/DEV/PN/eternal-sledgehammer'
-  tmux select-pane -t 1
-  tmux send-keys -t 2 'pndev shell' Enter
-  tmux send-keys -t 2 'pn_webpacker' Enter
-  tmux send-keys -t 3 'pndev shell' Enter
-  tmux send-keys -t 3 'pn_sidekiq' Enter
-  tmux send-keys -t 4 'pndev shell' Enter
-  tmux send-keys -t 4 'pn_server' Enter
-  tmux send-keys -t 1 'cd /home/miguel/DEV/PN/eternal-sledgehammer' Enter
-  tmux send-keys -t 1 'pndev shell' Enter
-  tmux send-keys -t 1 'load_dotenv' Enter
-  tmux select-pane -t 1
+pnsupport() {
+  local SESSION="$1"
+  local DIR="/home/miguel/DEV/PN/eternal-sledgehammer"
+
+  tmux new-window -t "$SESSION" -n 'pn support' -c "$DIR"
+
+  tmux split-window -t "$SESSION:pn support".0 -h -p 50 -c "$DIR"
+  tmux split-window -t "$SESSION:pn support".1 -v -p 80 -c "$DIR"
+  tmux split-window -t "$SESSION:pn support".2 -v -p 70 -c "$DIR"
+
+  tmux send-keys -t "$SESSION:pn support".1 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn support".1 'load_dotenv; pn_vite' Enter
+
+  tmux send-keys -t "$SESSION:pn support".2 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn support".2 'load_dotenv; pn_sidekiq' Enter
+
+  tmux send-keys -t "$SESSION:pn support".3 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn support".3 'load_dotenv; pn_server' Enter
+
+  tmux send-keys -t "$SESSION:pn support".0 'pndev shell' Enter
+  tmux send-keys -t "$SESSION:pn support".0 'load_dotenv' Enter
 }

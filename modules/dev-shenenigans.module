@@ -1,0 +1,19 @@
+# vi: ft=bash
+
+# necessary for the devdash to bound to all interfaces
+# so that I can access it ouside of the container/NUC
+export ENCORE_DEVDASH_LISTEN_ADDR=0.0.0.0:9400
+
+# Golang: lifted from source ~/.asdf/plugins/golang/set-env.zsh,
+# made to work with mise
+asdf_update_golang_env() {
+  local go_path
+  go_path="$(mise which go)"
+  if [[ -n "${go_path}" ]]; then
+    export GOROOT
+    GOROOT="$(dirname "$(dirname "${go_path:A}")")"
+  fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd asdf_update_golang_env

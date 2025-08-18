@@ -1,6 +1,6 @@
 alias gs='git status'
 alias gpp='git pull --prune'
-alias gpa='git remote | xargs -L1 -I R git push R'
+alias gpa='git remote | xargs -I R git push R' # push to all remotes
 alias gpu='git push'
 alias gpauc='gpa -u $(git branch --show-current)'
 alias gpac='gpa $(git branch --show-current)'

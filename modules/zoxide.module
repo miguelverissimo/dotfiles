@@ -1,0 +1,4 @@
+# vi: ft=bash
+
+# zoxide is installed via mise/asdf
+eval "$("$(mise which zoxide)" init zsh)"
