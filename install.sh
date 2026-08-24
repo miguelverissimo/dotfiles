@@ -31,6 +31,7 @@ CONFIGURATION_DIRS="alacritty \
                     desktop_files \
                     elixir \
                     git \
+                    herdr \
                     javascript \
                     kitty \
                     lazygit \

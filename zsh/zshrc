@@ -48,3 +48,27 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+#
+# ~~ neon aliases, pretty prompt
+#
+export NEON_HOME="/home/miguel/.neon2"
+if [ -f "$NEON_HOME/aliases" ]; then
+    source $NEON_HOME/aliases
+fi
+
+# OpenClaw Completion
+source "/home/miguel/.openclaw/completions/openclaw.zsh"
+
+# opencode
+export PATH=/home/miguel/.opencode/bin:$PATH
+
+# ~~ multiplexer auto-start on ssh
+# MUX=tmux  -> tmux (old prezto behaviour)   MUX=none -> plain shell
+# escape hatch: ssh <host> -t 'MUX=none zsh -l'
+if [[ -o interactive && -n "$SSH_TTY" && -z "$TMUX" && -z "$HERDR_PANE_ID" ]]; then
+  case "${MUX:-herdr}" in
+    herdr) (( $+commands[herdr] )) && { herdr && exit } ;;
+    tmux)  (( $+commands[tmux] ))  && { tmux new-session -A -s main && exit } ;;
+  esac
+fi

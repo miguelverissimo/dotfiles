@@ -1,0 +1,50 @@
+[ui]
+agent_panel_sort = "spaces"
+show_agent_labels_on_pane_borders = true
+
+[theme]
+name = "nord"
+auto_switch = false
+
+# Keybindings mirror ~/.dotfiles/tmux/tmux.conf where herdr has an equivalent.
+[keys]
+# Screen-like prefix, same as tmux (`set -g prefix C-a`).
+# Press it twice to send a literal ctrl+a through to the running program.
+prefix = "ctrl+a"
+
+# tmux: `bind r source-file ~/.tmux.conf`
+reload_config = "prefix+r"
+# freed up by moving reload off shift+r (default was prefix+r)
+resize_mode = "prefix+shift+r"
+
+# tmux: `bind-key ^D detach-client`
+detach = "prefix+ctrl+d"
+
+# Tabs ~ tmux windows. tmux: `bind t new-window` (c is remapped to clock-mode there).
+new_tab = "prefix+t"
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+
+# Splits. tmux: `bind v split-window -h` (left/right), `bind s split-window -v` (top/bottom).
+# herdr calls left/right "vertical" and top/bottom "horizontal".
+split_vertical = "prefix+v"
+split_horizontal = "prefix+s"
+close_pane = "prefix+x"
+zoom = "prefix+z"
+
+# Pane focus, vi-style (tmux uses bare ctrl+h/j/k/l via vim-tmux-navigator,
+# which herdr has no equivalent for — these are prefixed).
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# tmux resizes directly with `bind -r H/J/K/L`; herdr has no per-direction
+# resize binding, only a resize mode (hjkl once inside it).
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+# tmux default copy-mode entry.
+copy_mode = "prefix+["
