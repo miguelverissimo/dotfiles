@@ -49,7 +49,17 @@ fi
 export XAUTHORITY=$HOME/.Xauthority
 
 ### ssh-agent ###
-eval `ssh-agent`
+# Deliberately not started here. keychain (below) finds-or-starts a single agent
+# and caches its socket in ~/.keychain so every login reuses the same one.
+# Starting an agent here as well just leaks an abandoned one per login, because
+# keychain overrides SSH_AUTH_SOCK immediately afterwards.
 
 ### keychain
-eval `keychain --eval --agents ssh id_rsa github id_rsa_main`
+case $- in
+  *i*)
+    eval "$(keychain --eval --quiet id_rsa github id_rsa_main)"
+    ;;
+  *)
+    # non-interactive shell (scp, ssh -T, etc.) → do nothing
+    ;;
+esac
