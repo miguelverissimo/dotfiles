@@ -29,6 +29,8 @@ next_tab = "prefix+n"
 # herdr calls left/right "vertical" and top/bottom "horizontal".
 split_vertical = "prefix+v"
 split_horizontal = "prefix+s"
+# default was prefix+s, which split_horizontal now owns
+settings = "prefix+shift+s"
 close_pane = "prefix+x"
 zoom = "prefix+z"
 
@@ -48,3 +50,47 @@ swap_pane_right = "prefix+shift+l"
 
 # tmux default copy-mode entry.
 copy_mode = "prefix+["
+
+# Plugin bindings. Free keys were checked against herdr's compiled-in defaults
+# as well as the overrides above; reload with `herdr server reload-config`.
+
+# herdr-arrange
+[[keys.command]]
+key = "prefix+m"
+type = "plugin_action"
+command = "herdr-arrange.open"
+description = "arrange panes"
+
+[[keys.command]]
+key = "prefix+shift+m"
+type = "plugin_action"
+command = "herdr-arrange.open-tree"
+description = "move pane to…"
+
+# edi.layout-tools (its README suggests shift+l / m / shift+m, all taken here)
+[[keys.command]]
+key = "prefix+shift+y"
+type = "plugin_action"
+command = "edi.layout-tools.open-editor"
+description = "layout editor"
+
+[[keys.command]]
+key = "prefix+shift+e"
+type = "plugin_action"
+command = "edi.layout-tools.equalize"
+description = "equalize splits"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "edi.layout-tools.reshape-main-left"
+description = "reshape: main-left + column"
+
+[[keys.command]]
+key = "prefix+shift+q"
+type = "plugin_action"
+command = "edi.layout-tools.reshape-main-grid"
+description = "reshape: main-left + grid"
+
+[ui.toast]
+delivery = "herdr"
