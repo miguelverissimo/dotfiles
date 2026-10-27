@@ -1,6 +1,18 @@
 # vi: ft=bash
 
 alias cat='batcat'
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
 alias open='xdg-open'
+
+# pbcopy via OSC 52 — works without X/Wayland, over SSH, through tmux.
+# Requires `set-option -g set-clipboard on` in tmux.conf so tmux forwards the
+# OSC 52 to the outer terminal.
+pbcopy() {
+  local data
+  data=$(cat - | base64 | tr -d '\n')
+  printf '\e]52;c;%s\e\\' "$data" > /dev/tty
+}
+
+pbpaste() {
+  echo "pbpaste via OSC 52 isn't reliable; use the terminal's paste shortcut instead." >&2
+  return 1
+}
