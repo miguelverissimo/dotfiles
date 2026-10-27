@@ -2,5 +2,6 @@ bin/diff-so-fancy/
 modules/paths.module
 modules/arch.module
 modules/darwin.module
+modules/api-keys.module
 secrets
 !secrets/.super_secret.example
