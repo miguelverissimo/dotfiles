@@ -1,9 +1,15 @@
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+# ~/.zshenv -> ~/.dotfiles/zsh/zshenv
+# Read by EVERY zsh (incl. `ssh nuc 'cmd'`, scp, rsync). Env only; keep it
+# quiet and fast. Interactive things (aliases, prompt, herdr) live in ~/.zshrc.
 
-# added by Nix installer
-if [ -e /home/miguel/.nix-profile/etc/profile.d/nix.sh ]; then
-  source /home/miguel/.nix-profile/etc/profile.d/nix.sh;
-fi
+# No duplicate entries in the path arrays.
+typeset -gU path fpath cdpath manpath
+
+[[ -r $HOME/.dotfiles/zsh/env.sh ]] && source $HOME/.dotfiles/zsh/env.sh
+path=($path)   # re-assign the array so typeset -U drops duplicates
+
+# Old single-user Nix line (pre-Omarchy). Nix now comes from pacman (/usr/bin);
+# login shells also get /etc/profile.d/nix-daemon.sh via /etc/zsh/zprofile.
+# if [ -e /home/miguel/.nix-profile/etc/profile.d/nix.sh ]; then
+#   source /home/miguel/.nix-profile/etc/profile.d/nix.sh;
+# fi

@@ -1,5 +1,11 @@
 # vi: ft=bash
 
-#eval "$(fasd --init posix-alias zsh-hook)"
-#alias fz='fasd_cd -d'
-# alias fzz='fasd_cd -d -i'
+# fasd (pacman: fasd): a/s/d/sd/sf/zz frecency aliases + history hook.
+# `z`/`zi` stay with zoxide (zoxide.module loads later and owns them);
+# `f` stays the fzf preview alias (fzf.module).
+if (( $+commands[fasd] )); then
+  eval "$(fasd --init posix-alias zsh-hook)"
+  unalias z 2>/dev/null   # zoxide owns z (used ~100x in the old history)
+  alias fz='fasd_cd -d'
+  alias fzz='fasd_cd -d -i'
+fi

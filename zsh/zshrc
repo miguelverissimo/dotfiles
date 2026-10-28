@@ -1,72 +1,105 @@
-COMPLETION_WAITING_DOTS="true"
+# ~/.zshrc -> ~/.dotfiles/zsh/zshrc  (interactive zsh only)
+# Plain zsh, no framework. Replaces the old prezto setup module-for-module:
+#   history, completion, emacs keys, autosuggestions, syntax-highlighting,
+#   history-substring-search, terminal title, prompt (starship replaces steeef).
+# Environment variables live in ~/.dotfiles/zsh/env.sh (via ~/.zshenv).
+
+### History (prezto history module) ###
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
 HIST_STAMPS="dd.mm.yyyy"
+setopt BANG_HIST EXTENDED_HISTORY SHARE_HISTORY HIST_EXPIRE_DUPS_FIRST \
+       HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_FIND_NO_DUPS \
+       HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS HIST_VERIFY
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT INTERACTIVE_COMMENTS
+setopt EXTENDED_GLOB NO_BEEP
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+### Keys: emacs (prezto editor 'emacs'). Needed explicitly: EDITOR=nvim
+### would otherwise make zsh pick the vi keymap.
+bindkey -e
+autoload -Uz edit-command-line && zle -N edit-command-line
+bindkey '^X^E' edit-command-line '^Xe' edit-command-line
+bindkey '^[[H' beginning-of-line '^[[F' end-of-line '^[[3~' delete-char
+bindkey '^[[1;5C' forward-word '^[[1;5D' backward-word
+
+### Completion (prezto completion module) ###
+_zcache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+[[ -d $_zcache ]] || mkdir -p $_zcache
+fpath=(/usr/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+# Full security check at most once a day; otherwise trust the dump (fast).
+if [[ -n $_zcache/zcompdump(#qN.mh-24) ]]; then
+  compinit -C -d $_zcache/zcompdump
+else
+  compinit -d $_zcache/zcompdump
+  { zcompile $_zcache/zcompdump } &!
 fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $_zcache/compcache
+unset _zcache
+autoload -U +X bashcompinit && bashcompinit
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='nvim'
-#   export VISUAL='nvim'
-# else
-#   export EDITOR='nvim'
-#   export VISUAL='nvim'
-# fi
-export EDITOR='nvim'
-export VISUAL='nvim'
+### Terminal title: cwd at the prompt, command while it runs ###
+autoload -Uz add-zsh-hook
+_title_precmd()  { print -Pn '\e]0;%~\a' }
+_title_preexec() { print -n "\e]0;${1[1,60]}\a" }
+add-zsh-hook precmd _title_precmd
+add-zsh-hook preexec _title_preexec
 
+### Dotfiles modules: aliases + functions. The env-only modules
+### (paths api-keys go elixir) are already loaded by env.sh.
 DEFAULT_USER="Miguel"
-
-# source all individual configs and aliases
-for config_file ($HOME/.dotfiles/modules/*.module) source $config_file
-
-# source iterm2 zsh integration
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+for config_file ($HOME/.dotfiles/modules/*.module(N)); do
+  case ${config_file:t:r} in paths|api-keys|go|elixir) continue ;; esac
+  source $config_file
+done
+unset config_file
 
 # load zsh_functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/bit bit
+[[ -x /usr/local/bin/bit ]] && complete -o nospace -C /usr/local/bin/bit bit
 
-# Zellij
-# eval "$(zellij setup --generate-auto-start zsh)"
+# mise (asdf replacement): interactive activation on top of the shims in env.sh
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
 
-# tmux
-# adjust in zprestorc:213
-
-# mise (asdf replacement)
-eval "$(/home/miguel/.local/bin/mise activate zsh)"
-
-
-# pnpm
-export PNPM_HOME="/home/miguel/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-#
 # ~~ neon aliases, pretty prompt
-#
-export NEON_HOME="/home/miguel/.neon2"
-if [ -f "$NEON_HOME/aliases" ]; then
-    source $NEON_HOME/aliases
-fi
+export NEON_HOME="$HOME/.neon2"
+[[ -f $NEON_HOME/aliases ]] && source $NEON_HOME/aliases
 
 # OpenClaw Completion
-source "/home/miguel/.openclaw/completions/openclaw.zsh"
+[[ -r $HOME/.openclaw/completions/openclaw.zsh ]] && source $HOME/.openclaw/completions/openclaw.zsh
 
-# opencode
-export PATH=/home/miguel/.opencode/bin:$PATH
+### Plugins (pacman: zsh-autosuggestions zsh-syntax-highlighting
+### zsh-history-substring-search). Order matters: highlighting before hss.
+_zp=/usr/share/zsh/plugins
+[[ -r $_zp/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source $_zp/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -r $_zp/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $_zp/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -r $_zp/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+  source $_zp/zsh-history-substring-search/zsh-history-substring-search.zsh
+  bindkey '^[[A' history-substring-search-up   '^[OA' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down '^[OB' history-substring-search-down
+  bindkey '^P' history-substring-search-up '^N' history-substring-search-down
+fi
+unset _zp
 
-# ~~ multiplexer auto-start on ssh
-# MUX=tmux  -> tmux (old prezto behaviour)   MUX=none -> plain shell
-# escape hatch: ssh <host> -t 'MUX=none zsh -l'
-if [[ -o interactive && -n "$SSH_TTY" && -z "$TMUX" && -z "$HERDR_PANE_ID" ]]; then
+### Prompt: starship (~/.config/starship.toml) ###
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+
+# ~~ multiplexer auto-start on ssh (same mechanism as the old box)
+# Fires only for an interactive LOGIN shell over SSH with a TTY (plain `ssh nuc`),
+# outside herdr/tmux.
+# `ssh nuc 'cmd'`, scp, rsync and sftp never read ~/.zshrc (non-interactive).
+# MUX=herdr (default) | tmux | none
+# escape hatches: ssh -t nuc zsh            (interactive, non-login: no herdr)
+#                 ssh -t nuc 'MUX=none zsh -l'  (full login shell, no herdr)
+if [[ -o interactive && -o login && -n "$SSH_TTY" && -t 0 && -t 1 && -z "$TMUX" && -z "$HERDR_PANE_ID" ]]; then
   case "${MUX:-herdr}" in
     herdr) (( $+commands[herdr] )) && { herdr && exit } ;;
     tmux)  (( $+commands[tmux] ))  && { tmux new-session -A -s main && exit } ;;

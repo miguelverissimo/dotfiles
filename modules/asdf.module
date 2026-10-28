@@ -1,5 +1,7 @@
 # vi: ft=bash
 
+# asdf was replaced by mise; only load it where ~/.asdf still exists.
+[[ -s ${HOME}/.asdf/asdf.sh ]] || return 0
 export ASDF_RUBY_BUILD_VERSION=master
 source ${HOME}/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)

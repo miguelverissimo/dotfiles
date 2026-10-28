@@ -1,6 +1,8 @@
 # vi: ft=bash
 
-alias cat='batcat'
+# Debian/Ubuntu ship bat as `batcat`; Arch ships it as `bat`.
+if command -v batcat >/dev/null 2>&1; then alias cat='batcat'
+elif command -v bat >/dev/null 2>&1; then alias cat='bat'; fi
 alias open='xdg-open'
 
 # pbcopy via OSC 52 — works without X/Wayland, over SSH, through tmux.

@@ -16,4 +16,6 @@ asdf_update_golang_env() {
 }
 
 autoload -U add-zsh-hook
-add-zsh-hook precmd asdf_update_golang_env
+# chpwd, not precmd: `mise which go` costs ~17 ms, too slow for every prompt
+add-zsh-hook chpwd asdf_update_golang_env
+asdf_update_golang_env

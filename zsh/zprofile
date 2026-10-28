@@ -1,65 +1,30 @@
-### Browser ###
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
+# ~/.zprofile -> ~/.dotfiles/zsh/zprofile  (zsh LOGIN shells, after /etc/zsh/zprofile)
+# Environment variables moved to ~/.dotfiles/zsh/env.sh (sourced by ~/.zshenv)
+# so non-login shells get them too.
 
-### Super Secure Stuff (i.e. tokens) ###
-if [[ -e ~/.super_secret ]]; then
-  source ~/.super_secret
-fi
-
-### Editors ###
-export EDITOR='nvim'
-export VISUAL='nvim'
-export PAGER='less'
-
-### Language ###
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-
-### Paths ###
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  /usr/local/{bin,sbin}
-  $path
-)
-
-### Less ###
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
-### X11
-export XAUTHORITY=$HOME/.Xauthority
+# /etc/zsh/zprofile -> /etc/profile (+ nix-daemon.sh) may prepend to PATH; put
+# mise shims and the dotfiles' own dirs back in front (dupes are dropped).
+typeset -gU path
+[[ -r $HOME/.dotfiles/zsh/env.sh ]] && source $HOME/.dotfiles/zsh/env.sh
+path=($path)
 
 ### ssh-agent ###
 # Deliberately not started here. keychain (below) finds-or-starts a single agent
 # and caches its socket in ~/.keychain so every login reuses the same one.
-# Starting an agent here as well just leaks an abandoned one per login, because
-# keychain overrides SSH_AUTH_SOCK immediately afterwards.
 
-### keychain
-case $- in
-  *i*)
-    eval "$(keychain --eval --quiet id_rsa github id_rsa_main)"
-    ;;
-  *)
-    # non-interactive shell (scp, ssh -T, etc.) → do nothing
-    ;;
-esac
+### keychain (interactive logins with a TTY only; asks for key passphrases
+### once per boot, until the agent holds the keys)
+# keychain 3: --immediate restores the 2.x behaviour (ask for the passphrase
+# right away, no "Press Enter to run ssh-add" wait). Ctrl-C at the prompt skips
+# key loading only: the INT trap stops zsh from aborting the rest of startup
+# (zshrc, prompt, herdr); the agent env then comes from ~/.keychain.
+if [[ -o interactive && -t 0 ]] && (( $+commands[keychain] )); then
+  _keychain_load() {
+    setopt localoptions localtraps
+    trap : INT
+    eval "$(keychain add --eval --quiet --immediate id_rsa github id_rsa_main)"
+    [[ -S $SSH_AUTH_SOCK ]] || { [[ -r ~/.keychain/$HOST-sh ]] && source ~/.keychain/$HOST-sh >/dev/null }
+  }
+  _keychain_load
+  unfunction _keychain_load
+fi
